@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Gestão de Conta",
+    "title": "Gestão de Contas",
     "description": "Abra e gerencie contas para o seu cliente em poucos minutos. Consulte também nossa [documentação](https://bankly.readme.io/v1.0/docs/) para mais detalhes sobre os fluxos de negócio.",
     "version": "1.0"
   },
