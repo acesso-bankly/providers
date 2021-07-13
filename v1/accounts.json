@@ -1,0 +1,1757 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Gestão de Conta",
+        "description": "Abra e gerencie contas para o seu cliente em poucos minutos. Consulte também nossa [documentação](https://bankly.readme.io/v1.0/docs/) para mais detalhes sobre os fluxos de negócio.",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.sandbox.bankly.com.br"
+        }
+    ],
+    "paths": {
+        "/accounts/{accountNumber}": {
+            "get": {
+                "tags": [
+                    "Conta de Pagamento"
+                ],
+                "summary": "Obtenha dados da conta de pagamento.",
+                "description": "Opcionalmente você pode obter o saldo desta conta.",
+                "operationId": "GetAccountByAccountNumberAsync",
+                "parameters": [
+                    {
+                        "name": "accountNumber",
+                        "in": "path",
+                        "description": "Número da conta.",
+                        "required": true,
+                        "schema": {
+                            "minLength": 1,
+                            "type": "string",
+                            "description": "Número da conta."
+                        }
+                    },
+                    {
+                        "name": "includeBalance",
+                        "in": "query",
+                        "description": "Inclua o saldo da conta na pesquisa.",
+                        "schema": {
+                            "type": "boolean",
+                            "description": "Inclua o saldo da conta na pesquisa."
+                        }
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "header",
+                        "description": "Versão da API. Atualmente estamos na 1.0.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso encontrado",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaymentAccountResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Há algum problema com a sua requisição.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ocorreu algum erro inexperado no nosso servidor.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/customers/{documentNumber}": {
+            "put": {
+                "tags": [
+                    "Abertura de conta pessoal"
+                ],
+                "summary": "Registre (ou substitua) um novo cliente pessoa física.",
+                "description": "O pedido de registro será analisado e resultado você pode obter consultando o registro do cliente. Caso o cliente não exista ele será criado, se já existir e o cadastro tenha sido previamente reprovado, seus dados serão sobrepostos. Após o registro aprovado considere utilizar o enpoint PATCH (em construção) para atualizações cadastrais.",
+                "operationId": "RegisterCustomerAsync",
+                "parameters": [
+                    {
+                        "name": "documentNumber",
+                        "in": "path",
+                        "description": "Número do documento CPF do cliente . Informe somente os números.",
+                        "required": true,
+                        "schema": {
+                            "minLength": 1,
+                            "type": "string",
+                            "description": "Número do documento CPF do cliente . Informe somente os números."
+                        }
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "header",
+                        "description": "Versão da API. Atualmente estamos na 1.0.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterCustomerRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Requisição foi aceita e está sendo processada",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Location": {
+                                "description": "Localização do recurso recém-criado ou em análise.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Há algum problema com a sua requisição.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "A solicitação atual conflitou com o recurso existente no servidor.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ocorreu algum erro inexperado no nosso servidor.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Abertura de conta pessoal"
+                ],
+                "summary": "Obtenha o registro do cliente.",
+                "description": "Você pode obter um resultado resumido (BASIC) ou detalhado (DETAILED).",
+                "operationId": "GetCustomersRegistrationAsync",
+                "parameters": [
+                    {
+                        "name": "resultLevel",
+                        "in": "query",
+                        "description": "Tipo de retorno da API. BASIC ou DETAILED",
+                        "schema": {
+                            "$ref": "#/components/schemas/ResultLevels"
+                        }
+                    },
+                    {
+                        "name": "documentNumber",
+                        "in": "path",
+                        "description": "Número do documento CPF do cliente . Informe somente os números.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Número do documento CPF do cliente . Informe somente os números.",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "header",
+                        "description": "Versão da API. Atualmente estamos na 1.0.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso encontrado",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CustomerDetailedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Há algum problema com a sua requisição.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ocorreu algum erro inexperado no nosso servidor.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/customers/{documentNumber}/accounts": {
+            "post": {
+                "tags": [
+                    "Abertura de conta pessoal"
+                ],
+                "summary": "Crie uma conta de pagamento.",
+                "description": "IMPORTANTE! É necessário ter o registro do titular (pessoa física) previamente aprovado.",
+                "operationId": "CreatePersonalAccountAsync",
+                "parameters": [
+                    {
+                        "name": "documentNumber",
+                        "in": "path",
+                        "description": "Número do documento CPF do cliente . Informe somente os números.",
+                        "required": true,
+                        "schema": {
+                            "minLength": 1,
+                            "type": "string",
+                            "description": "Número do documento CPF do cliente . Informe somente os números."
+                        }
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "header",
+                        "description": "Versão da API. Atualmente estamos na 1.0.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePaymentAccountRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Recurso criado com sucesso",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Location": {
+                                "description": "Localização do recurso recém-criado ou em análise.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaymentAccountResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Há algum problema com a sua requisição.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ocorreu algum erro inexperado no nosso servidor.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Abertura de conta pessoal"
+                ],
+                "summary": "Obtenha as contas de um cliente.",
+                "description": "Retornaremos uma lista com todas as contas desse cliente, independentemente de seus respectivos status.",
+                "operationId": "GetCustomerAccountsAsync",
+                "parameters": [
+                    {
+                        "name": "documentNumber",
+                        "in": "path",
+                        "description": "Número do documento CPF do cliente . Informe somente os números.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Número do documento CPF do cliente . Informe somente os números.",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "header",
+                        "description": "Versão da API. Atualmente estamos na 1.0.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso encontrado",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PaymentAccountBasicResponse"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Há algum problema com a sua requisição.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ocorreu algum erro inexperado no nosso servidor.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/document-analysis/{documentNumber}": {
+            "put": {
+                "tags": [
+                    "Análise de documentos."
+                ],
+                "summary": "Envie documentos (SELFIE, RG ou CNH) para análise.",
+                "description": "Essa etapa deve anteceder o pedido de registro do titular da conta (pessoa física ou pessoa jurídica).",
+                "operationId": "UploadDocumentAsync",
+                "parameters": [
+                    {
+                        "name": "documentNumber",
+                        "in": "path",
+                        "description": "Número do documento CPF do cliente pessoal ou representante legal da empresa.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Número do documento CPF do cliente pessoal ou representante legal da empresa.",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "header",
+                        "description": "Versão da API. Atualmente estamos na 1.0.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "documentType": {
+                                        "$ref": "#/components/schemas/DocumentType"
+                                    },
+                                    "documentSide": {
+                                        "$ref": "#/components/schemas/DocumentSide"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "description": "Arquivo da imagem. Não deve ser superior à 1 MB. A resolução deve ser compatível com VGA. [Saiba mais](https://en.wikipedia.org/wiki/Video_Graphics_Array).",
+                                        "format": "binary",
+                                        "nullable": true
+                                    }
+                                }
+                            },
+                            "encoding": {
+                                "documentType": {
+                                    "style": "form"
+                                },
+                                "documentSide": {
+                                    "style": "form"
+                                },
+                                "image": {
+                                    "style": "form"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Requisição foi aceita e está sendo processada",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "Location": {
+                                "description": "Localização do recurso recém-criado ou em análise.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadDocumentResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Há algum problema com a sua requisição.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ocorreu algum erro inexperado no nosso servidor.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Análise de documentos."
+                ],
+                "summary": "Obtenha o resultado da análise do documento.",
+                "description": "Você pode solicitar mais de um resultado, informando os tokens correspondentes às análises solicitadas.",
+                "operationId": "GetDocumentAnalysisAsync",
+                "parameters": [
+                    {
+                        "name": "documentNumber",
+                        "in": "path",
+                        "description": "Número do documento CPF do titular.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Número do documento CPF do titular.",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Lista de tokens de análise do documento.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "Lista de tokens de análise do documento.",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "resultLevel",
+                        "in": "query",
+                        "description": "Tipo de resultado a ser retornado (ONLY_STATUS ou DETAILED).",
+                        "schema": {
+                            "$ref": "#/components/schemas/ResultLevel"
+                        }
+                    },
+                    {
+                        "name": "api-version",
+                        "in": "header",
+                        "description": "Versão da API. Atualmente estamos na 1.0.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso encontrado",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DocumentAnalysisResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ocorreu algum erro inexperado no nosso servidor.",
+                        "headers": {
+                            "x-bkly-correlation-id": {
+                                "description": "Id correlação da operação requisitada.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Balance": {
+                "type": "object",
+                "properties": {
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "currency": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "SummarizedBalance": {
+                "type": "object",
+                "properties": {
+                    "inProcess": {
+                        "$ref": "#/components/schemas/Balance"
+                    },
+                    "available": {
+                        "$ref": "#/components/schemas/Balance"
+                    },
+                    "blocked": {
+                        "$ref": "#/components/schemas/Balance"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AccountStatus": {
+                "enum": [
+                    "ACTIVE",
+                    "CLOSED",
+                    "CASH_IN_BLOCKED",
+                    "CASH_OUT_BLOCKED",
+                    "BLOCKED"
+                ],
+                "type": "string",
+                "description": "Status da conta."
+            },
+            "PaymentAccountResponse": {
+                "type": "object",
+                "properties": {
+                    "balance": {
+                        "$ref": "#/components/schemas/SummarizedBalance"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/AccountStatus"
+                    },
+                    "branch": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "number": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "propertyName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "messages": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Error"
+                        },
+                        "nullable": true
+                    },
+                    "reference": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "GetPaymentAccountRequest": {
+                "required": [
+                    "accountNumber"
+                ],
+                "type": "object",
+                "properties": {
+                    "accountNumber": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Número da conta."
+                    },
+                    "includeBalance": {
+                        "type": "boolean",
+                        "description": "Inclua o saldo da conta na pesquisa."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "BusinessType": {
+                "enum": [
+                    "MEI",
+                    "EI",
+                    "EIRELI"
+                ],
+                "type": "string"
+            },
+            "BusinessSize": {
+                "enum": [
+                    "MEI",
+                    "ME",
+                    "EPP"
+                ],
+                "type": "string"
+            },
+            "Address": {
+                "required": [
+                    "addressLine",
+                    "buildingNumber",
+                    "city",
+                    "country",
+                    "neighborhood",
+                    "state",
+                    "zipCode"
+                ],
+                "type": "object",
+                "properties": {
+                    "zipCode": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "O CEP correspondente ao endereço."
+                    },
+                    "addressLine": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Logradouro (Nome da rua, avenida, etc)."
+                    },
+                    "buildingNumber": {
+                        "maxLength": 10,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Número da residência."
+                    },
+                    "complement": {
+                        "maxLength": 256,
+                        "type": "string",
+                        "description": "Complemento do endereço. Exemplo: Apto 123, Casa B, etc.",
+                        "nullable": true
+                    },
+                    "neighborhood": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Nome do bairro ou distrito."
+                    },
+                    "city": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Nome da cidade."
+                    },
+                    "state": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Sigla do estado brasileiro conforme a ISO 3166-2:BR."
+                    },
+                    "country": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Sigla do país (Brasil) conforme a ISO 3166-2. Exemplo: BR."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Phone": {
+                "required": [
+                    "countryCode",
+                    "number"
+                ],
+                "type": "object",
+                "properties": {
+                    "countryCode": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Código DDI do país. Por enquanto é permitido apenas 55 ou +55 (Brasil)."
+                    },
+                    "number": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Número de telefone incluindo DDD."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "LegalRepresentative": {
+                "required": [
+                    "motherName",
+                    "registerName",
+                    "phone",
+                    "address",
+                    "birthDate",
+                    "email",
+                    "documentNumber"
+                ],
+                "type": "object",
+                "properties": {
+                    "registerName": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Nome conforme consta no documento de identificação (RG ou CNH) do cliente."
+                    },
+                    "socialName": {
+                        "type": "string",
+                        "description": "Nome pelo qual a pessoa gostaria de ser chamada. [Saiba mais](https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf)",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "$ref": "#/components/schemas/Phone"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "birthDate": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Data de nascimento do cliente. O cliente deve possuir no mínimo 16 anos.",
+                        "format": "date-time"
+                    },
+                    "motherName": {
+                        "type": "string",
+                        "description": "Nome da mãe do cliente conforme consta no documento de identificação.",
+                        "nullable": true
+                    },
+                    "email": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado por dois clientes.",
+                        "format": "email"
+                    },
+                    "documentNumber": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Número do documento CPF. Informe somente os números.",
+                        "readOnly": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "RegisterBusinessRequest": {
+                "required": [
+                    "businessAddress",
+                    "businessName",
+                    "businessSize",
+                    "businessType",
+                    "legalRepresentative"
+                ],
+                "type": "object",
+                "properties": {
+                    "businessName": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Razão social da empresa."
+                    },
+                    "tradingName": {
+                        "type": "string",
+                        "description": "Nome fantasia da empresa.",
+                        "nullable": true
+                    },
+                    "businessEmail": {
+                        "type": "string",
+                        "description": "E-mail comercial da empresa.",
+                        "format": "email",
+                        "nullable": true
+                    },
+                    "businessType": {
+                        "$ref": "#/components/schemas/BusinessType"
+                    },
+                    "businessSize": {
+                        "$ref": "#/components/schemas/BusinessSize"
+                    },
+                    "businessAddress": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "legalRepresentative": {
+                        "$ref": "#/components/schemas/LegalRepresentative"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "BusinessIdentification": {
+                "required": [
+                    "documentNumber"
+                ],
+                "type": "object",
+                "properties": {
+                    "documentNumber": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Número do documento CNPJ da empresa. Informe somente os números."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ResultLevels": {
+                "enum": [
+                    "BASIC",
+                    "DETAILED"
+                ],
+                "type": "string",
+                "description": "Tipo de retorno da API (BASIC ou DETAILED)."
+            },
+            "BusinessDetailedResponse": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "businessAddress": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "owners": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LegalRepresentative"
+                        },
+                        "nullable": true
+                    },
+                    "legalRepresentatives": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LegalRepresentative"
+                        },
+                        "nullable": true
+                    },
+                    "reasons": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "documentNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "businessName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "tradingName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "businessType": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "businessSize": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ProblemDetails": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "detail": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "instance": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "extensions": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object",
+                            "additionalProperties": false
+                        },
+                        "nullable": true,
+                        "readOnly": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AccountType": {
+                "enum": [
+                    "PAYMENT_ACCOUNT"
+                ],
+                "type": "string",
+                "description": "Tipo da conta a ser criada. Neste momento só é permitido PAYMENT_ACCOUNT."
+            },
+            "CreatePaymentAccountRequest": {
+                "type": "object",
+                "properties": {
+                    "accountType": {
+                        "$ref": "#/components/schemas/AccountType"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PaymentAccountBasicResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/AccountStatus"
+                    },
+                    "branch": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "number": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "RegisterCustomerRequest": {
+                "required": [
+                    "motherName",
+                    "registerName",
+                    "phone",
+                    "address",
+                    "birthDate",
+                    "email"
+                ],
+                "type": "object",
+                "properties": {
+                    "registerName": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Nome conforme consta no documento de identificação (RG ou CNH) do cliente."
+                    },
+                    "socialName": {
+                        "type": "string",
+                        "description": "Nome pelo qual a pessoa gostaria de ser chamada. [Saiba mais](https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf)",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "$ref": "#/components/schemas/Phone"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "birthDate": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Data de nascimento do cliente. O cliente deve possuir no mínimo 16 anos.",
+                        "format": "date-time"
+                    },
+                    "motherName": {
+                        "type": "string",
+                        "description": "Nome da mãe do cliente conforme consta no documento de identificação.",
+                        "nullable": true
+                    },
+                    "email": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado por dois clientes.",
+                        "format": "email"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CustomerIdentification": {
+                "required": [
+                    "documentNumber"
+                ],
+                "type": "object",
+                "properties": {
+                    "documentNumber": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "Número do documento CPF do cliente . Informe somente os números."
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CustomerStatus": {
+                "enum": [
+                    "PENDING_APPROVAL",
+                    "APPROVED",
+                    "REPROVED",
+                    "REVOKED",
+                    "CANCELED",
+                    "BLACKLISTED"
+                ],
+                "type": "string",
+                "description": "Status do cliente (PF)."
+            },
+            "CustomerProfile": {
+                "enum": [
+                    "COMPLETE",
+                    "SIMPLE"
+                ],
+                "type": "string",
+                "description": "Perfil do cliente (PF)."
+            },
+            "CustomerDetailedResponse": {
+                "type": "object",
+                "properties": {
+                    "phone": {
+                        "$ref": "#/components/schemas/Phone"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "email": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "motherName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "birthDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "isPoliticallyExposedPerson": {
+                        "type": "boolean"
+                    },
+                    "reasons": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "documentNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "registerName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "socialName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/CustomerStatus"
+                    },
+                    "profile": {
+                        "$ref": "#/components/schemas/CustomerProfile"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "DocumentType": {
+                "enum": [
+                    "RG",
+                    "CNH",
+                    "SELFIE"
+                ],
+                "type": "string",
+                "description": "Tipo do documento (RG, CNH, SELFIE)."
+            },
+            "DocumentSide": {
+                "enum": [
+                    "FRONT",
+                    "BACK"
+                ],
+                "type": "string",
+                "description": "Lado do documento (FRONT ou BACK). Quando o tipo do documento for selfie, este parâmetro será desprezado."
+            },
+            "UploadDocumentResponse": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ResultLevel": {
+                "enum": [
+                    "ONLY_STATUS",
+                    "DETAILED"
+                ],
+                "type": "string"
+            },
+            "AnalysisStatus": {
+                "enum": [
+                    "ANALYZING",
+                    "PARTIALLY_ANALYZED",
+                    "ANALYSIS_COMPLETED",
+                    "UNEXPECTED_ERROR"
+                ],
+                "type": "string"
+            },
+            "FaceMatchStatus": {
+                "enum": [
+                    "HAS_FACE_MATCH",
+                    "UNMATCHED_DOCUMENT",
+                    "MANY_FACES_DETECTED"
+                ],
+                "type": "string"
+            },
+            "FaceMatch": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/FaceMatchStatus"
+                    },
+                    "similarity": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    },
+                    "confidence": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "FaceDetailsStatus": {
+                "enum": [
+                    "DETECTED_FACE",
+                    "MANY_FACES_DETECTED",
+                    "COULD_NOT_DETECT_FACE"
+                ],
+                "type": "string"
+            },
+            "AgeRange": {
+                "type": "object",
+                "properties": {
+                    "low": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "high": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "FacialDetail": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "Tipo do detalhe facial identificado",
+                        "nullable": true
+                    },
+                    "confidence": {
+                        "type": "number",
+                        "description": "N�vel de confian�a do resultado",
+                        "format": "float",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "FaceDetails": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/FaceDetailsStatus"
+                    },
+                    "confidence": {
+                        "type": "number",
+                        "format": "float",
+                        "nullable": true
+                    },
+                    "ageRange": {
+                        "$ref": "#/components/schemas/AgeRange"
+                    },
+                    "gender": {
+                        "$ref": "#/components/schemas/FacialDetail"
+                    },
+                    "sunglasses": {
+                        "$ref": "#/components/schemas/FacialDetail"
+                    },
+                    "eyesOpen": {
+                        "$ref": "#/components/schemas/FacialDetail"
+                    },
+                    "emotions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FacialDetail"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "OcrStatus": {
+                "enum": [
+                    "DETECTED_DOCUMENT",
+                    "NO_DOCUMENT_FOUND",
+                    "NO_INFO_FOUND"
+                ],
+                "type": "string"
+            },
+            "DocumentDetails": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/OcrStatus"
+                    },
+                    "identifiedDocumentType": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "idNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "cpfNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "birthDate": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "fatherName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "motherName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "registerName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "validDate": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "driveLicenseCategory": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "driveLicenseNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "driveLicenseFirstQualifyingDate": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "federativeUnit": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "issuedBy": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "issuePlace": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "issueDate": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "LivenessStatus": {
+                "enum": [
+                    "LIVENESS_FOUND",
+                    "NO_LIVENESS",
+                    "COULD_NOT_DETECT_FACE"
+                ],
+                "type": "string"
+            },
+            "Liveness": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/LivenessStatus"
+                    },
+                    "confidence": {
+                        "type": "number",
+                        "format": "double",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "DocumentAnalysisResponse": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "documentType": {
+                        "$ref": "#/components/schemas/DocumentType"
+                    },
+                    "documentSide": {
+                        "$ref": "#/components/schemas/DocumentSide"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/AnalysisStatus"
+                    },
+                    "faceMatch": {
+                        "$ref": "#/components/schemas/FaceMatch"
+                    },
+                    "faceDetails": {
+                        "$ref": "#/components/schemas/FaceDetails"
+                    },
+                    "documentDetails": {
+                        "$ref": "#/components/schemas/DocumentDetails"
+                    },
+                    "liveness": {
+                        "$ref": "#/components/schemas/Liveness"
+                    },
+                    "analyzedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "description": "Inclua o token de autorização do tipo Bearer",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "x-explorer-enabled": true,
+    "x-samples-enabled": true,
+    "x-samples-languages": [
+        "csharp",
+        "javascript",
+        "node",
+        "go",
+        "java",
+        "kotlin",
+        "php",
+        "python",
+        "ruby",
+        "swift",
+        "cplusplus",
+        "powershell",
+        "curl"
+    ],
+    "x-readme": {
+        "proxy-enabled": true
+    }
+}
