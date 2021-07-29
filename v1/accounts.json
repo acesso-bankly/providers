@@ -12,7 +12,7 @@
     "/accounts/{accountNumber}" : {
       "get" : {
         "tags" : [ "Conta de Pagamento" ],
-        "summary" : "Obtenha dados da conta de pagamento.",
+        "summary" : "Obtenha dados da conta de pagamentos.",
         "description" : "Opcionalmente você pode obter o saldo desta conta.",
         "operationId" : "GetAccountByAccountNumberAsync",
         "parameters" : [ {
