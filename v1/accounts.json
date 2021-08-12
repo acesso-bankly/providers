@@ -1734,7 +1734,7 @@
       }
     }
   },
-  "x-explorer-enabled": true,
+  "x-explorer-enabled": false,
   "x-samples-enabled": false,
   "x-readme": {
     "proxy-enabled": false,
