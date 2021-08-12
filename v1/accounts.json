@@ -1737,18 +1737,7 @@
   "x-explorer-enabled": true,
   "x-samples-enabled": true,
   "x-samples-languages": [
-    "csharp",
-    "javascript",
-    "node",
-    "go",
-    "java",
-    "kotlin",
-    "php",
-    "python",
-    "ruby",
-    "swift",
-    "cplusplus",
-    "powershell",
+    "json",
     "curl"
   ],
   "x-readme": {
