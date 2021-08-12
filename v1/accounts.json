@@ -1736,10 +1736,6 @@
   },
   "x-explorer-enabled": true,
   "x-samples-enabled": true,
-  "x-samples-languages": [
-    "json",
-    "curl"
-  ],
   "x-readme": {
     "proxy-enabled": true
   }
