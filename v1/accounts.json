@@ -1737,7 +1737,7 @@
   "x-explorer-enabled": true,
   "x-samples-enabled": false,
   "x-readme": {
-    "proxy-enabled": true,
+    "proxy-enabled": false,
     "samples-enabled": false
   }
 }
