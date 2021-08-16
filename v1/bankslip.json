@@ -2,7 +2,7 @@
     "openapi": "3.0.1",
     "info": {
         "title": "Gestão de boletos",
-        "description": "Depósitos e cobranças via boleto em poucos minutos.",
+        "description": "Depósitos e cobranças via boleto em poucos minutos",
         "version": "1.0"
     },
     "servers": [
