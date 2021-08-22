@@ -1,0 +1,5 @@
+enum: 
+  - MOBILE
+  - LANDLINE
+type: string
+description: Tipo de telefone. Default MOBILE
