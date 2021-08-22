@@ -1,0 +1,12 @@
+OAuth2:
+  type: oauth2
+  description: O OAuth2 é um framework de autorização aberto, poderoso e flexível, amplamente utilizado para proteção de aplicações e APIs REST.
+  flows:
+    clientCredentials:
+      tokenUrl: https://login.sandbox.bankly.com.br/connect/token
+
+BearerAuth:
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: Inclua o token de autorização do tipo Bearer
