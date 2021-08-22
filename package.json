@@ -1,0 +1,32 @@
+{
+  "name": "bankly-open-api-reference",
+  "version": "1.0.0",
+  "description": "bankly's open api reference",
+  "scripts": {
+    "build:accounts": "swagger-cli bundle src/v1/apis/accounts/_index.yaml --outfile dist/v1/accounts.openapi.yaml --type yaml",
+    "build:cards": "swagger-cli bundle src/v1/apis/cards/_index.yaml --outfile dist/v1/cards.openapi.yaml --type yaml",
+    "build:kyc": "swagger-cli bundle src/v1/apis/kyc/_index.yaml --outfile dist/v1/kyc.openapi.yaml --type yaml",
+    "build:pix": "swagger-cli bundle src/v1/apis/pix/_index.yaml --outfile dist/v1/pix.openapi.yaml --type yaml",
+    "build:payments": "swagger-cli bundle src/v1/apis/payments/_index.yaml --outfile dist/v1/payments.openapi.yaml --type yaml",
+    "build:limits": "swagger-cli bundle src/v1/apis/limits/_index.yaml --outfile dist/v1/limits.openapi.yaml --type yaml",
+    "build": "npm run build:accounts & npm run build:cards & npm run build:kyc & npm run build:pix & npm run build:payments & npm run build:limits",
+    
+    "test:accounts": "swagger-cli validate src/v1/apis/accounts/_index.yaml",
+    "test:cards": "swagger-cli validate src/v1/apis/cards/_index.yaml",
+    "test:kyc": "swagger-cli validate src/v1/apis/kyc/_index.yaml",
+    "test:pix": "swagger-cli validate src/v1/apis/pix/_index.yaml",
+    "test:payments": "swagger-cli validate src/v1/apis/payments/_index.yaml",
+    "test:limits": "swagger-cli validate src/v1/apis/limits/_index.yaml",
+    "test": "npm run test:accounts & npm run test:cards & npm run test:kyc & npm run test:pix & npm run test:payments & npm run test:limits"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acesso-bankly/open-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acesso-bankly/open-api/issues"
+  },
+  "homepage": "https://github.com/acesso-bankly/open-api#readme"
+}
