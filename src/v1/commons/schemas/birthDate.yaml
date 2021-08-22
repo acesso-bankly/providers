@@ -1,0 +1,4 @@
+  minLength: 1
+  type: string
+  description: Data de nascimento do cliente. O cliente deve possuir no mínimo 16 anos.
+  format: date-time
