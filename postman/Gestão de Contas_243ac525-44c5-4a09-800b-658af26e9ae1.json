@@ -1,0 +1,1931 @@
+{
+    "info": {
+        "_postman_id": "b362ee26-f5c2-4c35-ad17-26abf3a5c05b",
+        "name": "Gestão de Contas",
+        "description": "Abra e gerencie contas para o seu cliente em poucos minutos. Consulte também nossa [documentação](https://bankly.readme.io/v1.0/docs/) para mais detalhes sobre os fluxos de negócio.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "customers/{document Number}",
+            "item": [
+                {
+                    "name": "accounts",
+                    "item": [
+                        {
+                            "name": "Obtenha as contas de um cliente.",
+                            "id": "8d1951ff-907c-4a5d-8458-c48251dcf5cd",
+                            "request": {
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "<Bearer Token>",
+                                            "type": "string"
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/customers/:documentNumber/accounts",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "customers",
+                                        ":documentNumber",
+                                        "accounts"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "id": "95054faf-08d4-416e-ade7-2ca2a36a581f",
+                                            "key": "documentNumber",
+                                            "value": "elit sint ipsum sit deserunt",
+                                            "description": "(Required) Número do documento CPF do cliente . Informe somente os números."
+                                        }
+                                    ]
+                                },
+                                "description": "Retornaremos uma lista com todas as contas desse cliente, independentemente de seus respectivos status."
+                            },
+                            "response": [
+                                {
+                                    "id": "91691894-68bc-4af3-94a5-36fb04f6c32b",
+                                    "name": "Recurso encontrado",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                            },
+                                            {
+                                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                                "key": "api-version",
+                                                "value": "sunt in sint qui"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/customers/:documentNumber/accounts",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "customers",
+                                                ":documentNumber",
+                                                "accounts"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "documentNumber"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "disabled": false,
+                                            "description": "Id correlação da operação requisitada.",
+                                            "key": "x-bkly-correlation-id",
+                                            "value": "sunt in sint qui"
+                                        },
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "[\n {\n  \"status\": \"ACTIVE\",\n  \"branch\": \"ullamco\",\n  \"number\": \"reprehenderit exercitation\"\n },\n {\n  \"status\": \"CASH_OUT_BLOCKED\",\n  \"branch\": \"Lorem nisi sit\",\n  \"number\": \"dolor veniam\"\n }\n]"
+                                },
+                                {
+                                    "id": "ca31d8c9-7141-4bea-884b-8abf9b3742f7",
+                                    "name": "Há algum problema com a sua requisição.",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                            },
+                                            {
+                                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                                "key": "api-version",
+                                                "value": "sunt in sint qui"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/customers/:documentNumber/accounts",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "customers",
+                                                ":documentNumber",
+                                                "accounts"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "documentNumber"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "disabled": false,
+                                            "description": "Id correlação da operação requisitada.",
+                                            "key": "x-bkly-correlation-id",
+                                            "value": "sunt in sint qui"
+                                        },
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                                },
+                                {
+                                    "id": "fa41299b-cb4f-4b4a-b5a8-e7ac6b1538ff",
+                                    "name": "Recurso não encontrado.",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                            },
+                                            {
+                                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                                "key": "api-version",
+                                                "value": "sunt in sint qui"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/customers/:documentNumber/accounts",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "customers",
+                                                ":documentNumber",
+                                                "accounts"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "documentNumber"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Not Found",
+                                    "code": 404,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "disabled": false,
+                                            "description": "Id correlação da operação requisitada.",
+                                            "key": "x-bkly-correlation-id",
+                                            "value": "sunt in sint qui"
+                                        },
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"type\": \"ex dolore est\",\n \"title\": \"veniam sit dolore\",\n \"status\": 49509083,\n \"detail\": \"in cupidatat dolore ex mollit\",\n \"instance\": \"id\",\n \"extensions\": {}\n}"
+                                },
+                                {
+                                    "id": "d0cdf6ab-b912-43df-ab2b-c765fa6f6aa0",
+                                    "name": "Ocorreu algum erro inexperado no nosso servidor.",
+                                    "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                            },
+                                            {
+                                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                                "key": "api-version",
+                                                "value": "sunt in sint qui"
+                                            }
+                                        ],
+                                        "url": {
+                                            "raw": "{{baseUrl}}/customers/:documentNumber/accounts",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "customers",
+                                                ":documentNumber",
+                                                "accounts"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "documentNumber"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Internal Server Error",
+                                    "code": 500,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "disabled": false,
+                                            "description": "Id correlação da operação requisitada.",
+                                            "key": "x-bkly-correlation-id",
+                                            "value": "sunt in sint qui"
+                                        },
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Crie uma conta de pagamento.",
+                            "id": "81bb4066-440d-4e62-b5dc-776ff2a8d46b",
+                            "request": {
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "<Bearer Token>",
+                                            "type": "string"
+                                        }
+                                    ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"accountType\": \"PAYMENT_ACCOUNT\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/customers/:documentNumber/accounts",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "customers",
+                                        ":documentNumber",
+                                        "accounts"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "id": "1720ee44-5314-47f1-a7fd-13c518b5822e",
+                                            "key": "documentNumber",
+                                            "value": "eiusmod sunt exercitation pariatur do",
+                                            "description": "(Required) Número do documento CPF do cliente . Informe somente os números."
+                                        }
+                                    ]
+                                },
+                                "description": "IMPORTANTE! É necessário ter o registro do titular (pessoa física) previamente aprovado."
+                            },
+                            "response": [
+                                {
+                                    "id": "af5bd860-5881-464b-aa9b-ab56e5d1a556",
+                                    "name": "Recurso criado com sucesso",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                            },
+                                            {
+                                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                                "key": "api-version",
+                                                "value": "sunt in sint qui"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n    \"accountType\": \"PAYMENT_ACCOUNT\"\n}"
+                                        },
+                                        "url": {
+                                            "raw": "{{baseUrl}}/customers/:documentNumber/accounts",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "customers",
+                                                ":documentNumber",
+                                                "accounts"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "documentNumber"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Created",
+                                    "code": 201,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "disabled": false,
+                                            "description": "Id correlação da operação requisitada.",
+                                            "key": "x-bkly-correlation-id",
+                                            "value": "sunt in sint qui"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": "Localização do recurso recém-criado ou em análise.",
+                                            "key": "Location",
+                                            "value": "sunt in sint qui"
+                                        },
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"balance\": {\n  \"inProcess\": {\n   \"amount\": -44165103.16653297,\n   \"currency\": \"pariatur elit nisi ut\"\n  },\n  \"available\": {\n   \"amount\": 22800667.93334505,\n   \"currency\": \"occaecat a\"\n  },\n  \"blocked\": {\n   \"amount\": -87686379.8483376,\n   \"currency\": \"dolore aute\"\n  }\n },\n \"status\": \"CASH_OUT_BLOCKED\",\n \"branch\": \"exercitation eu Excepteur Lorem\",\n \"number\": \"in cupi\"\n}"
+                                },
+                                {
+                                    "id": "2d1d6476-cfdb-4b61-a247-b58af7fcf017",
+                                    "name": "Há algum problema com a sua requisição.",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                            },
+                                            {
+                                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                                "key": "api-version",
+                                                "value": "sunt in sint qui"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n    \"accountType\": \"PAYMENT_ACCOUNT\"\n}"
+                                        },
+                                        "url": {
+                                            "raw": "{{baseUrl}}/customers/:documentNumber/accounts",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "customers",
+                                                ":documentNumber",
+                                                "accounts"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "documentNumber"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "disabled": false,
+                                            "description": "Id correlação da operação requisitada.",
+                                            "key": "x-bkly-correlation-id",
+                                            "value": "sunt in sint qui"
+                                        },
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                                },
+                                {
+                                    "id": "9bebdec3-9747-4635-a2b3-b754bfcab26a",
+                                    "name": "Ocorreu algum erro inexperado no nosso servidor.",
+                                    "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                            },
+                                            {
+                                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                                "key": "api-version",
+                                                "value": "sunt in sint qui"
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n    \"accountType\": \"PAYMENT_ACCOUNT\"\n}"
+                                        },
+                                        "url": {
+                                            "raw": "{{baseUrl}}/customers/:documentNumber/accounts",
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "path": [
+                                                "customers",
+                                                ":documentNumber",
+                                                "accounts"
+                                            ],
+                                            "variable": [
+                                                {
+                                                    "key": "documentNumber"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "status": "Internal Server Error",
+                                    "code": 500,
+                                    "_postman_previewlanguage": "json",
+                                    "header": [
+                                        {
+                                            "disabled": false,
+                                            "description": "Id correlação da operação requisitada.",
+                                            "key": "x-bkly-correlation-id",
+                                            "value": "sunt in sint qui"
+                                        },
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "cookie": [],
+                                    "responseTime": null,
+                                    "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                                }
+                            ]
+                        }
+                    ],
+                    "id": "12f8fd58-0d36-4a99-80be-56985925d63f"
+                },
+                {
+                    "name": "Obtenha o registro do cliente.",
+                    "id": "64f48448-47d8-4be9-8f53-6fa86e96cbe9",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "<Bearer Token>",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                "key": "api-version",
+                                "value": "sunt in sint qui"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/customers/:documentNumber?resultLevel=DETAILED",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "customers",
+                                ":documentNumber"
+                            ],
+                            "query": [
+                                {
+                                    "key": "resultLevel",
+                                    "value": "DETAILED",
+                                    "description": "Tipo de retorno da API. BASIC ou DETAILED"
+                                }
+                            ],
+                            "variable": [
+                                {
+                                    "id": "f436d9a9-bd47-4e08-bd5f-650c233f730d",
+                                    "key": "documentNumber",
+                                    "value": "elit sint ipsum sit deserunt",
+                                    "description": "(Required) Número do documento CPF do cliente . Informe somente os números."
+                                }
+                            ]
+                        },
+                        "description": "Você pode obter um resultado resumido (BASIC) ou detalhado (DETAILED)."
+                    },
+                    "response": [
+                        {
+                            "id": "bdf26194-c2c8-4280-9074-5db221fb9a2f",
+                            "name": "Recurso encontrado",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/customers/:documentNumber?resultLevel=DETAILED",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "customers",
+                                        ":documentNumber"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "resultLevel",
+                                            "value": "DETAILED"
+                                        }
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"phone\": {\n  \"countryCode\": \"ipsum est\",\n  \"number\": \"enim dolore adipisicing\"\n },\n \"address\": {\n  \"addressLine\": \"nisi\",\n  \"buildingNumber\": \"Lore\",\n  \"city\": \"est commodo aute officia\",\n  \"country\": \"irure adipisicing ex Duis\",\n  \"neighborhood\": \"ullamco non eu culpa voluptate\",\n  \"state\": \"nostrud consectetur\",\n  \"zipCode\": \"nisi labore\",\n  \"complement\": \"anim exercitation qui voluptate\"\n },\n \"email\": \"deserun\",\n \"motherName\": \"ea incididunt\",\n \"birthDate\": \"2012-01-26T03:16:18.418Z\",\n \"isPoliticallyExposedPerson\": false,\n \"reasons\": [\n  \"non ullamco ipsum\",\n  \"ad adipisicing ut officia tempo\"\n ],\n \"documentNumber\": \"exercitation\",\n \"registerName\": \"quis anim proident Excepteur\",\n \"socialName\": \"Duis laboris in fugiat\",\n \"status\": \"REPROVED\",\n \"profile\": \"SIMPLE\",\n \"createdAt\": \"2005-04-10T20:22:26.535Z\",\n \"updatedAt\": \"1965-01-06T07:04:56.383Z\"\n}"
+                        },
+                        {
+                            "id": "66dd56e8-e7aa-4a66-979a-c46e69e5244e",
+                            "name": "Há algum problema com a sua requisição.",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/customers/:documentNumber?resultLevel=DETAILED",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "customers",
+                                        ":documentNumber"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "resultLevel",
+                                            "value": "DETAILED"
+                                        }
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                        },
+                        {
+                            "id": "301ed530-7aab-4bdf-8849-5f3b62a8988b",
+                            "name": "Recurso não encontrado.",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/customers/:documentNumber?resultLevel=DETAILED",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "customers",
+                                        ":documentNumber"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "resultLevel",
+                                            "value": "DETAILED"
+                                        }
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Not Found",
+                            "code": 404,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"type\": \"ex dolore est\",\n \"title\": \"veniam sit dolore\",\n \"status\": 49509083,\n \"detail\": \"in cupidatat dolore ex mollit\",\n \"instance\": \"id\",\n \"extensions\": {}\n}"
+                        },
+                        {
+                            "id": "5cac773f-4e9e-4446-94bd-921da7c90b30",
+                            "name": "Ocorreu algum erro inexperado no nosso servidor.",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/customers/:documentNumber?resultLevel=DETAILED",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "customers",
+                                        ":documentNumber"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "resultLevel",
+                                            "value": "DETAILED"
+                                        }
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Internal Server Error",
+                            "code": 500,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Registre (ou substitua) um novo cliente pessoa física.",
+                    "id": "7a0cb693-c0da-43d4-88e9-10dad4f42767",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "<Bearer Token>",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                "key": "api-version",
+                                "value": "sunt in sint qui"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"address\": {\n        \"addressLine\": \"ut qui\",\n        \"buildingNumber\": \"labor\",\n        \"city\": \"aute exercitation velit\",\n        \"country\": \"Excepteur id occaecat officia\",\n        \"neighborhood\": \"consectetur nulla dolor ut\",\n        \"state\": \"sit est dolore sint dolore\",\n        \"zipCode\": \"mollit tempor\",\n        \"complement\": \"nisi ut dolore\"\n    },\n    \"birthDate\": \"1993-10-28T15:29:40.507Z\",\n    \"email\": \"NqGz7UZcUeJnBO@XVLqGRtrqufnwkxcpaeaokJlUsuKcV.atbm\",\n    \"motherName\": \"ut dolor\",\n    \"phone\": {\n        \"countryCode\": \"nulla laborum cillum aliqua amet\",\n        \"number\": \"quis magna\"\n    },\n    \"registerName\": \"in enim\",\n    \"socialName\": \"exercitation culpa officia dolore\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/customers/:documentNumber",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "customers",
+                                ":documentNumber"
+                            ],
+                            "variable": [
+                                {
+                                    "id": "d8ccfe93-1a10-4c0a-a9b9-4ab845cb27d1",
+                                    "key": "documentNumber",
+                                    "value": "eiusmod sunt exercitation pariatur do",
+                                    "description": "(Required) Número do documento CPF do cliente . Informe somente os números."
+                                }
+                            ]
+                        },
+                        "description": "O pedido de registro será analisado e resultado você pode obter consultando o registro do cliente. Caso o cliente não exista ele será criado, se já existir e o cadastro tenha sido previamente reprovado, seus dados serão sobrepostos. Após o registro aprovado considere utilizar o enpoint PATCH (em construção) para atualizações cadastrais."
+                    },
+                    "response": [
+                        {
+                            "id": "23910020-8ade-49be-9d62-44d41abb4c37",
+                            "name": "Requisição foi aceita e está sendo processada",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"address\": {\n        \"addressLine\": \"ut qui\",\n        \"buildingNumber\": \"labor\",\n        \"city\": \"aute exercitation velit\",\n        \"country\": \"Excepteur id occaecat officia\",\n        \"neighborhood\": \"consectetur nulla dolor ut\",\n        \"state\": \"sit est dolore sint dolore\",\n        \"zipCode\": \"mollit tempor\",\n        \"complement\": \"nisi ut dolore\"\n    },\n    \"birthDate\": \"1993-10-28T15:29:40.507Z\",\n    \"email\": \"NqGz7UZcUeJnBO@XVLqGRtrqufnwkxcpaeaokJlUsuKcV.atbm\",\n    \"motherName\": \"ut dolor\",\n    \"phone\": {\n        \"countryCode\": \"nulla laborum cillum aliqua amet\",\n        \"number\": \"quis magna\"\n    },\n    \"registerName\": \"in enim\",\n    \"socialName\": \"exercitation culpa officia dolore\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/customers/:documentNumber",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "customers",
+                                        ":documentNumber"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Accepted",
+                            "code": 202,
+                            "_postman_previewlanguage": "text",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": "Localização do recurso recém-criado ou em análise.",
+                                    "key": "Location",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "text/plain"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": ""
+                        },
+                        {
+                            "id": "6a947deb-f27d-4038-80cf-91479af09e8f",
+                            "name": "Há algum problema com a sua requisição.",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"address\": {\n        \"addressLine\": \"ut qui\",\n        \"buildingNumber\": \"labor\",\n        \"city\": \"aute exercitation velit\",\n        \"country\": \"Excepteur id occaecat officia\",\n        \"neighborhood\": \"consectetur nulla dolor ut\",\n        \"state\": \"sit est dolore sint dolore\",\n        \"zipCode\": \"mollit tempor\",\n        \"complement\": \"nisi ut dolore\"\n    },\n    \"birthDate\": \"1993-10-28T15:29:40.507Z\",\n    \"email\": \"NqGz7UZcUeJnBO@XVLqGRtrqufnwkxcpaeaokJlUsuKcV.atbm\",\n    \"motherName\": \"ut dolor\",\n    \"phone\": {\n        \"countryCode\": \"nulla laborum cillum aliqua amet\",\n        \"number\": \"quis magna\"\n    },\n    \"registerName\": \"in enim\",\n    \"socialName\": \"exercitation culpa officia dolore\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/customers/:documentNumber",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "customers",
+                                        ":documentNumber"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                        },
+                        {
+                            "id": "828d051c-25ef-4689-ada7-a5cda5b07800",
+                            "name": "A solicitação atual conflitou com o recurso existente no servidor.",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"address\": {\n        \"addressLine\": \"ut qui\",\n        \"buildingNumber\": \"labor\",\n        \"city\": \"aute exercitation velit\",\n        \"country\": \"Excepteur id occaecat officia\",\n        \"neighborhood\": \"consectetur nulla dolor ut\",\n        \"state\": \"sit est dolore sint dolore\",\n        \"zipCode\": \"mollit tempor\",\n        \"complement\": \"nisi ut dolore\"\n    },\n    \"birthDate\": \"1993-10-28T15:29:40.507Z\",\n    \"email\": \"NqGz7UZcUeJnBO@XVLqGRtrqufnwkxcpaeaokJlUsuKcV.atbm\",\n    \"motherName\": \"ut dolor\",\n    \"phone\": {\n        \"countryCode\": \"nulla laborum cillum aliqua amet\",\n        \"number\": \"quis magna\"\n    },\n    \"registerName\": \"in enim\",\n    \"socialName\": \"exercitation culpa officia dolore\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/customers/:documentNumber",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "customers",
+                                        ":documentNumber"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Conflict",
+                            "code": 409,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                        },
+                        {
+                            "id": "feb0569d-b56c-4f14-a8f3-c9def0cd4e7d",
+                            "name": "Ocorreu algum erro inexperado no nosso servidor.",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"address\": {\n        \"addressLine\": \"ut qui\",\n        \"buildingNumber\": \"labor\",\n        \"city\": \"aute exercitation velit\",\n        \"country\": \"Excepteur id occaecat officia\",\n        \"neighborhood\": \"consectetur nulla dolor ut\",\n        \"state\": \"sit est dolore sint dolore\",\n        \"zipCode\": \"mollit tempor\",\n        \"complement\": \"nisi ut dolore\"\n    },\n    \"birthDate\": \"1993-10-28T15:29:40.507Z\",\n    \"email\": \"NqGz7UZcUeJnBO@XVLqGRtrqufnwkxcpaeaokJlUsuKcV.atbm\",\n    \"motherName\": \"ut dolor\",\n    \"phone\": {\n        \"countryCode\": \"nulla laborum cillum aliqua amet\",\n        \"number\": \"quis magna\"\n    },\n    \"registerName\": \"in enim\",\n    \"socialName\": \"exercitation culpa officia dolore\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/customers/:documentNumber",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "customers",
+                                        ":documentNumber"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Internal Server Error",
+                            "code": 500,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                        }
+                    ]
+                }
+            ],
+            "id": "de5c4956-8100-449e-9e1c-5a1f76402514"
+        },
+        {
+            "name": "document-analysis/{document Number}",
+            "item": [
+                {
+                    "name": "Obtenha o resultado da análise do documento.",
+                    "id": "977fa0d0-5242-422a-89a8-b57a9c597ca9",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "<Bearer Token>",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                "key": "api-version",
+                                "value": "sunt in sint qui"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/document-analysis/:documentNumber?token=eiusmod dolore pariatur&token=deserunt consectetur&resultLevel=ONLY_STATUS",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "document-analysis",
+                                ":documentNumber"
+                            ],
+                            "query": [
+                                {
+                                    "key": "token",
+                                    "value": "eiusmod dolore pariatur",
+                                    "description": "Lista de tokens de análise do documento."
+                                },
+                                {
+                                    "key": "token",
+                                    "value": "deserunt consectetur",
+                                    "description": "Lista de tokens de análise do documento."
+                                },
+                                {
+                                    "key": "resultLevel",
+                                    "value": "ONLY_STATUS",
+                                    "description": "Tipo de resultado a ser retornado (ONLY_STATUS ou DETAILED)."
+                                }
+                            ],
+                            "variable": [
+                                {
+                                    "id": "09ad70d9-be7a-483a-ba28-8b55f212827d",
+                                    "key": "documentNumber",
+                                    "value": "tempor amet ipsum cillum aute",
+                                    "description": "(Required) Número do documento CPF do titular."
+                                }
+                            ]
+                        },
+                        "description": "Você pode solicitar mais de um resultado, informando os tokens correspondentes às análises solicitadas."
+                    },
+                    "response": [
+                        {
+                            "id": "1f1a2529-b101-4b4a-bc52-f662dc7e2216",
+                            "name": "Recurso encontrado",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/document-analysis/:documentNumber?token=nisi in id minim non&token=voluptate Ut ipsum elit&resultLevel=ONLY_STATUS",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "document-analysis",
+                                        ":documentNumber"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "token",
+                                            "value": "nisi in id minim non"
+                                        },
+                                        {
+                                            "key": "token",
+                                            "value": "voluptate Ut ipsum elit"
+                                        },
+                                        {
+                                            "key": "resultLevel",
+                                            "value": "ONLY_STATUS"
+                                        }
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"token\": \"commodo eu qui minim non\",\n \"documentType\": \"RG\",\n \"documentSide\": \"FRONT\",\n \"status\": \"ANALYZING\",\n \"faceMatch\": {\n  \"status\": \"UNMATCHED_DOCUMENT\",\n  \"similarity\": 42349679.90000945,\n  \"confidence\": -40201968.439103864\n },\n \"faceDetails\": {\n  \"status\": \"COULD_NOT_DETECT_FACE\",\n  \"confidence\": -71305037.03844059,\n  \"ageRange\": {\n   \"low\": 19207258,\n   \"high\": -37126571\n  },\n  \"gender\": {\n   \"value\": {},\n   \"confidence\": 92624384.56417367\n  },\n  \"sunglasses\": {\n   \"value\": {},\n   \"confidence\": -2221564.4060394466\n  },\n  \"eyesOpen\": {\n   \"value\": {},\n   \"confidence\": 98333371.16777384\n  },\n  \"emotions\": [\n   {\n    \"value\": {},\n    \"confidence\": -81093498.56761932\n   },\n   {\n    \"value\": {},\n    \"confidence\": 33417403.377275214\n   }\n  ]\n },\n \"documentDetails\": {\n  \"status\": \"DETECTED_DOCUMENT\",\n  \"identifiedDocumentType\": \"do sed consequat laboris\",\n  \"idNumber\": \"incididunt ad\",\n  \"cpfNumber\": \"tempor irure occaecat ea\",\n  \"birthDate\": \"aute esse elit ex\",\n  \"fatherName\": \"ut in\",\n  \"motherName\": \"labore \",\n  \"registerName\": \"nulla\",\n  \"validDate\": \"enim incididunt est in\",\n  \"driveLicenseCategory\": \"laboris\",\n  \"driveLicenseNumber\": \"incididunt\",\n  \"driveLicenseFirstQualifyingDate\": \"esse Ut\",\n  \"federativeUnit\": \"nisi magna\",\n  \"issuedBy\": \"ea esse tempor amet laborum\",\n  \"issuePlace\": \"anim in proident\",\n  \"issueDate\": \"et qui\"\n },\n \"liveness\": {\n  \"status\": \"NO_LIVENESS\",\n  \"confidence\": 68624255.28227735\n },\n \"analyzedAt\": \"2001-11-20T13:50:33.934Z\"\n}"
+                        },
+                        {
+                            "id": "24814da5-c1f9-4e2f-a380-cc4c0a170e84",
+                            "name": "Recurso não encontrado.",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/document-analysis/:documentNumber?token=nisi in id minim non&token=voluptate Ut ipsum elit&resultLevel=ONLY_STATUS",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "document-analysis",
+                                        ":documentNumber"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "token",
+                                            "value": "nisi in id minim non"
+                                        },
+                                        {
+                                            "key": "token",
+                                            "value": "voluptate Ut ipsum elit"
+                                        },
+                                        {
+                                            "key": "resultLevel",
+                                            "value": "ONLY_STATUS"
+                                        }
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Not Found",
+                            "code": 404,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                        },
+                        {
+                            "id": "14f6b17a-a3fc-4a94-962f-cda91e0026ca",
+                            "name": "Ocorreu algum erro inexperado no nosso servidor.",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/document-analysis/:documentNumber?token=nisi in id minim non&token=voluptate Ut ipsum elit&resultLevel=ONLY_STATUS",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "document-analysis",
+                                        ":documentNumber"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "token",
+                                            "value": "nisi in id minim non"
+                                        },
+                                        {
+                                            "key": "token",
+                                            "value": "voluptate Ut ipsum elit"
+                                        },
+                                        {
+                                            "key": "resultLevel",
+                                            "value": "ONLY_STATUS"
+                                        }
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Internal Server Error",
+                            "code": 500,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Envie documentos (SELFIE, RG ou CNH) para análise.",
+                    "id": "5efc28c6-3b3e-4e50-9f91-ad49c1a1d4c1",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "<Bearer Token>",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                "key": "api-version",
+                                "value": "sunt in sint qui"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "documentType",
+                                    "value": "RG",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "documentSide",
+                                    "value": "BACK",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "image",
+                                    "value": "dolore proident aliqua ad cillum",
+                                    "type": "text",
+                                    "description": "Arquivo da imagem. Não deve ser superior à 1 MB. A resolução deve ser compatível com VGA. [Saiba mais](https://en.wikipedia.org/wiki/Video_Graphics_Array)."
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/document-analysis/:documentNumber",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "document-analysis",
+                                ":documentNumber"
+                            ],
+                            "variable": [
+                                {
+                                    "id": "44c359dd-28dc-4ac7-a38f-7d132bb4c2fb",
+                                    "key": "documentNumber",
+                                    "value": "voluptate eiusmod",
+                                    "description": "(Required) Número do documento CPF do cliente pessoal ou representante legal da empresa."
+                                }
+                            ]
+                        },
+                        "description": "Essa etapa deve anteceder o pedido de registro do titular da conta (pessoa física ou pessoa jurídica)."
+                    },
+                    "response": [
+                        {
+                            "id": "5ee507bb-de86-4791-8807-22a6bdee2d5e",
+                            "name": "Requisição foi aceita e está sendo processada",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "documentType",
+                                            "value": "RG",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "documentSide",
+                                            "value": "BACK",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "description": "Arquivo da imagem. Não deve ser superior à 1 MB. A resolução deve ser compatível com VGA. [Saiba mais](https://en.wikipedia.org/wiki/Video_Graphics_Array).",
+                                            "key": "image",
+                                            "value": "dolore proident aliqua ad cillum",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/document-analysis/:documentNumber",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "document-analysis",
+                                        ":documentNumber"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Accepted",
+                            "code": 202,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": "Localização do recurso recém-criado ou em análise.",
+                                    "key": "Location",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"token\": \"labore qui minim\"\n}"
+                        },
+                        {
+                            "id": "1e076e34-f4d0-486b-b46d-50192f33cd6a",
+                            "name": "Há algum problema com a sua requisição.",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "documentType",
+                                            "value": "RG",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "documentSide",
+                                            "value": "BACK",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "description": "Arquivo da imagem. Não deve ser superior à 1 MB. A resolução deve ser compatível com VGA. [Saiba mais](https://en.wikipedia.org/wiki/Video_Graphics_Array).",
+                                            "key": "image",
+                                            "value": "dolore proident aliqua ad cillum",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/document-analysis/:documentNumber",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "document-analysis",
+                                        ":documentNumber"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                        },
+                        {
+                            "id": "99371748-517b-4810-9c0e-ba5c9a532e01",
+                            "name": "Ocorreu algum erro inexperado no nosso servidor.",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    },
+                                    {
+                                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                        "key": "api-version",
+                                        "value": "sunt in sint qui"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "documentType",
+                                            "value": "RG",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "documentSide",
+                                            "value": "BACK",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "description": "Arquivo da imagem. Não deve ser superior à 1 MB. A resolução deve ser compatível com VGA. [Saiba mais](https://en.wikipedia.org/wiki/Video_Graphics_Array).",
+                                            "key": "image",
+                                            "value": "dolore proident aliqua ad cillum",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/document-analysis/:documentNumber",
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "path": [
+                                        "document-analysis",
+                                        ":documentNumber"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "documentNumber"
+                                        }
+                                    ]
+                                }
+                            },
+                            "status": "Internal Server Error",
+                            "code": 500,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "disabled": false,
+                                    "description": "Id correlação da operação requisitada.",
+                                    "key": "x-bkly-correlation-id",
+                                    "value": "sunt in sint qui"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "cookie": [],
+                            "responseTime": null,
+                            "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                        }
+                    ]
+                }
+            ],
+            "id": "d76eb02f-16ae-46a1-8197-218b63a3db8e"
+        },
+        {
+            "name": "Obtenha dados da conta de pagamentos.",
+            "id": "2fd8778e-cd91-4822-b14b-054062f0ef19",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "<Bearer Token>",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "header": [
+                    {
+                        "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                        "key": "api-version",
+                        "value": "sunt in sint qui"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/accounts/:accountNumber?includeBalance=false",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "accounts",
+                        ":accountNumber"
+                    ],
+                    "query": [
+                        {
+                            "key": "includeBalance",
+                            "value": "false",
+                            "description": "Inclua o saldo da conta na pesquisa."
+                        }
+                    ],
+                    "variable": [
+                        {
+                            "id": "da457d97-5815-4648-864b-49608fc366d3",
+                            "key": "accountNumber",
+                            "value": "velit veniam labore",
+                            "description": "(Required) Número da conta."
+                        }
+                    ]
+                },
+                "description": "Opcionalmente você pode obter o saldo desta conta."
+            },
+            "response": [
+                {
+                    "id": "87b744d2-602a-4964-a6b9-ac324cbaa9fb",
+                    "name": "Recurso encontrado",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                            },
+                            {
+                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                "key": "api-version",
+                                "value": "sunt in sint qui"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/accounts/:accountNumber?includeBalance=false",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "accounts",
+                                ":accountNumber"
+                            ],
+                            "query": [
+                                {
+                                    "key": "includeBalance",
+                                    "value": "false"
+                                }
+                            ],
+                            "variable": [
+                                {
+                                    "key": "accountNumber"
+                                }
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "disabled": false,
+                            "description": "Id correlação da operação requisitada.",
+                            "key": "x-bkly-correlation-id",
+                            "value": "sunt in sint qui"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "cookie": [],
+                    "responseTime": null,
+                    "body": "{\n \"balance\": {\n  \"inProcess\": {\n   \"amount\": -44165103.16653297,\n   \"currency\": \"pariatur elit nisi ut\"\n  },\n  \"available\": {\n   \"amount\": 22800667.93334505,\n   \"currency\": \"occaecat a\"\n  },\n  \"blocked\": {\n   \"amount\": -87686379.8483376,\n   \"currency\": \"dolore aute\"\n  }\n },\n \"status\": \"CASH_OUT_BLOCKED\",\n \"branch\": \"exercitation eu Excepteur Lorem\",\n \"number\": \"in cupi\"\n}"
+                },
+                {
+                    "id": "ec3c7834-c91a-4319-97e4-fd91c90459bc",
+                    "name": "Há algum problema com a sua requisição.",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                            },
+                            {
+                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                "key": "api-version",
+                                "value": "sunt in sint qui"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/accounts/:accountNumber?includeBalance=false",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "accounts",
+                                ":accountNumber"
+                            ],
+                            "query": [
+                                {
+                                    "key": "includeBalance",
+                                    "value": "false"
+                                }
+                            ],
+                            "variable": [
+                                {
+                                    "key": "accountNumber"
+                                }
+                            ]
+                        }
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "disabled": false,
+                            "description": "Id correlação da operação requisitada.",
+                            "key": "x-bkly-correlation-id",
+                            "value": "sunt in sint qui"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "cookie": [],
+                    "responseTime": null,
+                    "body": "{\n \"errors\": [\n  {\n   \"code\": \"tempor irure quis\",\n   \"propertyName\": \"mollit sint\",\n   \"messages\": [\n    \"in\",\n    \"enim\"\n   ]\n  },\n  {\n   \"code\": \"in quis irure\",\n   \"propertyName\": \"esse in\",\n   \"messages\": [\n    \"ea Duis est quis deserunt\",\n    \"nostrud non\"\n   ]\n  }\n ],\n \"reference\": 23469130\n}"
+                },
+                {
+                    "id": "8ffd758f-cc7a-4712-86c1-909791655635",
+                    "name": "Recurso não encontrado.",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                            },
+                            {
+                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                "key": "api-version",
+                                "value": "sunt in sint qui"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/accounts/:accountNumber?includeBalance=true",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "accounts",
+                                ":accountNumber"
+                            ],
+                            "query": [
+                                {
+                                    "key": "includeBalance",
+                                    "value": "true"
+                                }
+                            ],
+                            "variable": [
+                                {
+                                    "key": "accountNumber"
+                                }
+                            ]
+                        }
+                    },
+                    "status": "Not Found",
+                    "code": 404,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "disabled": false,
+                            "description": "Id correlação da operação requisitada.",
+                            "key": "x-bkly-correlation-id",
+                            "value": "sunt in sint qui"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "cookie": [],
+                    "responseTime": null,
+                    "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                },
+                {
+                    "id": "df2ce3b4-accc-402c-b207-1225b0d74e14",
+                    "name": "Ocorreu algum erro inexperado no nosso servidor.",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                            },
+                            {
+                                "description": "(Required) Versão da API. Atualmente estamos na 1.0.",
+                                "key": "api-version",
+                                "value": "sunt in sint qui"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/accounts/:accountNumber?includeBalance=true",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "accounts",
+                                ":accountNumber"
+                            ],
+                            "query": [
+                                {
+                                    "key": "includeBalance",
+                                    "value": "true"
+                                }
+                            ],
+                            "variable": [
+                                {
+                                    "key": "accountNumber"
+                                }
+                            ]
+                        }
+                    },
+                    "status": "Internal Server Error",
+                    "code": 500,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "disabled": false,
+                            "description": "Id correlação da operação requisitada.",
+                            "key": "x-bkly-correlation-id",
+                            "value": "sunt in sint qui"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "cookie": [],
+                    "responseTime": null,
+                    "body": "{\n \"errors\": [\n  {\n   \"code\": \"id officia ut eiusmod\",\n   \"propertyName\": \"adipisicing sit dolor in\",\n   \"messages\": [\n    \"esse nisi irure aliquip ex\",\n    \"officia in\"\n   ]\n  },\n  {\n   \"code\": \"enim non magna culpa\",\n   \"propertyName\": \"ex magna irure officia\",\n   \"messages\": [\n    \"elit culpa\",\n    \"c\"\n   ]\n  }\n ],\n \"reference\": -18326206\n}"
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "id": "319b31db-6ef7-4363-983b-a0942b9bbee8",
+            "key": "baseUrl",
+            "value": "https://api.sandbox.bankly.com.br",
+            "type": "string"
+        }
+    ]
+}
