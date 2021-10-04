@@ -5,9 +5,11 @@
     "description" : "Abra e gerencie contas para o seu cliente em poucos minutos. Consulte também nossa [documentação](https://bankly.readme.io/v1.0/docs/) para mais detalhes sobre os fluxos de negócio.",
     "version" : "1.0"
   },
-  "servers" : [ {
-    "url" : "https://api.sandbox.bankly.com.br"
-  } ],
+  "servers" : [ 
+    {
+      "url" : "https://api.sandbox.bankly.com.br"
+    } 
+  ],
   "paths" : {
     "/accounts/{accountNumber}" : {
       "get" : {
@@ -1680,10 +1682,10 @@
       }
     }
   },
-  "x-explorer-enabled" : true,
-  "x-samples-enabled" : true,
-  "x-samples-languages" : [ "csharp", "javascript", "node", "go", "java", "kotlin", "php", "python", "ruby", "swift", "cplusplus", "powershell", "curl" ],
   "x-readme" : {
-    "proxy-enabled" : true
+    "explorer-enabled" : true,
+    "proxy-enabled" : true,
+    "samples-enabled" : true,
+    "samples-languages" : [ "curl" ]
   }
 }
