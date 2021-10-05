@@ -18,8 +18,8 @@ jobs:
             ./apis/v1/accounts.openapi.yaml
 
   publish:
-    runs-on: ubuntu-latest
     if: ${{ success() }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: readmeio/github-readme-sync@v2
