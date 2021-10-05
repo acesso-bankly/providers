@@ -7,12 +7,24 @@ on:
     branches:
       - develop  
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: mbowman100/swagger-validator-action@master
+        name: Validate schemas
+        with: 
+          files: |
+            ./apis/v1/accounts.openapi.yaml
+
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ success() }}
+    steps:
+      - uses: actions/checkout@v2
       - uses: readmeio/github-readme-sync@v2
+        name: Publish to readme.io
         with:
           readme-oas-key: ${{ secrets.README_OAS_KEY }}
-          oas-file-path: './apis/v1/accounts/schema.yaml'
+          oas-file-path: './apis/v1/accounts.openapi.yaml'
           api-version: 'v0.1'
