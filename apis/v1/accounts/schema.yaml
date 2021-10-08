@@ -101,7 +101,7 @@ paths:
       summary: Obtenha as contas de pagamento de um cliente.
       description: |
         Retornaremos uma lista com todas as contas desse cliente, independentemente de seus respectivos status. 
-        <span class="bkly-ref-small-stable-tag">stable</span>
+        <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: account.read</span>
       operationId: GetPersonalAccountsAsync
       parameters:
         - name: documentNumber
@@ -182,7 +182,7 @@ paths:
       summary: Crie uma conta de pagamentos pessoa física.
       description: |
           IMPORTANTE! É necessário ter o registro do titular (pessoa física) previamente aprovado.
-          <span class="bkly-ref-small-stable-tag">stable</span>
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: account.create</span>
       operationId: CreatePersonalAccountAsync
       parameters:
         - name: documentNumber
