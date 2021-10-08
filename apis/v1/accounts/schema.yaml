@@ -1,0 +1,595 @@
+openapi: 3.0.1
+info:
+  title: Gestão de Contas
+  description: Abra e gerencie contas de pagamentos do seu cliente pessoa física ou jurídica.
+  version: '1.0'
+servers:
+  - url: https://api.sandbox.bankly.com.br
+paths:
+  /accounts/{accountNumber}:
+    get:
+      tags:
+        - Conta de pagamentos
+      summary: Obtenha dados da conta de pagamentos.
+      description: |
+        Opcionalmente você pode obter o saldo desta conta. 
+        <span class="bkly-ref-small-stable-tag">stable</span>
+      operationId: GetAccountAsync
+      parameters:
+        - name: accountNumber
+          in: path
+          description: Número da conta.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            minLength: 1
+            maxLength: 13
+            type: string
+        - name: includeBalance
+          in: query
+          description: Inclua o saldo da conta na pesquisa.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: boolean
+            default: true
+        - name: api-version
+          in: header
+          description: Versão da API. Atualmente estamos na 1.0.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            default: 1  
+      responses:
+        '200':
+          description: Recurso encontrado
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDetailedResponse'
+              examples:
+                  accountBasicExample:
+                      $ref: '#/components/examples/accountBasicExample'
+                  accountDetailedExample:
+                      $ref: '#/components/examples/accountDetailedExample'
+        '400':
+          description: Há algum problema com a sua requisição.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Recurso não encontrado.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+        '500':
+          description: Ocorreu algum erro inexperado no nosso servidor.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+  /customers/{documentNumber}/accounts:
+    get:
+      tags:
+        - Conta pessoa física
+      summary: Obtenha as contas de pagamento de um cliente.
+      description: |
+        Retornaremos uma lista com todas as contas desse cliente, independentemente de seus respectivos status. 
+        <span class="bkly-ref-small-stable-tag">stable</span>
+      operationId: GetPersonalAccountsAsync
+      parameters:
+        - name: documentNumber
+          in: path
+          description: Número do documento CPF do cliente . Informe somente os números.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            description: Número do documento CPF do cliente . Informe somente os números.
+            nullable: true
+        - name: api-version
+          in: header
+          description: Versão da API. Atualmente estamos na 1.0.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Recurso encontrado
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountBasicResponse'
+              example:
+                - number: '123456'
+                  branch: '0001'  
+                  status: 'ACTIVE'
+                - number: '123'
+                  branch: '0001'  
+                  status: 'CLOSED'
+        '400':
+          description: Há algum problema com a sua requisição.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Recurso não encontrado.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+        '500':
+          description: Ocorreu algum erro inexperado no nosso servidor.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+    post:
+      tags:
+        - Conta pessoa física
+      summary: Crie uma conta de pagamentos pessoa física.
+      description: |
+          IMPORTANTE! É necessário ter o registro do titular (pessoa física) previamente aprovado.
+          <span class="bkly-ref-small-stable-tag">stable</span>
+      operationId: CreatePersonalAccountAsync
+      parameters:
+        - name: documentNumber
+          in: path
+          description: Número do documento CPF do cliente. Informe somente os números.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            minLength: 1
+            type: string
+            description: Número do documento CPF do cliente. Informe somente os números.
+        - name: api-version
+          in: header
+          description: Versão da API. Atualmente estamos na 1.0.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          description: Chave de idempotêcia para a requisição.
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountRequest'
+      responses:
+        '201':
+          description: Recurso criado com sucesso
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Location:
+              description: Localização do recurso recém-criado ou em análise.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDetailedResponse'
+              examples:
+                  accountDetailedExample:
+                      $ref: '#/components/examples/accountDetailedExample'
+        '400':
+          description: Há algum problema com a sua requisição.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: A sintaxe da requisição esta correta, mas não foi possível processar devido uma regra de negócio.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Ocorreu algum erro inexperado no nosso servidor.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+  /business/{documentNumber}/accounts:
+    get:
+      tags:
+        - Conta pessoa jurídica
+      summary: Obtenha as contas de pagamento de uma empresa.
+      description: |
+          Retornaremos uma lista com todas as contas desse cliente, independentemente de seus respectivos status.
+          <span class="bkly-ref-small-beta-tag">beta</span>
+      operationId: GetBusinessAccountsAsync
+      parameters:
+        - name: documentNumber
+          in: path
+          description: Número do documento CPF do cliente. Informe somente os números.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            description: Número do documento CPF do cliente. Informe somente os números.
+            nullable: true
+        - name: api-version
+          in: header
+          description: Versão da API. Atualmente estamos na 1.0.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Recurso encontrado
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountBasicResponse'
+              example:
+                - number: '123456'
+                  branch: '0001'  
+                  status: 'ACTIVE'
+                - number: '123'
+                  branch: '0001'  
+                  status: 'CLOSED'        
+        '400':
+          description: Há algum problema com a sua requisição.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Recurso não encontrado.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+        '500':
+          description: Ocorreu algum erro inexperado no nosso servidor.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+    post:
+      tags:
+        - Conta pessoa jurídica
+      summary: Crie uma conta de pagamento para uma empresa (MEI, EI ou EIRELLI).
+      description: |
+          IMPORTANTE! É necessário ter o registro do titular (pessoa jurídica) previamente aprovado.
+          <span class="bkly-ref-small-beta-tag">beta</span>
+      operationId: CreateBusinessAccountAsync
+      parameters:
+        - name: documentNumber
+          in: path
+          description: Número do documento CNPJ da empresa. Informe somente os números.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            minLength: 1
+            type: string
+            description: Número do documento CNPJ da empresa. Informe somente os números.
+        - name: api-version
+          in: header
+          description: Versão da API. Atualmente estamos na 1.0.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          description: Chave de idempotêcia para a requisição.
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string    
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountRequest'
+      responses:
+        '201':
+          description: Recurso criado com sucesso
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+            Location:
+              description: Localização do recurso recém-criado ou em análise.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDetailedResponse'
+              examples:
+                  accountDetailedExample:
+                      $ref: '#/components/examples/accountDetailedExample'
+        '400':
+          description: Há algum problema com a sua requisição.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: A sintaxe da requisição esta correta, mas não foi possível processar devido uma regra de negócio.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Ocorreu algum erro inexperado no nosso servidor.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              style: simple
+              explode: false
+              schema:
+                type: string
+
+security:
+  - Bearer: []
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          nullable: true
+        propertyName:
+          type: string
+          nullable: true
+        messages:
+          type: array
+          nullable: true
+          items:
+            type: string
+      additionalProperties: false
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Error'
+        reference:
+          type: integer
+          format: int32
+      additionalProperties: false  
+    Balance:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SummarizedBalance:
+      type: object
+      properties:
+        inProcess:
+          $ref: '#/components/schemas/Balance'
+        available:
+          $ref: '#/components/schemas/Balance'
+        blocked:
+          $ref: '#/components/schemas/Balance'
+      additionalProperties: false
+    AccountStatus:
+      type: string
+      description: Status da conta.
+      enum:
+        - ACTIVE
+        - CLOSED
+        - CASH_IN_BLOCKED
+        - CASH_OUT_BLOCKED
+        - BLOCKED
+    AccountType:
+      type: string
+      description: Tipo da conta a ser criada. Neste momento só é permitido PAYMENT_ACCOUNT.
+      enum:
+        - PAYMENT_ACCOUNT
+    CreateAccountRequest:
+      type: object
+      properties:
+        accountType:
+          $ref: '#/components/schemas/AccountType'
+      additionalProperties: false
+    AccountBasicResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/AccountStatus'
+        branch:
+          type: string
+          nullable: true
+        number:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AccountDetailedResponse:
+      type: object
+      properties:
+        balance:
+          $ref: '#/components/schemas/SummarizedBalance'
+        status:
+          $ref: '#/components/schemas/AccountStatus'
+        branch:
+          type: string
+          nullable: true
+        number:
+          type: string
+          nullable: true
+      additionalProperties: false
+    
+  securitySchemes:
+    Bearer:
+      type: http
+      description: Inclua o token de autorização do tipo Bearer
+      scheme: bearer
+      bearerFormat: JWT
+
+  examples:
+    accountBasicExample:
+      value:
+        branch: '0001'  
+        number: '123456'
+        status: 'ACTIVE'
+      summary: Account Basic Example
+
+    accountDetailedExample:
+      value:
+        branch: '0001'  
+        number: '123456'
+        status: 'ACTIVE'
+        balance: 
+          available:
+              amount: 0.00
+              currency: 'BRL'
+          inProcess:
+              amount: 0.00
+              currency: 'BRL'
+          blocked:
+              amount: 0.00
+              currency: 'BRL'
+        
+      summary: Account Detailed Example     
+
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+  samples-languages:
+    - curl
