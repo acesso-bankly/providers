@@ -15,7 +15,7 @@ jobs:
         name: Validate schemas
         with: 
           files: |
-            ./apis/v1/accounts.openapi.yaml
+            ./apis/v1/accounts/schema.yaml
 
   publish:
     if: ${{ success() }}
@@ -26,5 +26,5 @@ jobs:
         name: Publish to readme.io
         with:
           readme-oas-key: ${{ secrets.README_OAS_KEY }}
-          oas-file-path: './apis/v1/accounts.openapi.yaml'
+          oas-file-path: './apis/v1/accounts/schema.yaml'
           api-version: 'v0.1'
