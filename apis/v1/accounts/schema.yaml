@@ -11,7 +11,9 @@ paths:
       tags:
         - Conta de pagamentos
       summary: Obtenha dados da conta de pagamentos.
-      description: <span class="bkly-ref-small-stable-tag">stable</span> Opcionalmente você pode obter o saldo desta conta. 
+      description: |
+        Opcionalmente você pode obter o saldo desta conta. 
+        <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-small-stable-tag">scope: account.read</span>
       operationId: GetAccountAsync
       parameters:
         - name: accountNumber
