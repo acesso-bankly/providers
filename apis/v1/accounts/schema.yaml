@@ -12,7 +12,7 @@ paths:
         - Conta de pagamentos
       summary: Obtenha dados da conta de pagamentos.
       description: |
-        <hr />
+        <span class="bkly-ref-description-hr"></span>
         Opcionalmente você pode obter o saldo desta conta. 
         <span class="bkly-ref-small-stable-tag">stable</span>
       operationId: GetAccountAsync
