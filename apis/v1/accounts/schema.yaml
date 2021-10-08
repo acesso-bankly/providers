@@ -76,6 +76,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                  accountDetailedExample:
+                      $ref: '#/components/examples/invalidParameterErrorResponse'    
         '404':
           description: Recurso não encontrado.
           headers:
@@ -158,6 +161,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                  accountDetailedExample:
+                      $ref: '#/components/examples/invalidParameterErrorResponse'    
         '404':
           description: Recurso não encontrado.
           headers:
@@ -252,6 +258,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                  accountDetailedExample:
+                      $ref: '#/components/examples/invalidParameterErrorResponse'
         '422':
           description: A sintaxe da requisição esta correta, mas não foi possível processar devido uma regra de negócio.
           headers:
@@ -265,6 +274,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                  accountDetailedExample:
+                      $ref: '#/components/examples/errorResponse'  
         '500':
           description: Ocorreu algum erro inexperado no nosso servidor.
           headers:
@@ -338,6 +350,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                  accountDetailedExample:
+                      $ref: '#/components/examples/invalidParameterErrorResponse'    
         '404':
           description: Recurso não encontrado.
           headers:
@@ -432,6 +447,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                  accountDetailedExample:
+                      $ref: '#/components/examples/invalidParameterErrorResponse'  
         '422':
           description: A sintaxe da requisição esta correta, mas não foi possível processar devido uma regra de negócio.
           headers:
@@ -445,6 +463,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                  accountDetailedExample:
+                      $ref: '#/components/examples/errorResponse'  
         '500':
           description: Ocorreu algum erro inexperado no nosso servidor.
           headers:
@@ -562,6 +583,19 @@ components:
       bearerFormat: JWT
 
   examples:
+    invalidParameterErrorResponse:
+      value:
+        errors:
+            - code: "INVALID_PARAMETER"  
+            - propertyName: '{{propertyName}}'
+            - messages:
+                - '{{Property error message}}'
+    errorResponse:
+      value:
+        errors:
+            - code: "SOME_ERROR_CODE"  
+            - messages:
+                - '{{Some error message}}'
     accountBasicExample:
       value:
         branch: '0001'  
