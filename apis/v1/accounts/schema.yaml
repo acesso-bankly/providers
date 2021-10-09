@@ -587,21 +587,25 @@ components:
       value:
         errors:
             - code: "INVALID_PARAMETER"  
-            - propertyName: '{{propertyName}}'
-            - messages:
-                - '{{Property error message}}'
+              propertyName: '{{propertyName}}'
+              messages:
+                - '{{"propertyName" error message}}'
+      summary: Invalid parameter error
+
     errorResponse:
       value:
         errors:
             - code: "SOME_ERROR_CODE"  
-            - messages:
+              messages:
                 - '{{Some error message}}'
+      summary: Business error           
+
     accountBasicExample:
       value:
         branch: '0001'  
         number: '123456'
         status: 'ACTIVE'
-      summary: Account Basic Example
+      summary: Account without balace
 
     accountDetailedExample:
       value:
@@ -617,9 +621,8 @@ components:
               currency: 'BRL'
           blocked:
               amount: 0.00
-              currency: 'BRL'
-        
-      summary: Account Detailed Example     
+              currency: 'BRL'  
+      summary: Account with balance
 
 x-readme:
   explorer-enabled: true
