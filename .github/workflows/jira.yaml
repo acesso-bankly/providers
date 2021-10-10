@@ -31,4 +31,4 @@ jobs:
             ]
           }'  
     - name: Log created issue
-      run: echo "Issue ${{ steps.create.outputs.issue }} was created"  
+      run: echo "Issue ${{ steps.code_review.outputs.issue }} was created"  
