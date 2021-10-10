@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Gestão de Clientes
-  description: Registre, atualize, consulte o cadasto de clientes pessoa física ou jurídica. Um cliente com cadastro pode se tornar titular de contas e cartão de crédito (pré-pago).
+  description: Registre, atualize, consulte o cadasto de clientes pessoa física ou jurídica. Um cliente com cadastro pode se tornar titular de contas de pagamento e cartões de crédito (pré-pago).
   version: '1.0'
 servers:
   - url: https://api.sandbox.bankly.com.br

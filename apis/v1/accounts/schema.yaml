@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Gestão de Contas
-  description: Abra e gerencie contas de pagamentos do seu cliente pessoa física ou jurídica.
+  description: Abra e gerencie contas de pagamento do seu cliente pessoa física ou jurídica.
   version: '1.0'
 servers:
   - url: https://api.sandbox.bankly.com.br
