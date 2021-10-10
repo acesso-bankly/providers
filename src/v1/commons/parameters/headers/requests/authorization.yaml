@@ -1,6 +1,0 @@
-name: Authorization
-in: header
-description: Token de acesso ao recurso solicitado.
-required: true
-schema:
-  type: string
