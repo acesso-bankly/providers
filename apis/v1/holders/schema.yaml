@@ -9,7 +9,7 @@ paths:
   /customers/{documentNumber}:
     get:
       tags:
-        - Clientes Pessoa Física
+        - Pessoa física
       summary: Obtenha o registro do cliente.
       description: |
         <div class="bkly-ref-description">
@@ -100,7 +100,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
-        - Clientes Pessoa Física
+        - Pessoa física
       summary: Registre ou atualize dos dados de um cliente pessoa física.
       description: |
         <div class="bkly-ref-description">
@@ -221,7 +221,7 @@ paths:
   /business/{documentNumber}:
     get:
       tags:
-        - Clientes Pessoa Jurídica
+        - Pessoa jurídica
       summary: Obtenha o registro da empresa.
       description: |
         <div class="bkly-ref-description">
@@ -312,7 +312,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
-        - Clientes Pessoa Jurídica
+        - Pessoa jurídica
       summary: Registre ou atualize dos dados de um cliente pessoa física.
       description: |
         <div class="bkly-ref-description">
