@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Análise de Documentos
+  title: KYC (Know Your Customer)
   description: Antes de abrir uma conta de pagamento ou solicitar um cartão de crédito (pré-pago), conheça mais sobre o seu cliente.
   version: '1.0'
 servers:
@@ -9,7 +9,7 @@ paths:
   '/document-analysis/{documentNumber}':
     get:
       tags:
-        - Análise de documentos.
+        - Análise de documentos
       summary: Obtenha o resultado da análise do documento.
       description: |
         <div class="bkly-ref-description">
