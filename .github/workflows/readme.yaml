@@ -15,6 +15,7 @@ jobs:
         name: Validate schemas
         with: 
           files: |
+            ./apis/v1/oauth/schema.yaml
             ./apis/v1/holders/schema.yaml
             ./apis/v1/accounts/schema.yaml
 
@@ -24,13 +25,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: readmeio/github-readme-sync@v2
-        name: Publish holders API Reference to readme.io
+        name: Publish Auth API Reference to readme.io
+        with:
+          readme-oas-key: ${{ secrets.OAUTH_APIS_README_OAS_KEY }}
+          oas-file-path: './apis/v1/oauth/schema.yaml'
+          api-version: 'v0.1'      
+      - uses: readmeio/github-readme-sync@v2
+        name: Publish Holders API Reference to readme.io
         with:
           readme-oas-key: ${{ secrets.HOLDERS_APIS_README_OAS_KEY }}
           oas-file-path: './apis/v1/holders/schema.yaml'
           api-version: 'v0.1'
       - uses: readmeio/github-readme-sync@v2
-        name: Publish accounts API Reference to readme.io
+        name: Publish Accounts API Reference to readme.io
         with:
           readme-oas-key: ${{ secrets.ACCOUNTS_API_README_OAS_KEY }}
           oas-file-path: './apis/v1/accounts/schema.yaml'

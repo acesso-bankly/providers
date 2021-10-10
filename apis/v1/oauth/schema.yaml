@@ -1,0 +1,79 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: Auth
+servers:
+  - url: 'https://login.sandbox.bankly.com.br'
+paths:
+  /connect/token:
+    post:
+      summary: 'Obtenha um token de acesso'
+      description: |
+        <div class="bkly-ref-description">
+          <p>Obtenha um token de acesso para a api desejada.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span>
+        </div>
+      operationId: PostAuth
+      tags:
+        - Token de acesso
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthForm'
+      responses:
+        '200':
+          description: Token de acesso gerado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Há algum problema com a sua requisição.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error: 
+                    type: string
+
+components:
+  schemas:
+    AuthForm:
+      type: object
+      required:
+        - grant_type
+        - client_id
+        - client_secret
+        - scope
+      properties:
+        grant_type:
+          type: string
+          default: client_credentials
+          description: 'Método pelo qual suas aplicações podem obter tokens de acesso. Default: **client_credentials**'
+        client_id:
+          type: string
+          description: O identificador publico de sua aplicação. (uuid v4)
+        client_secret:
+          type: string
+          description: O segredo conhecido por sua aplicação e pelo servidor de autorização. 
+        scope:
+          type: string
+          description: 'Escopo da api que deseja acessar. Consulte a [lista de scope](https://docs.bankly.com.br/docs/scopes)'
+  
+    AuthResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Token de acesso no formato JWT (Json Web Token).
+        expires_in:
+          type: string
+          description: 'Tempo de vida do token em segundos. Evite solicitar novos tokens de acesso, antes do tempo de expiração. Default: **3600**'
+        token_type:
+          type: string
+          description: Tipo do token retornado. Default":" **Bearer**. 
+        scope:
+          type: string
+          description: Escopo informado na solicitação do token de acesso.          
