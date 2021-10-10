@@ -1,0 +1,11 @@
+description: 
+  $ref: '../descriptions/500.yaml'
+headers: 
+  x-bkly-correlation-id:
+    schema:
+      type: string
+    description: Id correlação da operação requisitada. Considere armazená-lo em um cache para eventuais tratativas
+content: 
+  application/json: 
+    schema: 
+      $ref: '../schemas/errors/_index.yaml'

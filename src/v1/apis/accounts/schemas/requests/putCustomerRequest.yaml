@@ -1,0 +1,31 @@
+type: object
+properties: 
+  registerName:
+    minLength: 1
+    maxLength: 256
+    type: string
+    description: Nome conforme consta no documento de identificação (RG ou CNH) do cliente.
+  socialName:
+    type: string
+    description: Nome pelo qual a pessoa gostaria de ser chamada. [Saiba mais](https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf)
+    nullable: true
+  phone:
+    $ref: '../../../../commons/schemas/phone.yaml'
+  address:
+    $ref: '../../../../commons/schemas/address.yaml'
+  birthDate: 
+    $ref: '../../../../commons/schemas/birthDate.yaml'
+  motherName:
+    type: string
+    description: Nome da mãe do cliente conforme consta no documento de identificação.
+    nullable: true
+  email:
+    maxLength: 256
+    type: string
+    description: Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado por dois clientes.
+    format: email
+required: 
+  - registerName
+  - phone
+  - address
+  - birthDate

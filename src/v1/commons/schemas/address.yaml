@@ -1,0 +1,50 @@
+type: object
+properties: 
+  zipcode: 
+    maxLength: 9
+    minLength: 9
+    type: string
+    description: O CEP correspondente ao endereço.
+  addressLine: 
+    maxLength: 256
+    minLength: 1
+    type: string
+    description: Logradouro (Nome da rua avenida etc).
+  buildingNumber: 
+    maxLength: 10
+    minLength: 1
+    type: string
+    description: Número da residência.
+  complement: 
+    maxLength: 256
+    type: string
+    description: 'Complemento do endereço. Exemplo: Apto 123 Casa B etc'
+    nullable: true
+  neighborhood: 
+    maxLength: 256
+    minLength: 1
+    type: string
+    description: Nome do bairro ou distrito.
+  city: 
+    maxLength: 256
+    minLength: 1
+    type: string
+    description: Nome da cidade.
+  state: 
+    maxLength: 2
+    minLength: 2
+    type: string
+    description: Sigla do estado brasileiro conforme a ISO 3166-2:BR.
+  country: 
+    maxLength: 2
+    minLength: 2
+    type: string
+    description: 'Sigla do país (Brasil) conforme a ISO 3166-2. Exemplo: BR'
+required: 
+  - addressLine
+  - buildingNumber
+  - city
+  - country
+  - neighborhood
+  - state
+  - zipcode

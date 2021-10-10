@@ -1,0 +1,12 @@
+description: 
+  $ref: '../descriptions/202.yaml'
+headers: 
+  x-bkly-correlation-id:
+    schema:
+      type: string
+    description: Id correlação da operação requisitada. Considere armazená-lo em um cache para eventuais tratativas
+
+  location:
+    schema:
+      type: string
+    description: Endpoint para localização do recurso que foi ou está sendo criado.

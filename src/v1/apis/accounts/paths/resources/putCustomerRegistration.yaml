@@ -1,0 +1,67 @@
+put: 
+  tags:
+    - Cliente pessoa física
+  summary: Registre ou atualize os dados cadastrais de um cliente pessoa física
+  description: O cadastro do cliente será analisado e processado assíncronamente com base nos dados fornecidos. Caso o cliente não exista ele será criado caso o cliente já exista e o seu cadastro tenha sido previamente reprovado seus dados serão sobrepostos. Após o registro aprovado considere utilizar o enpoint PATCH (em construção) para atualizações cadastrais O resultado você pode obter consultando o cadastro do cliente através do endpoint ***GET /customers/{documentNumber}***
+  operationId: PutCustomerRegistration
+  security: 
+    - Bearer: []
+  parameters: 
+    - $ref: '../../../../commons/parameters/path/personalDocument.yaml'
+    - $ref: '../../../../commons/parameters/headers/requests/apiVersion.yaml'
+    - $ref: '../../../../commons/parameters/headers/requests/contentType.yaml'
+  requestBody: 
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../schemas/requests/putCustomerRequest.yaml'
+        examples:
+          Simples:
+            value:
+              registerName: 'Peter Parker'
+              socialName: 'Spider Man'
+              birthDate: '1990-10-14'
+              phone:
+                type: 'MOBILE'
+                countryCode: '55'
+                number: '11987654321'
+              address: 
+                zipcode: '05402100'
+                addressLine: 'Av. Rebouças'
+                buildingNumber: '1368'
+                neighborhood: 'Pinheiros'
+                country: 'BR'
+                state": 'SP'
+                city": 'Sao Paulo'
+                complement": 'Sala roxa'
+          Completo:
+            value:
+              registerName: 'Peter Parker'
+              socialName: 'Spider Man'
+              birthDate: '1990-10-14'
+              phone:
+                type: 'MOBILE'
+                countryCode: '55'
+                number: '11987654321'
+              address: 
+                zipcode: '05402100'
+                addressLine: 'Av. Rebouças'
+                buildingNumber: '1368'
+                neighborhood: 'Pinheiros'
+                country: 'BR'
+                state": 'SP'
+                city": 'Sao Paulo'
+                complement": 'Sala roxa'
+              motherName: 'Mary Parker'
+              email: 'spiderman@damavel.com'
+
+  responses:
+    202: 
+      $ref: '../../../../commons/responses/202.yaml'
+    400: 
+      $ref: '../../../../commons/responses/400.yaml'
+    409:
+      $ref: '../../../../commons/responses/409.yaml'
+    500:
+      $ref: '../../../../commons/responses/500.yaml'

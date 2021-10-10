@@ -1,0 +1,5 @@
+# Requests
+putCustomerRequest:
+  $ref: './requests/putCustomerRequest.yaml'
+
+# Responses

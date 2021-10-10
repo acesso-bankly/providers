@@ -1,0 +1,7 @@
+name: Content-Type
+in: header
+description: O cabeçalho Content-Type é utilizado para indicar o tipo de arquivo do recurso. Default application/json.
+required: true
+schema:
+  type: string
+  default: application/json

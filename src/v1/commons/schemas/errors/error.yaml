@@ -1,0 +1,13 @@
+type: object
+properties:
+  code:
+    type: string
+    nullable: false
+  propertyName:
+    type: string
+    nullable: true
+  messages:
+    type: array
+    items:
+      type: string
+    nullable: false

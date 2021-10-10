@@ -1,0 +1,11 @@
+type: object
+properties: 
+  errors: 
+    type: array
+    items: 
+      $ref: './error.yaml'
+    nullable: true
+  
+  reference: 
+    type: string
+    nullable: true

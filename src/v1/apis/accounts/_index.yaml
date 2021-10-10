@@ -1,0 +1,21 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: 'Gestão de contas'
+  description: 'Abra e gerencie contas de pagamentos para o seu cliente em poucos minutos. Consulte também nossa [documentação](https://docs.bankly.com.br/docs) para mais detalhes sobre os fluxos de negócio.'
+
+servers:
+  - url: https://api.sandbox.bankly.com.br
+    description: Sandbox
+  - url: https://api.bankly.com.br
+    description: Production
+
+components:
+  schemas:
+    $ref: './schemas/_index.yaml'
+  securitySchemes:
+    $ref: '../../security/schemas/_index.yaml'
+
+paths:
+  /customers/{documentNumber}:
+    $ref: './paths/resources/putCustomerRegistration.yaml'
