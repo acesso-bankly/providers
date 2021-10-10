@@ -192,7 +192,7 @@ paths:
       summary: Crie uma conta de pagamentos pessoa física.
       description: |
           <div class="bkly-ref-description">
-            <p>IMPORTANTE! É necessário ter o registro do titular (pessoa física) previamente aprovado.</p>
+            <p><span class="bkly-ref-important">⚠️IMPORTANTE!</span> É necessário ter o registro do titular (pessoa física) previamente aprovado.</p>
             <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: account.create</span>
           </div>  
       operationId: CreatePersonalAccountAsync
