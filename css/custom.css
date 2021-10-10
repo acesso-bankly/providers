@@ -1,26 +1,27 @@
 header#hub-header #header-top {
-    padding: 10px 30px;
+  padding: 10px 30px;
 }
 
-section#hub-content header h1, section#hub-content header h2 {
-    color: #0153aa;
-    font-size: 32px;
-    line-height: 40px;
+section#hub-content header h1,
+section#hub-content header h2 {
+  color: #0153aa;
+  font-size: 32px;
+  line-height: 40px;
 }
 
 .bkly-overview-box {
-	border: 1px solid #ccc!important;
+  border: 1px solid #ccc !important;
 }
 
-.bkly-guide-box-tag { 
-	margin-bottom: 35px;
+.bkly-guide-box-tag {
+  margin-bottom: 35px;
 }
 
 .bkly-guide-beta-tag {
-	color:#f5f7f9;
-  font-weight:bold;
+  color: #f5f7f9;
+  font-weight: bold;
   padding: 8px 30px;
-  background-color:#eea236;
+  background-color: #eea236;
   border-radius: 10px;
   box-shadow: 0 -2px rgb(0 0 0 / 10%) inset;
   text-transform: lowercase;
@@ -44,7 +45,7 @@ section#hub-content header h1, section#hub-content header h2 {
   color: #f5f7f9;
   font-weight: 600;
   padding: 2px 15px;
-  background-color: #F6998B;
+  background-color: #f6998b;
   border-radius: 8px;
   box-shadow: 0 -2px rgb(0 0 0 / 10%) inset;
   text-transform: capitalize;
@@ -78,33 +79,33 @@ section#hub-content header h1, section#hub-content header h2 {
   text-transform: lowercase;
 }
 
-.bkly-guide-stable-tag { 
-	color:#f5f7f9;
-  font-weight:bold;
+.bkly-guide-stable-tag {
+  color: #f5f7f9;
+  font-weight: bold;
   padding: 8px 30px;
-  background-color:#17cb95;
+  background-color: #17cb95;
   border-radius: 10px;
   box-shadow: 0 -2px rgb(0 0 0 / 10%) inset;
   text-transform: lowercase;
 }
 
-.bkly-guide-box-link { 
-	margin: 30px 5px 30px 5px;
+.bkly-guide-box-link {
+  margin: 30px 5px 30px 5px;
 }
 
 .bkly-guide-link {
-	text-decoration: none !important;
-  color:#0053aa;
-  font-weight:600;
+  text-decoration: none !important;
+  color: #0053aa;
+  font-weight: 600;
   padding: 2px;
 }
 
 .bkly-guide-link:hover {
-	text-decoration: underline !important;
-  color:#0065d0;
+  text-decoration: underline !important;
+  color: #0065d0;
 }
 
-.bkly-ref-scope-tag { 
+.bkly-ref-scope-tag {
   color: #f5f7f9;
   font-weight: 600;
   padding: 2px 15px;
@@ -123,4 +124,8 @@ section#hub-content header h1, section#hub-content header h2 {
 .bkly-ref-important {
   font-weight: bold;
   color: #eea236;
+}
+
+.callout {
+  border-radius: 8px !important;
 }
