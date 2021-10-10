@@ -25,8 +25,9 @@ paths:
           style: simple
           explode: false
           schema:
-            minLength: 1
+            minLength: 3
             maxLength: 13
+            nullable: false
             type: string
         - name: includeBalance
           in: query
@@ -113,14 +114,15 @@ paths:
       parameters:
         - name: documentNumber
           in: path
-          description: Número do documento CPF do cliente . Informe somente os números.
+          description: Número do documento CPF do cliente. Informe somente os números.
           required: true
           style: simple
           explode: false
           schema:
+            minLength: 11
+            maxLength: 11
+            nullable: false
             type: string
-            description: Número do documento CPF do cliente . Informe somente os números.
-            nullable: true
         - name: api-version
           in: header
           description: Versão da API. Atualmente estamos na 1.0.
@@ -129,6 +131,7 @@ paths:
           explode: false
           schema:
             type: string
+            default: 1
       responses:
         '200':
           description: Recurso encontrado
@@ -204,9 +207,10 @@ paths:
           style: simple
           explode: false
           schema:
-            minLength: 1
+            minLength: 11
+            maxLength: 11
+            nullable: false
             type: string
-            description: Número do documento CPF do cliente. Informe somente os números.
         - name: api-version
           in: header
           description: Versão da API. Atualmente estamos na 1.0.
@@ -215,9 +219,10 @@ paths:
           explode: false
           schema:
             type: string
+            default: 1
         - name: Idempotency-Key
           in: header
-          description: Chave de idempotêcia para a requisição.
+          description: Chave de idempotêcia para a requisição (uuid v4).
           required: false
           style: simple
           explode: false
@@ -299,21 +304,22 @@ paths:
       summary: Obtenha as contas de pagamento de uma empresa.
       description: |
           <div class="bkly-ref-description">
-            <p>Retornaremos uma lista com todas as contas desse cliente, independentemente de seus respectivos status.</p>
+            <p>Retornaremos uma lista com todas as contas dessa empresa, independentemente de seus respectivos status.</p>
             <span class="bkly-ref-small-beta-tag">beta</span> <span class="bkly-ref-scope-tag">scope: account.read</span>
           </div>  
       operationId: GetBusinessAccountsAsync
       parameters:
         - name: documentNumber
           in: path
-          description: Número do documento CPF do cliente. Informe somente os números.
+          description: Número do documento CNPJ da empresa. Informe somente os números.
           required: true
           style: simple
           explode: false
           schema:
+            minLength: 14
+            maxLength: 14
+            nullable: false
             type: string
-            description: Número do documento CPF do cliente. Informe somente os números.
-            nullable: true
         - name: api-version
           in: header
           description: Versão da API. Atualmente estamos na 1.0.
@@ -322,6 +328,7 @@ paths:
           explode: false
           schema:
             type: string
+            default: 1
       responses:
         '200':
           description: Recurso encontrado
@@ -397,9 +404,10 @@ paths:
           style: simple
           explode: false
           schema:
-            minLength: 1
+            minLength: 14
+            maxLength: 14
+            nullable: false
             type: string
-            description: Número do documento CNPJ da empresa. Informe somente os números.
         - name: api-version
           in: header
           description: Versão da API. Atualmente estamos na 1.0.
@@ -408,9 +416,10 @@ paths:
           explode: false
           schema:
             type: string
+            default: 1
         - name: Idempotency-Key
           in: header
-          description: Chave de idempotêcia para a requisição.
+          description: Chave de idempotêcia para a requisição (uuid v4).
           required: false
           style: simple
           explode: false
