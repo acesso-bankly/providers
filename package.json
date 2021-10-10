@@ -1,0 +1,31 @@
+{
+  "name": "bankly-open-api-reference",
+  "version": "1.0.0",
+  "description": "bankly's open api reference",
+  "main": "index.js",
+  "scripts": {
+    "edit:clients-api": "openapi-editor --file ./apis/v1/clients/schema.yaml --port 23001",
+    "edit:accounts-api": "openapi-editor --file ./apis/v1/accouts/schema.yaml --port 23002"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acesso-bankly/open-api.git"
+  },
+  "keywords": [
+    "bankly",
+    "baas",
+    "apis",
+    "rest",
+    "restful",
+    "openapi"
+  ],
+  "author": "",
+  "license": "SEE LICENSE IN ./BANKLY.LIC",
+  "bugs": {
+    "url": "https://servicedesk.bankly.com.br"
+  },
+  "homepage": "https://bankly.com.br",
+  "devDependencies": {
+    "openapi-editor": "^0.3.0"
+  }
+}
