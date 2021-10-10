@@ -104,10 +104,16 @@ paths:
       summary: Registre ou atualize dos dados de um cliente pessoa física.
       description: |
         <div class="bkly-ref-description">
-          <p><span class="bkly-ref-important">⚠️IMPORTANTE!</span> O pedido de registro será analisado e resultado você pode obter consultando o registro do cliente. Os possíveis status do cliente após essa análise são: APPROVED, REPROVED, REVOKED ou BLOCKED.</p> 
-          <p>Caso o cliente não exista ele será criado, caso contrario seus dados serão sobrepostos.</p>
+          <p>O pedido de registro será analisado e resultado você pode obter consultando o registro do cliente. Caso o cliente não exista ele será criado, caso contrario seus dados serão sobrepostos.</p>
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: customer.write</span>
         </div>      
+        [block:callout]
+        {
+          "type": "warning",
+          "title": "Importante",
+          "body": "Os possíveis status do cliente após essa análise são: APPROVED, REPROVED, REVOKED ou BLOCKED."
+        }
+        [/block]
       operationId: PutCustomerRegistration
       parameters:
         - name: documentNumber
@@ -310,10 +316,16 @@ paths:
       summary: Registre ou atualize dos dados de um cliente pessoa física.
       description: |
         <div class="bkly-ref-description">
-          <p><span class="bkly-ref-important">⚠️IMPORTANTE!</span> O pedido de registro será analisado e resultado você pode obter consultando o registro da empresa. Os possíveis status da empresa após essa análise são: APPROVED, REPROVED, REVOKED ou BLOCKED</p> 
-          <p>Caso o cliente não exista ele será criado, caso contrario seus dados serão sobrepostos.</p> 
+          <p>O pedido de registro será analisado e resultado você pode obter consultando o registro da empresa. Caso o cliente não exista ele será criado, caso contrario seus dados serão sobrepostos.</p> 
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: business.write</span>
         </div>        
+        [block:callout]
+        {
+          "type": "warning",
+          "title": "Importante",
+          "body": "Os possíveis status da empresa após essa análise são: APPROVED, REPROVED, REVOKED ou BLOCKED."
+        }
+        [/block]
       operationId: PutBusinessRegistration
       parameters:
         - name: documentNumber

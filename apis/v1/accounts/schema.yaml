@@ -16,7 +16,7 @@ paths:
           <p>Opcionalmente você pode obter o saldo desta conta.</p> 
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: account.read</span>
         </div>  
-      operationId: GetAccountAsync
+      operationId: GetAccount
       parameters:
         - name: accountNumber
           in: path
@@ -110,7 +110,7 @@ paths:
           <p>Retornaremos uma lista com todas as contas desse cliente, independentemente de seus respectivos status.</p> 
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: account.read</span>
         </div>
-      operationId: GetPersonalAccountsAsync
+      operationId: GetPersonalAccounts
       parameters:
         - name: documentNumber
           in: path
@@ -194,11 +194,18 @@ paths:
         - Conta pessoa física
       summary: Crie uma conta de pagamentos pessoa física.
       description: |
-          <div class="bkly-ref-description">
-            <p><span class="bkly-ref-important">⚠️IMPORTANTE!</span> É necessário ter o registro do titular (pessoa física) previamente aprovado.</p>
-            <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: account.create</span>
-          </div>  
-      operationId: CreatePersonalAccountAsync
+        <div class="bkly-ref-description">
+          <p>O cliente poderá ter até 5 contas de pagamento, no entanto é necessário ter o registro do titular (pessoa física) previamente aprovado.</p>
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: account.create</span>
+        </div>
+        [block:callout]
+        {
+          "type": "warning",
+          "title": "Importante",
+          "body": "Considere o uso do header ```Idempotency-Key``` afim de evitar criar contas indesejadas."
+        }
+        [/block]  
+      operationId: CreatePersonalAccount
       parameters:
         - name: documentNumber
           in: path
@@ -307,7 +314,7 @@ paths:
             <p>Retornaremos uma lista com todas as contas dessa empresa, independentemente de seus respectivos status.</p>
             <span class="bkly-ref-small-beta-tag">beta</span> <span class="bkly-ref-scope-tag">scope: account.read</span>
           </div>  
-      operationId: GetBusinessAccountsAsync
+      operationId: GetBusinessAccounts
       parameters:
         - name: documentNumber
           in: path
@@ -391,11 +398,18 @@ paths:
         - Conta pessoa jurídica
       summary: Crie uma conta de pagamentos para uma empresa (MEI, EI ou EIRELLI).
       description: |
-          <div class="bkly-ref-description">
-            <p><span class="bkly-ref-important">⚠️IMPORTANTE!</span> É necessário ter o registro do titular (pessoa jurídica) previamente aprovado.</p>
-            <span class="bkly-ref-small-beta-tag">beta</span> <span class="bkly-ref-scope-tag">scope: account.create</span>
-          </div>  
-      operationId: CreateBusinessAccountAsync
+        <div class="bkly-ref-description">
+          <p>A empresa poderá ter até 5 contas de pagamento, no entanto é necessário ter o registro do titular (pessoa jurídica) previamente aprovado.</p>
+          <span class="bkly-ref-small-beta-tag">beta</span> <span class="bkly-ref-scope-tag">scope: account.create</span>
+        </div>  
+        [block:callout]
+        {
+          "type": "warning",
+          "title": "Importante",
+          "body": "Considere o uso do header ```Idempotency-Key``` afim de evitar criar contas indesejadas."
+        }
+        [/block] 
+      operationId: CreateBusinessAccount
       parameters:
         - name: documentNumber
           in: path
