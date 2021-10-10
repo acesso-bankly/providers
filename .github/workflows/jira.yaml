@@ -21,8 +21,14 @@ jobs:
         project: TW
         issuetype: Task
         summary: |
-          Review API Reference Pull Request ${{ github.event.number }}
+          Review API Reference Pull Request #${{ github.event.number }}
         description: |
           Created automatically via GitHub Actions
+        fields: '{ 
+            "labels": [
+              "api-reference",
+              "code-review"
+            ]
+          }'  
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"  
