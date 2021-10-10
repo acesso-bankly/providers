@@ -20,7 +20,7 @@ jobs:
             ./apis/v1/accounts/schema.yaml
 
   publish:
-    if: ${{ success() }}
+    if: ${{ success() && github.ref	== 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

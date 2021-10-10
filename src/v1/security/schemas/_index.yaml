@@ -1,5 +1,0 @@
-Bearer:
-  type: http
-  scheme: bearer
-  bearerFormat: JWT
-  description: Inclua o token de autorização do tipo Bearer

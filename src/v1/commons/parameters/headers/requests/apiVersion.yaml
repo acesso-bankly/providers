@@ -1,7 +1,0 @@
-name: api-version
-in: header
-description: Versão da API. Atualmente estamos na 1.0
-required: true
-schema:
-  type: string
-  default: 1

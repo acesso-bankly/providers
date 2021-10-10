@@ -1,8 +1,0 @@
-name: documentNumber
-in: path
-description: Número do documento CPF do cliente . Informe somente os números.
-required: true
-schema: 
-  type: string
-  minLength: 11
-  maxLength: 11
