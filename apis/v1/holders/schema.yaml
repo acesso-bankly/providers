@@ -111,14 +111,15 @@ paths:
       parameters:
         - name: documentNumber
           in: path
-          description: Número do documento CPF do cliente . Informe somente os números.
+          description: Número do documento CPF do cliente. Informe somente os números.
           required: true
           style: simple
           explode: false
           schema:
-            minLength: 1
+            minLength: 11
+            maxLength: 11
             type: string
-            description: Número do documento CPF do cliente . Informe somente os números.
+            description: Número do documento CPF do cliente. Informe somente os números.
         - name: api-version
           in: header
           description: Versão da API. Atualmente estamos na 1.0.
@@ -127,6 +128,7 @@ paths:
           explode: false
           schema:
             type: string
+            default: 1
       requestBody:
         content:
           application/json:
@@ -319,7 +321,8 @@ paths:
           style: simple
           explode: false
           schema:
-            minLength: 1
+            maxLength: 14
+            minLength: 14
             type: string
             description: Número do documento CNPJ da empresa. Informe somente os números.
         - name: api-version
@@ -330,6 +333,7 @@ paths:
           explode: false
           schema:
             type: string
+            default: 1
       requestBody:
         content:
           application/json:
@@ -458,24 +462,25 @@ components:
         - EPP
     Address:
       required:
+        - zipCode
         - addressLine
         - buildingNumber
-        - city
-        - country
         - neighborhood
+        - city
         - state
-        - zipCode
+        - country
       type: object
       properties:
         zipCode:
-          minLength: 1
+          minLength: 9
+          maxLength: 9
           type: string
-          description: O CEP correspondente ao endereço.
+          description: O CEP correspondente ao endereço. Informe somente os números.
         addressLine:
           maxLength: 256
           minLength: 1
           type: string
-          description: Logradouro (Nome da rua, avenida, etc).
+          description: Logradouro (Nome da rua, avenida, etc). Caso não exista, preencha S/N.
         buildingNumber:
           maxLength: 10
           minLength: 1
@@ -497,11 +502,13 @@ components:
           type: string
           description: Nome da cidade.
         state:
-          minLength: 1
+          maxLength: 2
+          minLength: 2
           type: string
           description: Sigla do estado brasileiro conforme a ISO 3166-2:BR.
         country:
-          minLength: 1
+          maxLength: 2
+          minLength: 2
           type: string
           description: 'Sigla do país (Brasil) conforme a ISO 3166-2. Exemplo: BR.'
       additionalProperties: false
@@ -512,23 +519,25 @@ components:
       type: object
       properties:
         countryCode:
-          minLength: 1
+          maxLength: 3
+          minLength: 2
           type: string
           description: Código DDI do país. Por enquanto é permitido apenas 55 ou +55 (Brasil).
         number:
-          minLength: 1
+          minLength: 11
+          maxLength: 11
           type: string
           description: Número de telefone incluindo DDD.
       additionalProperties: false
     LegalRepresentative:
       required:
-        - address
-        - birthDate
         - documentNumber
+        - registerName
+        - birthDate
+        - phone
+        - address
         - email
         - motherName
-        - phone
-        - registerName
       type: object
       properties:
         registerName:
@@ -545,7 +554,8 @@ components:
         address:
           $ref: '#/components/schemas/Address'
         birthDate:
-          minLength: 1
+          maxLength: 10
+          minLength: 10
           type: string
           description: Data de nascimento do cliente. O cliente deve possuir no mínimo 16 anos.
           format: date-time
@@ -554,12 +564,14 @@ components:
           description: Nome da mãe do cliente conforme consta no documento de identificação.
           nullable: true
         email:
+          maxLength: 256
           minLength: 1
           type: string
           description: Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado por dois clientes.
           format: email
         documentNumber:
-          minLength: 1
+          maxLength: 11
+          minLength: 11
           type: string
           description: Número do documento CPF. Informe somente os números.
           readOnly: true
@@ -589,12 +601,12 @@ components:
         - SIMPLE
     RegisterCustomerRequest:
       required:
-        - address
+        - registerName
         - birthDate
+        - phone
+        - address
         - email
         - motherName
-        - phone
-        - registerName
       type: object
       properties:
         registerName:
@@ -611,7 +623,8 @@ components:
         address:
           $ref: '#/components/schemas/Address'
         birthDate:
-          minLength: 1
+          maxLength: 10
+          minLength: 10
           type: string
           description: Data de nascimento do cliente. O cliente deve possuir no mínimo 16 anos.
           format: date-time
@@ -620,6 +633,7 @@ components:
           description: Nome da mãe do cliente conforme consta no documento de identificação.
           nullable: true
         email:
+          maxLength: 256
           minLength: 1
           type: string
           description: Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado por dois clientes.
@@ -627,8 +641,8 @@ components:
       additionalProperties: false
     RegisterBusinessRequest:
       required:
-        - businessAddress
         - businessName
+        - businessAddress
         - businessSize
         - businessType
         - legalRepresentative
@@ -660,26 +674,6 @@ components:
     CustomerResponse:
       type: object
       properties:
-        phone:
-          $ref: '#/components/schemas/Phone'
-        address:
-          $ref: '#/components/schemas/Address'
-        email:
-          type: string
-          nullable: true
-        motherName:
-          type: string
-          nullable: true
-        birthDate:
-          type: string
-          format: date-time
-        isPoliticallyExposedPerson:
-          type: boolean
-        reasons:
-          type: array
-          nullable: true
-          items:
-            type: string
         documentNumber:
           type: string
           nullable: true
@@ -689,6 +683,21 @@ components:
         socialName:
           type: string
           nullable: true
+        phone:
+          $ref: '#/components/schemas/Phone'
+        address:
+          $ref: '#/components/schemas/Address'
+        birthDate:
+          type: string
+          format: date-time
+        email:
+          type: string
+          nullable: true
+        motherName:
+          type: string
+          nullable: true          
+        isPoliticallyExposedPerson:
+          type: boolean                    
         status:
           $ref: '#/components/schemas/Status'
         profile:
@@ -699,15 +708,38 @@ components:
         updatedAt:
           type: string
           format: date-time
+        reasons:
+          type: array
+          nullable: true
+          items:
+            type: string
       additionalProperties: false
     BusinessResponse:
       type: object
       properties:
+        documentNumber:
+          type: string
+          nullable: false
+        businessName:
+          type: string
+          nullable: false
+        tradingName:
+          type: string
+          nullable: true
         email:
           type: string
           nullable: true
         businessAddress:
           $ref: '#/components/schemas/Address'
+        status:
+          type: string
+          nullable: false
+        businessType:
+          type: string
+          nullable: false
+        businessSize:
+          type: string
+          nullable: false
         owners:
           type: array
           nullable: true
@@ -718,36 +750,19 @@ components:
           nullable: true
           items:
             $ref: '#/components/schemas/LegalRepresentative'
+        createdAt:
+          type: string
+          format: date-time
+          nullable: false
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true        
         reasons:
           type: array
           nullable: true
           items:
             type: string
-        documentNumber:
-          type: string
-          nullable: true
-        businessName:
-          type: string
-          nullable: true
-        tradingName:
-          type: string
-          nullable: true
-        status:
-          type: string
-          nullable: true
-        businessType:
-          type: string
-          nullable: true
-        businessSize:
-          type: string
-          nullable: true
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-          nullable: true
       additionalProperties: false
   
   securitySchemes:
