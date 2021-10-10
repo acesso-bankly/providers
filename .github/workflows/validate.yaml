@@ -1,12 +1,27 @@
-name: Create jira issue to Pull Request review
+name: Build and Validate OAS
 on:
-  pull_request:
-    types: [ opened ]
+  push:
     branches:
       - develop
+  pull_request:
+    branches:
+      - develop  
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mbowman100/swagger-validator-action@master
+        name: Validate schemas
+        with: 
+          files: |
+            ./apis/v1/oauth/schema.yaml
+            ./apis/v1/holders/schema.yaml
+            ./apis/v1/accounts/schema.yaml
+
   code_review:
+    if: ${{ success() && github.event_name == 'pull_request' && github.event.action == 'opened' }}
     runs-on: ubuntu-latest
     steps:
     - name: Login on Jira
