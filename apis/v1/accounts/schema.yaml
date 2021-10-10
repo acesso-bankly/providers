@@ -385,7 +385,7 @@ paths:
       summary: Crie uma conta de pagamentos para uma empresa (MEI, EI ou EIRELLI).
       description: |
           <div class="bkly-ref-description">
-            <p>IMPORTANTE! É necessário ter o registro do titular (pessoa jurídica) previamente aprovado.</p>
+            <p><span class="bkly-ref-important">⚠️IMPORTANTE!</span> É necessário ter o registro do titular (pessoa jurídica) previamente aprovado.</p>
             <span class="bkly-ref-small-beta-tag">beta</span> <span class="bkly-ref-scope-tag">scope: account.create</span>
           </div>  
       operationId: CreateBusinessAccountAsync
