@@ -1,0 +1,35 @@
+name: Create jira issue to Pull Request review
+on:
+  pull_request:
+    types: [ opened ]
+    branches:
+      - develop
+
+jobs:
+  code_review:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Login on Jira
+      uses: atlassian/gajira-login@master
+      env:
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+
+    - name: Create Issue on Tech Writers Boards
+      uses: atlassian/gajira-create@master
+      with:
+        project: TW
+        issuetype: Task
+        summary: |
+          Review API Reference Pull Request #${{ github.event.number }}
+        description: |
+          Created automatically via GitHub Actions
+        fields: '{ 
+            "labels": [
+              "api-reference",
+              "code-review"
+            ]
+          }'  
+    - name: Log created issue
+      run: echo "Issue ${{ steps.code_review.outputs.issue }} was created"  

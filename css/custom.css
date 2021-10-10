@@ -1,0 +1,126 @@
+header#hub-header #header-top {
+    padding: 10px 30px;
+}
+
+section#hub-content header h1, section#hub-content header h2 {
+    color: #0153aa;
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.bkly-overview-box {
+	border: 1px solid #ccc!important;
+}
+
+.bkly-guide-box-tag { 
+	margin-bottom: 35px;
+}
+
+.bkly-guide-beta-tag {
+	color:#f5f7f9;
+  font-weight:bold;
+  padding: 8px 30px;
+  background-color:#eea236;
+  border-radius: 10px;
+  box-shadow: 0 -2px rgb(0 0 0 / 10%) inset;
+  text-transform: lowercase;
+}
+
+.bkly-ref-small-version-tag,
+.bkly-guide-small-version-tag {
+  color: #f5f7f9;
+  font-weight: 600;
+  padding: 2px 15px;
+  background-color: #018ef5;
+  border-radius: 8px;
+  box-shadow: 0 -2px rgb(0 0 0 / 10%) inset;
+  text-transform: capitalize;
+  font-size: 0.7em !important;
+  text-transform: lowercase;
+}
+
+.bkly-ref-small-deprecated-tag,
+.bkly-guide-small-deprecated-tag {
+  color: #f5f7f9;
+  font-weight: 600;
+  padding: 2px 15px;
+  background-color: #F6998B;
+  border-radius: 8px;
+  box-shadow: 0 -2px rgb(0 0 0 / 10%) inset;
+  text-transform: capitalize;
+  font-size: 0.7em !important;
+  text-transform: lowercase;
+}
+
+.bkly-ref-small-beta-tag,
+.bkly-guide-small-beta-tag {
+  color: #f5f7f9;
+  font-weight: 600;
+  padding: 2px 15px;
+  background-color: #eea236;
+  border-radius: 8px;
+  box-shadow: 0 -2px rgb(0 0 0 / 10%) inset;
+  text-transform: capitalize;
+  font-size: 0.7em !important;
+  text-transform: lowercase;
+}
+
+.bkly-ref-small-stable-tag,
+.bkly-guide-small-stable-tag {
+  color: #f5f7f9;
+  font-weight: 600;
+  padding: 2px 15px;
+  background-color: #17cb95;
+  border-radius: 8px;
+  box-shadow: 0 -2px rgb(0 0 0 / 10%) inset;
+  text-transform: capitalize;
+  font-size: 0.7em !important;
+  text-transform: lowercase;
+}
+
+.bkly-guide-stable-tag { 
+	color:#f5f7f9;
+  font-weight:bold;
+  padding: 8px 30px;
+  background-color:#17cb95;
+  border-radius: 10px;
+  box-shadow: 0 -2px rgb(0 0 0 / 10%) inset;
+  text-transform: lowercase;
+}
+
+.bkly-guide-box-link { 
+	margin: 30px 5px 30px 5px;
+}
+
+.bkly-guide-link {
+	text-decoration: none !important;
+  color:#0053aa;
+  font-weight:600;
+  padding: 2px;
+}
+
+.bkly-guide-link:hover {
+	text-decoration: underline !important;
+  color:#0065d0;
+}
+
+.bkly-ref-scope-tag { 
+  color: #f5f7f9;
+  font-weight: 600;
+  padding: 2px 15px;
+  background-color: #018ef5;
+  border-radius: 8px;
+  box-shadow: 0 -2px rgb(0 0 0 / 10%) inset;
+  text-transform: capitalize;
+  font-size: 0.7em !important;
+  text-transform: lowercase;
+}
+
+.bkly-ref-description {
+  padding-top: 10px;
+}
+
+.bkly-ref-important {
+  font-weight: bold;
+  color: #eea236;
+}

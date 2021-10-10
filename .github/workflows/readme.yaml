@@ -1,0 +1,44 @@
+name: Sync OAS to ReadMe
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main  
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mbowman100/swagger-validator-action@master
+        name: Validate schemas
+        with: 
+          files: |
+            ./apis/v1/oauth/schema.yaml
+            ./apis/v1/holders/schema.yaml
+            ./apis/v1/accounts/schema.yaml
+
+  publish:
+    if: ${{ success() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: readmeio/github-readme-sync@v2
+        name: Publish Auth API Reference to readme.io
+        with:
+          readme-oas-key: ${{ secrets.OAUTH_APIS_README_OAS_KEY }}
+          oas-file-path: './apis/v1/oauth/schema.yaml'
+          api-version: 'v0.1'      
+      - uses: readmeio/github-readme-sync@v2
+        name: Publish Holders API Reference to readme.io
+        with:
+          readme-oas-key: ${{ secrets.HOLDERS_APIS_README_OAS_KEY }}
+          oas-file-path: './apis/v1/holders/schema.yaml'
+          api-version: 'v0.1'
+      - uses: readmeio/github-readme-sync@v2
+        name: Publish Accounts API Reference to readme.io
+        with:
+          readme-oas-key: ${{ secrets.ACCOUNTS_API_README_OAS_KEY }}
+          oas-file-path: './apis/v1/accounts/schema.yaml'
+          api-version: 'v0.1'          
