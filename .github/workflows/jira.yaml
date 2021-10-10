@@ -1,8 +1,9 @@
 name: Create jira issue to Pull Request review
 on:
   pull_request:
+    types: [ opened ]
     branches:
-      - develop  
+      - develop
 
 jobs:
   code_review:
