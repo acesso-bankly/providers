@@ -77,3 +77,10 @@ components:
         scope:
           type: string
           description: Escopo informado na solicitação do token de acesso.          
+
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+  samples-languages:
+    - curl

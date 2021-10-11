@@ -598,6 +598,7 @@ components:
             messages:
               - '{{Some error message}}'
       summary: Business error
+
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
