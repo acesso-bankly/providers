@@ -94,10 +94,6 @@ paths:
               explode: false
               schema:
                 type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
         - Pessoa física
@@ -214,10 +210,6 @@ paths:
               explode: false
               schema:
                 type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
   /business/{documentNumber}:
     get:
       tags:
@@ -306,10 +298,6 @@ paths:
               explode: false
               schema:
                 type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
         - Pessoa jurídica
@@ -426,10 +414,6 @@ paths:
               explode: false
               schema:
                 type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'  
 security:
   - Bearer: []
   
