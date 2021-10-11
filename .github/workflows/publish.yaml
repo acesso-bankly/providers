@@ -28,7 +28,7 @@ jobs:
         with:
           readme-oas-key: ${{ secrets.OAUTH_APIS_README_OAS_KEY }}
           oas-file-path: './apis/v1/oauth/schema.yaml'
-          api-version: 'v0.1'
+          api-version: 'v1.0'
       - uses: readmeio/github-readme-sync@v2
         name: Publish Document Analysis API Reference to readme.io
         with:
