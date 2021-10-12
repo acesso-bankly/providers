@@ -576,7 +576,9 @@ components:
     RegisterBusinessRequest:
       required:
         - businessName
+        - tradingName
         - businessAddress
+        - businessEmail
         - businessSize
         - businessType
         - legalRepresentative
@@ -595,7 +597,7 @@ components:
           type: string
           description: E-mail comercial da empresa.
           format: email
-          nullable: true
+          nullable: false
         businessType:
           $ref: '#/components/schemas/BusinessType'
         businessSize:
