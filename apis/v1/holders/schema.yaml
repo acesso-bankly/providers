@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.0.3
 info:
   title: Gestão de Clientes
-  description: >-
+  description: |
     Registre, atualize, consulte o cadasto de clientes pessoa física ou
     jurídica. Um cliente com cadastro pode se tornar titular de contas de
     pagamento e cartões de crédito (pré-pago).
@@ -13,7 +13,8 @@ paths:
     get:
       tags:
         - Pessoa física
-      summary: Obtenha o registro do cliente.
+      summary: |
+        Obtenha o registro do cliente.
       description: |
         <div class="bkly-ref-description">
           <p>Você pode obter um resultado resumido (BASIC) ou detalhado (DETAILED).</p> 
@@ -21,44 +22,15 @@ paths:
         </div>
       operationId: GetCustomerRegistration
       parameters:
-        - name: resultLevel
-          in: query
-          description: Tipo de retorno da API. BASIC ou DETAILED
-          required: false
-          style: form
-          explode: true
-          schema:
-            $ref: '#/components/schemas/ResultLevels'
-        - name: documentNumber
-          in: path
-          description: Número do documento CPF do cliente. Informe somente os números.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            minLength: 11
-            maxLength: 11
-            nullable: false
-            type: string
-        - name: api-version
-          in: header
-          description: Versão da API. Atualmente estamos na 1.0.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-            default: 1
+        - $ref: '#/components/parameters/CustomerDocument'
+        - $ref: '#/components/parameters/ApiVersion'
+        - $ref: '#/components/parameters/ResultLevel'
       responses:
         '200':
           description: Recurso encontrado
           headers:
             x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+              $ref: '#/components/headers/CorrelationId'
           content:
             application/json:
               schema:
@@ -112,45 +84,18 @@ paths:
                       - SELFIE_RECUSED
                       - NAME_RECUSED
                     createdAt: '2021-08-31T21:20:58.754Z'
-                    updatedAt: '2021-08-31T21:21:58.754Z'    
+                    updatedAt: '2021-08-31T21:21:58.754Z'
         '400':
-          description: Há algum problema com a sua requisição.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                accountDetailedExample:
-                  $ref: '#/components/examples/invalidParameterErrorResponse'
+          $ref: '#/components/responses/400'
         '404':
-          description: Recurso não encontrado.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/404'
         '500':
-          description: Ocorreu algum erro inexperado no nosso servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/500'
     put:
       tags:
         - Pessoa física
-      summary: Registre ou atualize dos dados de um cliente pessoa física.
+      summary: |
+        Registre ou atualize dos dados de um cliente pessoa física.
       description: |
         <div class="bkly-ref-description">
           <p>O pedido de registro será analisado e resultado você pode obter consultando o registro do cliente. Caso o cliente não exista ele será criado, caso contrario seus dados serão sobrepostos.</p>
@@ -165,26 +110,8 @@ paths:
         [/block]
       operationId: PutCustomerRegistration
       parameters:
-        - name: documentNumber
-          in: path
-          description: Número do documento CPF do cliente. Informe somente os números.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            minLength: 11
-            maxLength: 11
-            type: string
-            description: Número do documento CPF do cliente. Informe somente os números.
-        - name: api-version
-          in: header
-          description: Versão da API. Atualmente estamos na 1.0.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-            default: 1
+        - $ref: '#/components/parameters/CustomerDocument'
+        - $ref: '#/components/parameters/ApiVersion'
       requestBody:
         content:
           application/json:
@@ -192,86 +119,21 @@ paths:
               $ref: '#/components/schemas/RegisterCustomerRequest'
       responses:
         '202':
-          description: Requisição foi aceita e está sendo processada.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-            Location:
-              description: Localização do recurso recém-criado ou em análise.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/202'
         '400':
-          description: Há algum problema com a sua requisição.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                accountDetailedExample:
-                  $ref: '#/components/examples/invalidParameterErrorResponse'
+          $ref: '#/components/responses/400'
         '409':
-          description: >-
-            A solicitação conflitou com o estado atual do recurso existente no
-            servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                accountDetailedExample:
-                  $ref: '#/components/examples/errorResponse'
+          $ref: '#/components/responses/409'
         '422':
-          description: >-
-            A sintaxe da requisição esta correta, mas não foi possível processar
-            devido uma regra de negócio.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                accountDetailedExample:
-                  $ref: '#/components/examples/errorResponse'
+          $ref: '#/components/responses/422'
         '500':
-          description: Ocorreu algum erro inexperado no nosso servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/500'
   '/business/{documentNumber}':
     get:
       tags:
         - Pessoa jurídica
-      summary: Obtenha o registro da empresa.
+      summary: |
+        Obtenha o registro da empresa.
       description: |
         <div class="bkly-ref-description">
           <p>Você pode obter um resultado resumido (BASIC) ou detalhado (DETAILED).</p> 
@@ -279,82 +141,103 @@ paths:
         </div>      
       operationId: GetBusinessRegistration
       parameters:
-        - name: resultLevel
-          in: query
-          description: Tipo de retorno da API. BASIC ou DETAILED
-          required: false
-          style: form
-          explode: true
-          schema:
-            $ref: '#/components/schemas/ResultLevels'
-        - name: documentNumber
-          in: path
-          description: Número do documento CPF do cliente. Informe somente os números.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            minLength: 11
-            maxLength: 11
-            nullable: false
-            type: string
-        - name: api-version
-          in: header
-          description: Versão da API. Atualmente estamos na 1.0.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-            default: 1
+        - $ref: '#/components/parameters/BusinessDocument'
+        - $ref: '#/components/parameters/ApiVersion'
+        - $ref: '#/components/parameters/ResultLevel'
       responses:
         '200':
           description: Recurso encontrado
           headers:
             x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+              $ref: '#/components/headers/CorrelationId'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BusinessResponse'
-        '400':
-          description: Há algum problema com a sua requisição.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
               examples:
-                accountDetailedExample:
-                  $ref: '#/components/examples/invalidParameterErrorResponse'
+                BusinessApproved:
+                  value:
+                    businessName: Peter Benjamin Parker
+                    tradingName: Spider Man
+                    businessEmail: spiderman@avengers.com
+                    businessType: MEI
+                    businessSize: MEI
+                    businessAddress:
+                      zipCode: '05402100'
+                      addressLine: Av. Rebouças
+                      buildingNumber: '1368'
+                      neighborhood: Pinheiros
+                      city: Sao Paulo
+                      state: SP
+                      country: BR
+                      complement: Sala roxa
+                    legalRepresentative:
+                      registerName: Peter Benjamin Parker
+                      socialName: Peter Parker
+                      phone:
+                        countryCode: '55'
+                        number: '11987654321'
+                      address:
+                        zipCode: '05402100'
+                        addressLine: Av. Rebouças
+                        buildingNumber: '1368'
+                        neighborhood: Pinheiros
+                        city: Sao Paulo
+                        state: SP
+                        country: BR
+                        complement: Sala roxa
+                      birthDate: '1990-10-14'
+                      motherName: Mary Parker
+                      email: peter.parker@avengers.com
+                    status: APPROVED
+                    createdAt: '2021-08-31T21:20:58.754Z'
+                    updatedAt: '2021-08-31T21:21:58.754Z'
+                BusinessRepproved:
+                  value:
+                    businessName: Peter Benjamin Parker
+                    tradingName: Spider Man
+                    businessEmail: spiderman@avengers.com
+                    businessType: MEI
+                    businessSize: MEI
+                    businessAddress:
+                      zipCode: '05402100'
+                      addressLine: Av. Rebouças
+                      buildingNumber: '1368'
+                      neighborhood: Pinheiros
+                      city: Sao Paulo
+                      state: SP
+                      country: BR
+                      complement: Sala roxa
+                    legalRepresentative:
+                      registerName: Peter Benjamin Parker
+                      socialName: Peter Parker
+                      phone:
+                        countryCode: '55'
+                        number: '11987654321'
+                      address:
+                        zipCode: '05402100'
+                        addressLine: Av. Rebouças
+                        buildingNumber: '1368'
+                        neighborhood: Pinheiros
+                        city: Sao Paulo
+                        state: SP
+                        country: BR
+                        complement: Sala roxa
+                      birthDate: '1990-10-14'
+                      motherName: Mary Parker
+                      email: peter.parker@avengers.com
+                    status: REPROVED
+                    reasons:
+                      - SELFIE_RECUSED
+                      - STATUS_RECUSED
+                    createdAt: '2021-08-31T21:20:58.754Z'
+                    updatedAt: '2021-08-31T21:21:58.754Z'
+        '400':
+          $ref: '#/components/responses/400'
         '404':
-          description: Recurso não encontrado.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/404'
         '500':
-          description: Ocorreu algum erro inexperado no nosso servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/500'
     put:
       tags:
         - Pessoa jurídica
@@ -373,26 +256,8 @@ paths:
         [/block]
       operationId: PutBusinessRegistration
       parameters:
-        - name: documentNumber
-          in: path
-          description: Número do documento CNPJ da empresa. Informe somente os números.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            maxLength: 14
-            minLength: 14
-            type: string
-            description: Número do documento CNPJ da empresa. Informe somente os números.
-        - name: api-version
-          in: header
-          description: Versão da API. Atualmente estamos na 1.0.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-            default: 1
+        - $ref: '#/components/parameters/BusinessDocument'
+        - $ref: '#/components/parameters/ApiVersion'
       requestBody:
         content:
           application/json:
@@ -400,84 +265,57 @@ paths:
               $ref: '#/components/schemas/RegisterBusinessRequest'
       responses:
         '202':
-          description: Requisição foi aceita e está sendo processada.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-            Location:
-              description: Localização do recurso recém-criado ou em análise.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/202'
         '400':
-          description: Há algum problema com a sua requisição.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                accountDetailedExample:
-                  $ref: '#/components/examples/invalidParameterErrorResponse'
+          $ref: '#/components/responses/400'
         '409':
-          description: >-
-            A solicitação conflitou com o estado atual do recurso existente no
-            servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                accountDetailedExample:
-                  $ref: '#/components/examples/errorResponse'
+          $ref: '#/components/responses/409'
         '422':
-          description: >-
-            A sintaxe da requisição esta correta, mas não foi possível processar
-            devido uma regra de negócio.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                accountDetailedExample:
-                  $ref: '#/components/examples/errorResponse'
+          $ref: '#/components/responses/422'
         '500':
-          description: Ocorreu algum erro inexperado no nosso servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/500'
 security:
   - Bearer: []
 components:
+  
+  parameters:
+    ApiVersion:
+      name: api-version
+      in: header
+      description: Versão da API. Atualmente estamos na 1.0.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        default: 1
+    CustomerDocument:
+      name: documentNumber
+      in: path
+      description: Número do documento CPF do cliente. Informe somente os números.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/CustomerDocument'
+    BusinessDocument:
+      name: documentNumber
+      in: path
+      description: Número do documento CNPJ da empresa. Informe somente os números.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/BusinessDocument'
+    ResultLevel:
+      name: resultLevel
+      in: query
+      description: Tipo de retorno da API. BASIC ou DETAILED
+      required: false
+      style: form
+      explode: true
+      schema:
+        $ref: '#/components/schemas/ResultLevel'
   schemas:
     Error:
       type: object
@@ -506,6 +344,14 @@ components:
           type: integer
           format: int32
       additionalProperties: false
+    CustomerDocument:
+      type: string
+      maxLength: 11
+      minLength: 11
+    BusinessDocument:
+      type: string
+      maxLength: 14
+      minLength: 14
     BusinessType:
       type: string
       enum:
@@ -538,7 +384,7 @@ components:
           maxLength: 256
           minLength: 1
           type: string
-          description: >-
+          description: |
             Logradouro (Nome da rua, avenida, etc). Caso não exista, preencha
             S/N.
         buildingNumber:
@@ -582,7 +428,7 @@ components:
           maxLength: 3
           minLength: 2
           type: string
-          description: >-
+          description: |
             Código DDI do país. Por enquanto é permitido apenas 55 ou +55
             (Brasil).
         number:
@@ -606,13 +452,14 @@ components:
           maxLength: 256
           minLength: 1
           type: string
-          description: >-
+          description: |
             Nome conforme consta no documento de identificação (RG ou CNH) do
             cliente.
         socialName:
           type: string
-          description: >-
+          description: >
             Nome pelo qual a pessoa gostaria de ser chamada. [Saiba
+
             mais](https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf)
           nullable: true
         phone:
@@ -623,13 +470,13 @@ components:
           maxLength: 10
           minLength: 10
           type: string
-          description: >-
+          description: |
             Data de nascimento do cliente. O cliente deve possuir no mínimo 16
             anos.
           format: date-time
         motherName:
           type: string
-          description: >-
+          description: |
             Nome da mãe do cliente conforme consta no documento de
             identificação.
           nullable: true
@@ -637,7 +484,7 @@ components:
           maxLength: 256
           minLength: 1
           type: string
-          description: >-
+          description: |
             Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado
             por dois clientes.
           format: email
@@ -648,7 +495,7 @@ components:
           description: Número do documento CPF. Informe somente os números.
           readOnly: true
       additionalProperties: false
-    ResultLevels:
+    ResultLevel:
       type: string
       description: Tipo de retorno da API (BASIC ou DETAILED).
       default: BASIC
@@ -685,13 +532,14 @@ components:
           maxLength: 256
           minLength: 1
           type: string
-          description: >-
+          description: |
             Nome conforme consta no documento de identificação (RG ou CNH) do
             cliente.
         socialName:
           type: string
-          description: >-
+          description: >
             Nome pelo qual a pessoa gostaria de ser chamada. [Saiba
+
             mais](https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf)
           nullable: true
         phone:
@@ -702,13 +550,13 @@ components:
           maxLength: 10
           minLength: 10
           type: string
-          description: >-
+          description: |
             Data de nascimento do cliente. O cliente deve possuir no mínimo 16
             anos.
           format: date-time
         motherName:
           type: string
-          description: >-
+          description: |
             Nome da mãe do cliente conforme consta no documento de
             identificação.
           nullable: true
@@ -716,7 +564,7 @@ components:
           maxLength: 256
           minLength: 1
           type: string
-          description: >-
+          description: |
             Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado
             por dois clientes.
           format: email
@@ -846,6 +694,79 @@ components:
           items:
             type: string
       additionalProperties: false
+  headers:
+    CorrelationId:
+      description: Id correlação da operação requisitada.
+      style: simple
+      explode: false
+      schema:
+        type: string
+    Location:
+      description: Localização do recurso recém-criado ou em análise.
+      style: simple
+      explode: false
+      schema:
+        type: string
+  responses:
+    '202':
+      description: Requisição foi aceita e está sendo processada.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+        Location:
+          $ref: '#/components/headers/Location'
+    '400':
+      description: Há algum problema com a sua requisição.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            accountDetailedExample:
+              $ref: '#/components/examples/invalidParameterErrorResponse'
+    '404':
+      description: |
+        Recurso não encontrado.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+    '409':
+      description: |
+        A solicitação conflitou com o estado atual do recurso existente no
+        servidor.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            accountDetailedExample:
+              $ref: '#/components/examples/errorResponse'
+    '422':
+      description: |
+        A sintaxe da requisição esta correta, mas não foi possível processar
+        devido uma regra de negócio.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            accountDetailedExample:
+              $ref: '#/components/examples/errorResponse'
+    '500':
+      description: |
+        Ocorreu algum erro inexperado no nosso servidor.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
   securitySchemes:
     Bearer:
       type: http
