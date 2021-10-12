@@ -107,7 +107,7 @@ paths:
         {
           "type": "warning",
           "title": "Importante",
-          "body": "Os possíveis status do cliente após essa análise são: APPROVED, REPROVED, REVOKED, BLOCKED."
+          "body": "Os possíveis status do cliente após essa análise são: _APPROVED, REPROVED, REVOKED, BLOCKED_."
         }
         [/block]
       operationId: PutCustomerRegistration
@@ -255,7 +255,7 @@ paths:
         {
           "type": "warning",
           "title": "Importante",
-          "body": "Os possíveis status da empresa após essa análise são: APPROVED, REPROVED, REVOKED, BLOCKED."
+          "body": "Os possíveis status da empresa após essa análise são: _APPROVED, REPROVED, REVOKED, BLOCKED_."
         }
         [/block]
       operationId: PutBusinessRegistration
