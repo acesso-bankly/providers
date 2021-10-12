@@ -18,45 +18,15 @@ paths:
         </div>  
       operationId: GetAccount
       parameters:
-        - name: accountNumber
-          in: path
-          description: Número da conta.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            minLength: 3
-            maxLength: 13
-            nullable: false
-            type: string
-        - name: includeBalance
-          in: query
-          description: Inclua o saldo da conta na pesquisa.
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: boolean
-            default: true
-        - name: api-version
-          in: header
-          description: Versão da API. Atualmente estamos na 1.0.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-            default: 1  
+        - $ref: '#/components/parameters/AccountNumber'
+        - $ref: '#/components/parameters/ApiVersion'
+        - $ref: '#/components/parameters/IncludeBalance'
       responses:
         '200':
-          description: Recurso encontrado
+          description: Recurso encontrado.
           headers:
             x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+              $ref: '#/components/headers/CorrelationId'
           content:
             application/json:
               schema:
@@ -67,39 +37,15 @@ paths:
                   accountDetailedExample:
                       $ref: '#/components/examples/accountDetailedExample'
         '400':
-          description: Há algum problema com a sua requisição.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                  accountDetailedExample:
-                      $ref: '#/components/examples/invalidParameterErrorResponse'    
-        '404':
-          description: Recurso não encontrado.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '409':
+          $ref: '#/components/responses/409'
+        '422':
+          $ref: '#/components/responses/422'
         '500':
-          description: Ocorreu algum erro inexperado no nosso servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/500'
   /customers/{documentNumber}/accounts:
     get:
       tags:
@@ -112,83 +58,33 @@ paths:
         </div>
       operationId: GetPersonalAccounts
       parameters:
-        - name: documentNumber
-          in: path
-          description: Número do documento CPF do cliente. Informe somente os números.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            minLength: 11
-            maxLength: 11
-            nullable: false
-            type: string
-        - name: api-version
-          in: header
-          description: Versão da API. Atualmente estamos na 1.0.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-            default: 1
+        - $ref: '#/components/parameters/CustomerDocument'
+        - $ref: '#/components/parameters/ApiVersion'
       responses:
         '200':
-          description: Recurso encontrado
+          description: Recurso encontrado.
           headers:
             x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+              $ref: '#/components/headers/CorrelationId'
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/AccountBasicResponse'
-              example:
-                - number: '123456'
-                  branch: '0001'  
-                  status: 'ACTIVE'
-                - number: '123'
-                  branch: '0001'  
-                  status: 'CLOSED'
-        '400':
-          description: Há algum problema com a sua requisição.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
               examples:
-                  accountDetailedExample:
-                      $ref: '#/components/examples/invalidParameterErrorResponse'    
-        '404':
-          description: Recurso não encontrado.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+                  listOfAccounts:
+                    $ref: '#/components/examples/listOfAccounts'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '409':
+          $ref: '#/components/responses/409'
+        '422':
+          $ref: '#/components/responses/422'
         '500':
-          description: Ocorreu algum erro inexperado no nosso servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/500'
     post:
       tags:
         - Conta pessoa física
@@ -207,34 +103,9 @@ paths:
         [/block]  
       operationId: CreatePersonalAccount
       parameters:
-        - name: documentNumber
-          in: path
-          description: Número do documento CPF do cliente. Informe somente os números.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            minLength: 11
-            maxLength: 11
-            nullable: false
-            type: string
-        - name: api-version
-          in: header
-          description: Versão da API. Atualmente estamos na 1.0.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-            default: 1
-        - name: Idempotency-Key
-          in: header
-          description: Chave de idempotêcia para a requisição (uuid v4).
-          required: false
-          style: simple
-          explode: false
-          schema:
-            type: string
+        - $ref: '#/components/parameters/CustomerDocument'
+        - $ref: '#/components/parameters/ApiVersion'
+        - $ref: '#/components/parameters/IdempotencyKey'
       requestBody:
         content:
           application/json:
@@ -242,20 +113,12 @@ paths:
               $ref: '#/components/schemas/CreateAccountRequest'
       responses:
         '201':
-          description: Recurso criado com sucesso
+          description: Recurso criado com sucesso.
           headers:
             x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+              $ref: '#/components/headers/CorrelationId'
             Location:
-              description: Localização do recurso recém-criado ou em análise.
-              style: simple
-              explode: false
-              schema:
-                type: string
+              $ref: '#/components/headers/Location'
           content:
             application/json:
               schema:
@@ -264,46 +127,15 @@ paths:
                   accountDetailedExample:
                       $ref: '#/components/examples/accountDetailedExample'
         '400':
-          description: Há algum problema com a sua requisição.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                  accountDetailedExample:
-                      $ref: '#/components/examples/invalidParameterErrorResponse'
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '409':
+          $ref: '#/components/responses/409'
         '422':
-          description: A sintaxe da requisição esta correta, mas não foi possível processar devido uma regra de negócio.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                  accountDetailedExample:
-                      $ref: '#/components/examples/errorResponse'  
+          $ref: '#/components/responses/422'
         '500':
-          description: Ocorreu algum erro inexperado no nosso servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/500'
   /business/{documentNumber}/accounts:
     get:
       tags:
@@ -316,83 +148,33 @@ paths:
           </div>  
       operationId: GetBusinessAccounts
       parameters:
-        - name: documentNumber
-          in: path
-          description: Número do documento CNPJ da empresa. Informe somente os números.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            minLength: 14
-            maxLength: 14
-            nullable: false
-            type: string
-        - name: api-version
-          in: header
-          description: Versão da API. Atualmente estamos na 1.0.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-            default: 1
+        - $ref: '#/components/parameters/BusinessDocument'
+        - $ref: '#/components/parameters/ApiVersion'
       responses:
         '200':
-          description: Recurso encontrado
+          description: Recurso encontrado.
           headers:
             x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+              $ref: '#/components/headers/CorrelationId'
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/AccountBasicResponse'
-              example:
-                - number: '123456'
-                  branch: '0001'  
-                  status: 'ACTIVE'
-                - number: '123'
-                  branch: '0001'  
-                  status: 'CLOSED'        
-        '400':
-          description: Há algum problema com a sua requisição.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
               examples:
-                  accountDetailedExample:
-                      $ref: '#/components/examples/invalidParameterErrorResponse'    
-        '404':
-          description: Recurso não encontrado.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+                  listOfAccounts:
+                    $ref: '#/components/examples/listOfAccounts'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '409':
+          $ref: '#/components/responses/409'
+        '422':
+          $ref: '#/components/responses/422'
         '500':
-          description: Ocorreu algum erro inexperado no nosso servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+          $ref: '#/components/responses/500'
     post:
       tags:
         - Conta pessoa jurídica
@@ -411,34 +193,9 @@ paths:
         [/block] 
       operationId: CreateBusinessAccount
       parameters:
-        - name: documentNumber
-          in: path
-          description: Número do documento CNPJ da empresa. Informe somente os números.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            minLength: 14
-            maxLength: 14
-            nullable: false
-            type: string
-        - name: api-version
-          in: header
-          description: Versão da API. Atualmente estamos na 1.0.
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: string
-            default: 1
-        - name: Idempotency-Key
-          in: header
-          description: Chave de idempotêcia para a requisição (uuid v4).
-          required: false
-          style: simple
-          explode: false
-          schema:
-            type: string    
+        - $ref: '#/components/parameters/BusinessDocument'
+        - $ref: '#/components/parameters/ApiVersion'
+        - $ref: '#/components/parameters/IdempotencyKey' 
       requestBody:
         content:
           application/json:
@@ -446,20 +203,12 @@ paths:
               $ref: '#/components/schemas/CreateAccountRequest'
       responses:
         '201':
-          description: Recurso criado com sucesso
+          description: Recurso criado com sucesso.
           headers:
             x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
+              $ref: '#/components/headers/CorrelationId'
             Location:
-              description: Localização do recurso recém-criado ou em análise.
-              style: simple
-              explode: false
-              schema:
-                type: string
+              $ref: '#/components/headers/Location'
           content:
             application/json:
               schema:
@@ -468,71 +217,111 @@ paths:
                   accountDetailedExample:
                       $ref: '#/components/examples/accountDetailedExample'
         '400':
-          description: Há algum problema com a sua requisição.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                  accountDetailedExample:
-                      $ref: '#/components/examples/invalidParameterErrorResponse'  
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '409':
+          $ref: '#/components/responses/409'
         '422':
-          description: A sintaxe da requisição esta correta, mas não foi possível processar devido uma regra de negócio.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                  accountDetailedExample:
-                      $ref: '#/components/examples/errorResponse'  
+          $ref: '#/components/responses/422'
         '500':
-          description: Ocorreu algum erro inexperado no nosso servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              style: simple
-              explode: false
-              schema:
-                type: string
-
+          $ref: '#/components/responses/500'
+  
 security:
   - Bearer: []
 
 components:
+  
+  parameters:
+    ApiVersion:
+      name: api-version
+      in: header
+      description: |
+        Versão da API. 
+        _Atualmente estamos na **1.0**._
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        default: 1
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      description: Chave de idempotêcia para a requisição (uuid v4).
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: string
+    AccountNumber:
+      name: accountNumber
+      in: path
+      description: |
+        Número da conta de pagamento.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/AccountNumber'
+    CustomerDocument:
+      name: documentNumber
+      in: path
+      description: |
+        Número do documento CPF do cliente. 
+        **_Informe somente os números._**
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/CustomerDocument'
+    BusinessDocument:
+      name: documentNumber
+      in: path
+      description: |
+        Número do documento CNPJ da empresa. 
+        **_Informe somente os números._**
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/BusinessDocument'
+    IncludeBalance:
+      name: includeBalance
+      in: query
+      description: Inclua o saldo da conta na pesquisa.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: boolean
+        default: false
+  
   schemas:
     Error:
       type: object
       properties:
         code:
+          description: Código do erro.
           type: string
           nullable: true
         propertyName:
+          description: Parametro ou propriedade com problema. Somente será retornado quando o erro for de sintaxe (Bad Request). 
           type: string
           nullable: true
         messages:
+          description: Lista de descrições do problema encontrado. 
           type: array
           nullable: true
           items:
             type: string
       additionalProperties: false
     ErrorResponse:
+      description: Detalhes do erro identificado.
       type: object
       properties:
         errors:
+          description: Lista de erros identificados. Trate-os antes de tentar novamente.
           type: array
           nullable: true
           items:
@@ -541,38 +330,70 @@ components:
           type: integer
           format: int32
       additionalProperties: false  
+    BankBranch:
+      type: string
+      minLength: 4
+      maxLength: 4
+      description: |
+        Agencia bancária.
+        _Default: **0001**._    
+    AccountNumber:
+      description: Número da conta de pagamento.
+      type: string
+      minLength: 3
+      maxLength: 13
+    CustomerDocument:
+      description: Número do documento CPF do titular da conta.
+      type: string
+      maxLength: 11
+      minLength: 11
+    BusinessDocument:
+      description: Número do documento CNPJ do titular da conta.
+      type: string
+      maxLength: 14
+      minLength: 14
     Balance:
+      description: Saldo da conta.
       type: object
       properties:
         amount:
+          description: |
+            Valor em decimal. Ex: 1.00.
           type: number
           format: double
         currency:
+          description: |
+            Moeda corrente. _Default: *BRL*_
           type: string
-          nullable: true
       additionalProperties: false
     SummarizedBalance:
+      description: Saldo sumarizado da conta.
       type: object
       properties:
         inProcess:
+          description: Saldo em processamento _(cash in)_.
           $ref: '#/components/schemas/Balance'
         available:
+          description: Saldo disponível.
           $ref: '#/components/schemas/Balance'
         blocked:
+          description: Saldo em bloqueio judicial.
           $ref: '#/components/schemas/Balance'
       additionalProperties: false
     AccountStatus:
       type: string
-      description: Status da conta.
+      description: |
+        Status da conta.
+        _(ACTIVE, CLOSED)_
       enum:
         - ACTIVE
         - CLOSED
-        - CASH_IN_BLOCKED
-        - CASH_OUT_BLOCKED
-        - BLOCKED
     AccountType:
       type: string
-      description: Tipo da conta a ser criada. Neste momento só é permitido PAYMENT_ACCOUNT.
+      description: |
+        Tipo da conta a ser criada. 
+        _Default: **PAYMENT_ACCOUNT**_.
+      default: PAYMENT_ACCOUNT
       enum:
         - PAYMENT_ACCOUNT
     CreateAccountRequest:
@@ -587,11 +408,9 @@ components:
         status:
           $ref: '#/components/schemas/AccountStatus'
         branch:
-          type: string
-          nullable: true
+          $ref: '#/components/schemas/BankBranch'
         number:
-          type: string
-          nullable: true
+          $ref: '#/components/schemas/AccountNumber'
       additionalProperties: false
     AccountDetailedResponse:
       type: object
@@ -601,13 +420,90 @@ components:
         status:
           $ref: '#/components/schemas/AccountStatus'
         branch:
-          type: string
-          nullable: true
+          $ref: '#/components/schemas/BankBranch'
         number:
-          type: string
-          nullable: true
+          $ref: '#/components/schemas/AccountNumber'
       additionalProperties: false
-    
+  
+  headers:
+    CorrelationId:
+      description: Id correlação da operação requisitada.
+      style: simple
+      explode: false
+      schema:
+        type: string
+    Location:
+      description: Localização do recurso recém-criado ou em análise.
+      style: simple
+      explode: false
+      schema:
+        type: string
+
+  responses:
+    '202':
+      description: Requisição foi aceita e está sendo processada.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+        Location:
+          $ref: '#/components/headers/Location'
+    '400':
+      description: Há algum problema com a sua requisição.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            accountDetailedExample:
+              $ref: '#/components/examples/invalidParameterErrorResponse'
+    '403':
+      description: |
+        O acesso ao recurso foi negado pelo servidor.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+    '404':
+      description: |
+        Recurso não encontrado.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+    '409':
+      description: |
+        A solicitação conflitou com o estado atual do recurso existente no servidor.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            accountDetailedExample:
+              $ref: '#/components/examples/errorResponse'
+    '422':
+      description: |
+        A sintaxe da requisição esta correta, mas não foi possível processar devido uma regra de negócio.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            accountDetailedExample:
+              $ref: '#/components/examples/errorResponse'
+    '500':
+      description: |
+        Ocorreu algum erro inexperado no nosso servidor.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
+
   securitySchemes:
     Bearer:
       type: http
@@ -623,7 +519,7 @@ components:
               propertyName: '{{propertyName}}'
               messages:
                 - '{{"propertyName" error message}}'
-      summary: Invalid parameter error
+      summary: Parametro inválido
 
     errorResponse:
       value:
@@ -631,14 +527,14 @@ components:
             - code: "SOME_ERROR_CODE"  
               messages:
                 - '{{Some error message}}'
-      summary: Business error           
+      summary: Erro de negócio         
 
     accountBasicExample:
       value:
         branch: '0001'  
         number: '123456'
         status: 'ACTIVE'
-      summary: Account without balace
+      summary: Conta de pagamento sem saldo
 
     accountDetailedExample:
       value:
@@ -655,7 +551,17 @@ components:
           blocked:
               amount: 0.00
               currency: 'BRL'  
-      summary: Account with balance
+      summary: Conta de pagamento com saldo
+      
+    listOfAccounts:
+      value:
+        - number: '123456'
+          branch: '0001'  
+          status: 'ACTIVE'
+        - number: '123'
+          branch: '0001'  
+          status: 'CLOSED'
+      summary: Lista de contas de pagamento
 
 x-readme:
   explorer-enabled: true
