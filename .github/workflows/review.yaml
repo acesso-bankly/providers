@@ -16,6 +16,7 @@ jobs:
         with: 
           files: |
             ./apis/v1/oauth/schema.yaml
+            ./apis/v1/document-analysis/schema.yaml
             ./apis/v1/holders/schema.yaml
             ./apis/v1/accounts/schema.yaml
 
