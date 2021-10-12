@@ -325,21 +325,26 @@ components:
       type: object
       properties:
         code:
+          description: Código do erro.
           type: string
           nullable: true
         propertyName:
+          description: Parametro ou propriedade com problema. Somente será retornado quando o erro for de sintaxe (Bad Request). 
           type: string
           nullable: true
         messages:
+          description: Lista de descrições do problema encontrado. 
           type: array
           nullable: true
           items:
             type: string
       additionalProperties: false
     ErrorResponse:
+      description: Detalhes do erro identificado.
       type: object
       properties:
         errors:
+          description: Lista de erros identificados. Trate-os antes de tentar novamente.
           type: array
           nullable: true
           items:
@@ -349,28 +354,31 @@ components:
           format: int32
       additionalProperties: false
     CustomerDocument:
+      description: Número do documento CPF do cliente.
       type: string
       maxLength: 11
       minLength: 11
     BusinessDocument:
+      description: Número do documento CNPJ da empresa.
       type: string
       maxLength: 14
       minLength: 14
     BusinessType:
-      type: string
       description: Tipo da empresa (MEI, EI ou EIRELLI).
+      type: string
       enum:
         - MEI
         - EI
         - EIRELI
     BusinessSize:
-      type: string
       description: Porte da empresa (MEI, ME ou EPP).
+      type: string
       enum:
         - MEI
         - ME
         - EPP
     Address:
+      description: Endereço do cliente, da empresa ou de seu representante legal.
       required:
         - zipCode
         - addressLine
@@ -452,6 +460,7 @@ components:
         - address
         - email
         - motherName
+        - isPoliticallyExposedPerson
       type: object
       properties:
         registerName:
@@ -463,9 +472,8 @@ components:
             cliente.
         socialName:
           type: string
-          description: >
+          description: |
             Nome pelo qual a pessoa gostaria de ser chamada. [Saiba
-
             mais](https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf)
           nullable: true
         phone:
@@ -502,6 +510,9 @@ components:
           type: string
           description: Número do documento CPF. Informe somente os números.
           readOnly: true
+        isPoliticallyExposedPerson:
+          description: Identificação do cliente como pessoa politicamente exposta.
+          type: boolean
       additionalProperties: false
     ResultLevel:
       type: string
@@ -545,7 +556,7 @@ components:
             cliente.
         socialName:
           type: string
-          description: >
+          description: |
             Nome pelo qual a pessoa gostaria de ser chamada. [Saiba
             mais](https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf)
           nullable: true
@@ -577,6 +588,9 @@ components:
             Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado
             por dois clientes.
           format: email
+        isPoliticallyExposedPerson:
+          description: Identificação do cliente como pessoa politicamente exposta.
+          type: boolean
       additionalProperties: false
     RegisterBusinessRequest:
       required:
@@ -618,40 +632,56 @@ components:
       type: object
       properties:
         documentNumber:
+          description: Número do documento CPF do cliente.
           type: string
           nullable: true
         registerName:
+          description: Nome conforme consta no documento de identificação (RG ou CNH) do cliente.
           type: string
           nullable: true
         socialName:
+          description: |
+            Nome pelo qual a pessoa gostaria de ser chamada. [Saiba
+            mais](https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf)
           type: string
           nullable: true
         phone:
+          description: Telefone de contato do cliente.
           $ref: '#/components/schemas/Phone'
         address:
+          description: Endereço informado no registro do cliente.
           $ref: '#/components/schemas/Address'
         birthDate:
+          description: Data de nascimento do cliente.
           type: string
           format: date-time
         email:
+          description: E-mail de contato do cliente.
           type: string
           nullable: true
         motherName:
+          description: Nome da mãe informado no registro do cliente.
           type: string
           nullable: true
         isPoliticallyExposedPerson:
+          description: Identificação do cliente como pessoa politicamente exposta.
           type: boolean
         status:
+          description: Status da análise KYC realizada no registro do cliente.
           $ref: '#/components/schemas/Status'
         profile:
+          description: Perfil do cliente, baseado nos dados fornecidos no onbording ou atualização cadastral (SIMPLES ou COMPLETO).
           $ref: '#/components/schemas/Profile'
         createdAt:
+          description: Data do primeiro registro do cliente.
           type: string
           format: date-time
         updatedAt:
+          description: Data da atualização do registro do cliente.
           type: string
           format: date-time
         reasons:
+          description: Motivos de reprovação do registro do cliente.
           type: array
           nullable: true
           items:
@@ -661,47 +691,60 @@ components:
       type: object
       properties:
         documentNumber:
+          description: Número do documento CNPJ da empresa.
           type: string
           nullable: false
         businessName:
+          description: Razão social da empresa.
           type: string
           nullable: false
         tradingName:
+          description: Nome fantasia da empresa.
           type: string
           nullable: true
         email:
+          description: E-mail comercial da empresa.
           type: string
           nullable: true
         businessAddress:
+          description: Endereço da empresa informado no registro.
           $ref: '#/components/schemas/Address'
         status:
+          description: Status da análise KYC realizada no registro da empresa.
           type: string
           nullable: false
         businessType:
+          description: Tipo da empresa (MEI, EI, EIRELLI, LTDA ou SA).
           type: string
           nullable: false
         businessSize:
+          description: Porte da empresa (MEI, ME, EPP, SMALL, MEDIUM ou LARGE).
           type: string
           nullable: false
         owners:
+          description: Lista de sócios da empresa (QSA).
           type: array
           nullable: true
           items:
             $ref: '#/components/schemas/LegalRepresentative'
         legalRepresentatives:
+          description: Lista de representantes legais da empresa.
           type: array
           nullable: true
           items:
             $ref: '#/components/schemas/LegalRepresentative'
         createdAt:
+          description: Data do primeiro registro da empresa.
           type: string
           format: date-time
           nullable: false
         updatedAt:
+          description: Data da atualização do registro da empresa.
           type: string
           format: date-time
           nullable: true
         reasons:
+          description: Motivos de reprovação do registro da empresa.
           type: array
           nullable: true
           items:
