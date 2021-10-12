@@ -59,6 +59,7 @@ paths:
                     status: APPROVED
                     createdAt: '2021-08-31T21:20:58.754Z'
                     updatedAt: '2021-08-31T21:21:58.754Z'
+                  summary: Approved Customer
                 CustomerReproved:
                   value:
                     registerName: Peter Parker
@@ -85,6 +86,7 @@ paths:
                       - NAME_RECUSED
                     createdAt: '2021-08-31T21:20:58.754Z'
                     updatedAt: '2021-08-31T21:21:58.754Z'
+                  summary: Reproved Customer
         '400':
           $ref: '#/components/responses/400'
         '404':
@@ -192,6 +194,7 @@ paths:
                     status: APPROVED
                     createdAt: '2021-08-31T21:20:58.754Z'
                     updatedAt: '2021-08-31T21:21:58.754Z'
+                  summary: Approved Business
                 BusinessRepproved:
                   value:
                     businessName: Peter Benjamin Parker
@@ -232,6 +235,7 @@ paths:
                       - STATUS_RECUSED
                     createdAt: '2021-08-31T21:20:58.754Z'
                     updatedAt: '2021-08-31T21:21:58.754Z'
+                  summary: Reproved Business    
         '400':
           $ref: '#/components/responses/400'
         '404':
