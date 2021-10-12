@@ -131,15 +131,6 @@ components:
       explode: false
       schema:
         $ref: '#/components/schemas/CustomerDocument'
-    BusinessDocument:
-      name: documentNumber
-      in: path
-      description: Número do documento CNPJ da empresa. Informe somente os números.
-      required: true
-      style: simple
-      explode: false
-      schema:
-        $ref: '#/components/schemas/BusinessDocument'
     ResultLevel:
       name: resultLevel
       in: query
