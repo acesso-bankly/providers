@@ -52,7 +52,7 @@ paths:
       tags:
         - Análise de documentos
       summary: |
-        Envie documentos (SELFIE, RG ou CNH) para análise.
+        Envie documentos (SELFIE, RG, CNH) para análise.
       description: |
         <div class="bkly-ref-description">
           <p>Essa análise é um pré-requisito para fluxo de onboarding completo e atualização cadastral para clientes pessoa física ou pessoa jurídica.</p>
@@ -140,7 +140,7 @@ components:
       in: query
       description: |
         Tipo de retorno da API.
-        _(ONLY_STATUS ou DETAILED)_
+        _(ONLY_STATUS, DETAILED)_
       required: false
       style: form
       explode: true
@@ -204,7 +204,7 @@ components:
       type: string
       description: |
         Lado do documento.
-        _(FRONT ou BACK)_
+        _(FRONT, BACK)_
       enum:
         - FRONT
         - BACK
@@ -212,7 +212,7 @@ components:
       type: string
       description: |
         Tipo de retorno da API.
-        _(ONLY_STATUS ou DETAILED)_
+        _(ONLY_STATUS, DETAILED)_
       default: ONLY_STATUS
       enum:
         - ONLY_STATUS
@@ -221,7 +221,7 @@ components:
       type: string
       description: |
         Status da análise da imagem.
-        _(ANALYZING, PARTIALLY_ANALYZED, ANALYSIS_COMPLETED ou UNEXPECTED_ERROR)_
+        _(ANALYZING, PARTIALLY_ANALYZED, ANALYSIS_COMPLETED, UNEXPECTED_ERROR)_
       enum:
         - ANALYZING
         - PARTIALLY_ANALYZED
@@ -236,7 +236,7 @@ components:
     FaceMatchStatus: 
       description: |
         Resultado da análise face match.
-        _(HAS_FACE_MATCH, UNMATCHED_DOCUMENT ou MANY_FACES_DETECTEDR)_
+        _(HAS_FACE_MATCH, UNMATCHED_DOCUMENT, MANY_FACES_DETECTEDR)_
       type: string
       enum:
         - HAS_FACE_MATCH
@@ -261,7 +261,7 @@ components:
     FaceDetailsStatus:
       description: |
         Resultado da análise facial.
-        _(DETECTED_FACE, MANY_FACES_DETECTED ou COULD_NOT_DETECT_FACE)_
+        _(DETECTED_FACE, MANY_FACES_DETECTED, COULD_NOT_DETECT_FACE)_
       type: string
       enum:
         - DETECTED_FACE
@@ -323,7 +323,7 @@ components:
     OcrStatus:
       description: |
         Resultado da análise OCR.
-        _(DETECTED_DOCUMENT, NO_DOCUMENT_FOUND ou NO_INFO_FOUND)_
+        _(DETECTED_DOCUMENT, NO_DOCUMENT_FOUND, NO_INFO_FOUND)_
       type: string
       enum:
         - DETECTED_DOCUMENT
@@ -400,7 +400,7 @@ components:
     LivenessStatus:
       description: |
         Resultado da análise de prova de vida.
-        _(LIVENESS_FOUND, NO_LIVENESS ou COULD_NOT_DETECT_FACE)_
+        _(LIVENESS_FOUND, NO_LIVENESS, COULD_NOT_DETECT_FACE)_
       type: string
       enum:
         - LIVENESS_FOUND

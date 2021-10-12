@@ -107,7 +107,7 @@ paths:
         {
           "type": "warning",
           "title": "Importante",
-          "body": "Os possíveis status do cliente após essa análise são: APPROVED, REPROVED, REVOKED ou BLOCKED."
+          "body": "Os possíveis status do cliente após essa análise são: APPROVED, REPROVED, REVOKED, BLOCKED."
         }
         [/block]
       operationId: PutCustomerRegistration
@@ -255,7 +255,7 @@ paths:
         {
           "type": "warning",
           "title": "Importante",
-          "body": "Os possíveis status da empresa após essa análise são: APPROVED, REPROVED, REVOKED ou BLOCKED."
+          "body": "Os possíveis status da empresa após essa análise são: APPROVED, REPROVED, REVOKED, BLOCKED."
         }
         [/block]
       operationId: PutBusinessRegistration
@@ -322,7 +322,7 @@ components:
       in: query
       description: |
         Tipo de retorno da API.
-        (BASIC ou DETAILED)
+        _(BASIC, DETAILED)_
       required: false
       style: form
       explode: true
@@ -374,7 +374,7 @@ components:
     BusinessType:
       description: |
         Tipo da empresa.
-        (MEI, EI ou EIRELLI)
+        (MEI, EI, EIRELLI)
       type: string
       enum:
         - MEI
@@ -383,7 +383,7 @@ components:
     BusinessSize:
       description: |
         Porte da empresa.
-        (MEI, ME ou EPP)
+        (MEI, ME, EPP)
       type: string
       enum:
         - MEI
@@ -488,7 +488,7 @@ components:
           minLength: 1
           type: string
           description: |
-            Nome conforme consta no documento de identificação (RG ou CNH) do cliente.
+            Nome conforme consta no documento de identificação _(RG, CNH)_ do cliente.
         socialName:
           type: string
           description: |
@@ -538,7 +538,7 @@ components:
       type: string
       description: |
         Tipo de retorno da API.
-        _(BASIC ou DETAILED)_
+        _(BASIC, DETAILED)_
       default: BASIC
       enum:
         - BASIC
@@ -574,7 +574,7 @@ components:
           minLength: 1
           type: string
           description: |
-            Nome conforme consta no documento de identificação (RG ou CNH) do cliente.
+            Nome conforme consta no documento de identificação _(RG, CNH)_ do cliente.
         socialName:
           type: string
           description: |
@@ -655,7 +655,7 @@ components:
           description: Número do documento CPF do cliente.
           type: string
         registerName:
-          description: Nome conforme consta no documento de identificação (RG ou CNH) do cliente.
+          description: Nome conforme consta no documento de identificação _(RG, CNH)_ do cliente.
           type: string
         socialName:
           description: |
@@ -689,7 +689,7 @@ components:
         profile:
           description: |
             Perfil do cliente, baseado no registro do cliente.
-            _(SIMPLES ou COMPLETO)_
+            _(SIMPLES, COMPLETO)_
           $ref: '#/components/schemas/Profile'
         createdAt:
           description: Data do primeiro registro do cliente.
@@ -731,12 +731,12 @@ components:
         businessType:
           description: |
             Tipo da empresa.
-            _(MEI, EI, EIRELLI, LTDA ou SA)_
+            _(MEI, EI, EIRELLI, LTDA, SA)_
           $ref: '#/components/schemas/BusinessType'
         businessSize:
           description: |
             Porte da empresa.
-            _(MEI, ME, EPP, SMALL, MEDIUM ou LARGE)_
+            _(MEI, ME, EPP, SMALL, MEDIUM, LARGE)_
           $ref: '#/components/schemas/BusinessSize'
         owners:
           description: Lista de sócios da empresa como consta no Quadro dos Sócios e Administradores (QSA).
