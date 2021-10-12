@@ -115,7 +115,9 @@ components:
     ApiVersion:
       name: api-version
       in: header
-      description: Versão da API. Atualmente estamos na 1.0.
+      description: |
+        Versão da API. 
+        **Atualmente estamos na 1.0.**
       required: true
       style: simple
       explode: false
@@ -125,7 +127,9 @@ components:
     CustomerDocument:
       name: documentNumber
       in: path
-      description: Número do documento CPF do cliente ou representante legal da empresa. Informe somente os números.
+      description: |
+        Número do documento CPF do cliente ou representante legal da empresa. 
+        **Informe somente os números.**
       required: true
       style: simple
       explode: false
@@ -136,7 +140,7 @@ components:
       in: query
       description: |
         Tipo de retorno da API.
-        (ONLY_STATUS ou DETAILED)
+        _(ONLY_STATUS ou DETAILED)_
       required: false
       style: form
       explode: true
@@ -191,7 +195,7 @@ components:
       type: string
       description: |
         Tipo do documento.
-        (RG, CNH, SELFIE)
+        _(RG, CNH, SELFIE)_
       enum:
         - RG
         - CNH
@@ -200,7 +204,7 @@ components:
       type: string
       description: |
         Lado do documento.
-        (FRONT ou BACK)
+        _(FRONT ou BACK)_
       enum:
         - FRONT
         - BACK
@@ -208,7 +212,7 @@ components:
       type: string
       description: |
         Tipo de retorno da API.
-        (ONLY_STATUS ou DETAILED)
+        _(ONLY_STATUS ou DETAILED)_
       default: ONLY_STATUS
       enum:
         - ONLY_STATUS
@@ -217,7 +221,7 @@ components:
       type: string
       description: |
         Status da análise da imagem.
-        (ANALYZING, PARTIALLY_ANALYZED, ANALYSIS_COMPLETED ou UNEXPECTED_ERROR)
+        _(ANALYZING, PARTIALLY_ANALYZED, ANALYSIS_COMPLETED ou UNEXPECTED_ERROR)_
       enum:
         - ANALYZING
         - PARTIALLY_ANALYZED
@@ -232,7 +236,7 @@ components:
     FaceMatchStatus: 
       description: |
         Resultado da análise face match.
-        (HAS_FACE_MATCH, UNMATCHED_DOCUMENT ou MANY_FACES_DETECTEDR)
+        _(HAS_FACE_MATCH, UNMATCHED_DOCUMENT ou MANY_FACES_DETECTEDR)_
       type: string
       enum:
         - HAS_FACE_MATCH
@@ -257,7 +261,7 @@ components:
     FaceDetailsStatus:
       description: |
         Resultado da análise facial.
-        (DETECTED_FACE, MANY_FACES_DETECTED ou COULD_NOT_DETECT_FACE)
+        _(DETECTED_FACE, MANY_FACES_DETECTED ou COULD_NOT_DETECT_FACE)_
       type: string
       enum:
         - DETECTED_FACE
@@ -318,8 +322,8 @@ components:
       additionalProperties: false
     OcrStatus:
       description: |
-        Resultado da análise OCR
-        (DETECTED_DOCUMENT, NO_DOCUMENT_FOUND ou NO_INFO_FOUND).
+        Resultado da análise OCR.
+        _(DETECTED_DOCUMENT, NO_DOCUMENT_FOUND ou NO_INFO_FOUND)_
       type: string
       enum:
         - DETECTED_DOCUMENT
@@ -396,7 +400,7 @@ components:
     LivenessStatus:
       description: |
         Resultado da análise de prova de vida.
-        (LIVENESS_FOUND, NO_LIVENESS ou COULD_NOT_DETECT_FACE).
+        _(LIVENESS_FOUND, NO_LIVENESS ou COULD_NOT_DETECT_FACE)_
       type: string
       enum:
         - LIVENESS_FOUND
@@ -461,9 +465,8 @@ components:
         image:
           type: string
           description: |
-            Arquivo da imagem. Não deve ser superior à 1 MB. A resolução deve
-            ser compatível com VGA. [Saiba
-            mais](https://en.wikipedia.org/wiki/Video_Graphics_Array).
+            Arquivo da imagem. Não deve ser superior à **1 MB**.
+            _A resolução deve ser compatível com VGA. [Saiba mais](https://en.wikipedia.org/wiki/Video_Graphics_Array)._
           format: binary
           nullable: true
   headers:
@@ -507,8 +510,7 @@ components:
           $ref: '#/components/headers/CorrelationId'
     '409':
       description: |
-        A solicitação conflitou com o estado atual do recurso existente no
-        servidor.
+        A solicitação conflitou com o estado atual do recurso existente no servidor.
       headers:
         x-bkly-correlation-id:
           $ref: '#/components/headers/CorrelationId'
@@ -521,8 +523,7 @@ components:
               $ref: '#/components/examples/errorResponse'
     '422':
       description: |
-        A sintaxe da requisição esta correta, mas não foi possível processar
-        devido uma regra de negócio.
+        A sintaxe da requisição esta correta, mas não foi possível processar devido uma regra de negócio.
       headers:
         x-bkly-correlation-id:
           $ref: '#/components/headers/CorrelationId'
