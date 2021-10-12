@@ -44,6 +44,8 @@ paths:
                   $ref: '#/components/examples/DocumentBack'
         '400':
           $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
         '500':
@@ -100,6 +102,8 @@ paths:
                   summary: Token da análise
         '400':
           $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
         '409':
           $ref: '#/components/responses/409'
         '422':
@@ -502,6 +506,12 @@ components:
           examples:
             accountDetailedExample:
               $ref: '#/components/examples/invalidParameterErrorResponse'
+    '403':
+      description: |
+        O acesso ao recurso foi negado pelo servidor.
+      headers:
+        x-bkly-correlation-id:
+          $ref: '#/components/headers/CorrelationId'
     '404':
       description: |
         Recurso não encontrado.
