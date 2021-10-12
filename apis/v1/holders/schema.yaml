@@ -358,12 +358,14 @@ components:
       minLength: 14
     BusinessType:
       type: string
+      description: Tipo da empresa (MEI, EI ou EIRELLI)
       enum:
         - MEI
         - EI
         - EIRELI
     BusinessSize:
       type: string
+      description: Porte da empresa (MEI, ME ou EPP)
       enum:
         - MEI
         - ME
