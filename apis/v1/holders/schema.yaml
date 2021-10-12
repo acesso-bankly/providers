@@ -314,7 +314,7 @@ components:
     ResultLevel:
       name: resultLevel
       in: query
-      description: Tipo de retorno da API. BASIC ou DETAILED
+      description: Tipo de retorno da API (BASIC ou DETAILED).
       required: false
       style: form
       explode: true
