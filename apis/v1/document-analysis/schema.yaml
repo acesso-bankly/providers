@@ -86,8 +86,10 @@ paths:
           description: Requisição foi aceita e está sendo processada.
           headers:
             x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
               $ref: '#/components/headers/CorrelationId'
             Location:
+              description: Localização do recurso recém-criado ou em análise.
               $ref: '#/components/headers/Location'
           content:
             application/json:
