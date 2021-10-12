@@ -413,6 +413,7 @@ components:
       type: object
       properties:
         token:
+          description: Token da análise.
           type: string
           nullable: true
         documentType:
