@@ -7,7 +7,7 @@ servers:
 paths:
   /connect/token:
     post:
-      summary: 'Obtenha um token de acesso'
+      summary: Obtenha um token de acesso
       description: |
         <div class="bkly-ref-description">
           <p>Obtenha um token de acesso para a api desejada.</p> 
@@ -28,6 +28,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthResponse'
+              examples:
+                authResponse:
+                  value:
+                    access_token: '{{JWT}}'
+                    expires_in: 3600
+                    token_type: Bearer
+                    scope: '{{requested scope}}'
+                  summary: Exemplo de sucesso 
         '400':
           description: Há algum problema com a sua requisição.
           content:
@@ -35,9 +43,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  error: 
+                  error:
                     type: string
-
+              examples:
+                authError:
+                  value: 
+                    error: "invalid_credentials"
+                  summary: Exemplo de erro
 components:
   schemas:
     AuthForm:
@@ -46,38 +58,49 @@ components:
         - grant_type
         - client_id
         - client_secret
-        - scope
       properties:
         grant_type:
           type: string
           default: client_credentials
-          description: 'Método pelo qual suas aplicações podem obter tokens de acesso. Default: **client_credentials**'
+          description: |
+            Método pelo qual suas aplicações podem obter tokens de acesso. 
+            Default: **_client_credentials_**
         client_id:
           type: string
-          description: O identificador publico de sua aplicação. (uuid v4)
+          description: |
+            O identificador publico de sua aplicação no formato (uuid v4). 
         client_secret:
           type: string
-          description: O segredo conhecido por sua aplicação e pelo servidor de autorização. 
+          description: >
+            O segredo conhecido por sua aplicação e pelo servidor de
+            autorização. 
         scope:
           type: string
-          description: 'Escopo da api que deseja acessar. Consulte a [lista de scope](https://docs.bankly.com.br/docs/scopes)'
-  
+          description: |
+            Escopo da api que deseja acessar. 
+            Consulte a [lista de scope](https://docs.bankly.com.br/docs/scopes)
     AuthResponse:
       type: object
       properties:
         access_token:
           type: string
-          description: Token de acesso no formato JWT (Json Web Token).
+          description: |
+            Token de acesso no formato JWT (Json Web Token).
         expires_in:
           type: string
-          description: 'Tempo de vida do token em segundos. Evite solicitar novos tokens de acesso, antes do tempo de expiração. Default: **3600**'
+          description: >
+            Tempo de vida do token em segundos. 
+            Evite solicitar novos tokens de acesso, antes do tempo de expiração.
+            Default: **_3600_**
         token_type:
           type: string
-          description: Tipo do token retornado. Default":" **Bearer**. 
+          description: |
+            Tipo do token retornado. 
+            Default: **_Bearer_**
         scope:
           type: string
-          description: Escopo informado na solicitação do token de acesso.          
-
+          description: |
+            Escopo informado na solicitação do token de acesso.          
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
