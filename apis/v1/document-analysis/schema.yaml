@@ -187,7 +187,9 @@ components:
       minLength: 11
     DocumentType:
       type: string
-      description: 'Tipo do documento (RG, CNH, SELFIE).'
+      description: |
+        Tipo do documento.
+        (RG, CNH, SELFIE)
       enum:
         - RG
         - CNH
@@ -195,15 +197,16 @@ components:
     DocumentSide:
       type: string
       description: |
-        Lado do documento (FRONT ou BACK). Quando o tipo do documento for
-        selfie, este parâmetro será desprezado.
+        Lado do documento.
+        (FRONT ou BACK)
       enum:
         - FRONT
         - BACK
     ResultLevel:
       type: string
       description: |
-        Tipo de retorno da API (ONLY_STATUS ou DETAILED).
+        Tipo de retorno da API.
+        (ONLY_STATUS ou DETAILED)
       default: ONLY_STATUS
       enum:
         - ONLY_STATUS
@@ -211,7 +214,8 @@ components:
     AnalysisStatus:
       type: string
       description: |
-        Status da análise da imagem (ANALYZING, PARTIALLY_ANALYZED, ANALYSIS_COMPLETED ou UNEXPECTED_ERROR).
+        Status da análise da imagem.
+        (ANALYZING, PARTIALLY_ANALYZED, ANALYSIS_COMPLETED ou UNEXPECTED_ERROR)
       enum:
         - ANALYZING
         - PARTIALLY_ANALYZED
@@ -225,7 +229,8 @@ components:
       nullable: false
     FaceMatchStatus: 
       description: |
-        Resultado da análise face match (HAS_FACE_MATCH, UNMATCHED_DOCUMENT ou MANY_FACES_DETECTEDR).
+        Resultado da análise face match.
+        (HAS_FACE_MATCH, UNMATCHED_DOCUMENT ou MANY_FACES_DETECTEDR)
       type: string
       enum:
         - HAS_FACE_MATCH
@@ -249,7 +254,8 @@ components:
       additionalProperties: false
     FaceDetailsStatus:
       description: |
-        Resultado da análise facial (DETECTED_FACE, MANY_FACES_DETECTED ou COULD_NOT_DETECT_FACE).
+        Resultado da análise facial.
+        (DETECTED_FACE, MANY_FACES_DETECTED ou COULD_NOT_DETECT_FACE)
       type: string
       enum:
         - DETECTED_FACE
@@ -310,7 +316,8 @@ components:
       additionalProperties: false
     OcrStatus:
       description: |
-        Resultado da análise facial (DETECTED_DOCUMENT, NO_DOCUMENT_FOUND ou NO_INFO_FOUND).
+        Resultado da análise OCR
+        (DETECTED_DOCUMENT, NO_DOCUMENT_FOUND ou NO_INFO_FOUND).
       type: string
       enum:
         - DETECTED_DOCUMENT
@@ -352,7 +359,7 @@ components:
           type: string
           nullable: true
         validDate:
-          description: Validade do documento (Somente em CNH).
+          description: Validade do documento CNH do motorista.
           type: string
           nullable: true
         driveLicenseCategory:
@@ -360,11 +367,11 @@ components:
           type: string
           nullable: true
         driveLicenseNumber:
-          description: Número da licença de motorista (Somente em CNH).
+          description: Número da licença (CNH) do motorista.
           type: string
           nullable: true
         driveLicenseFirstQualifyingDate:
-          description: Data da primeira habilitação de motorista (Somente em CNH).
+          description: Data da primeira habilitação (CNH) do motorista.
           type: string
           nullable: true
         federativeUnit:
@@ -386,7 +393,8 @@ components:
       additionalProperties: false
     LivenessStatus:
       description: |
-        Resultado da análise de prova de vida (LIVENESS_FOUND, NO_LIVENESS ou COULD_NOT_DETECT_FACE).
+        Resultado da análise de prova de vida.
+        (LIVENESS_FOUND, NO_LIVENESS ou COULD_NOT_DETECT_FACE).
       type: string
       enum:
         - LIVENESS_FOUND
@@ -431,6 +439,7 @@ components:
         liveness:
           $ref: '#/components/schemas/Liveness'
         analyzedAt:
+          description: Data da análise do documento.
           type: string
           format: date-time
           nullable: true
