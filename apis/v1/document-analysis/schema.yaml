@@ -134,7 +134,9 @@ components:
     ResultLevel:
       name: resultLevel
       in: query
-      description: Tipo de retorno da API (ONLY_STATUS ou DETAILED).
+      description: |
+        Tipo de retorno da API.
+        (ONLY_STATUS ou DETAILED)
       required: false
       style: form
       explode: true
