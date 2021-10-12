@@ -117,7 +117,7 @@ components:
       in: header
       description: |
         Versão da API. 
-        **Atualmente estamos na 1.0.**
+        _Atualmente estamos na **1.0**._
       required: true
       style: simple
       explode: false
