@@ -358,14 +358,14 @@ components:
       minLength: 14
     BusinessType:
       type: string
-      description: Tipo da empresa (MEI, EI ou EIRELLI)
+      description: Tipo da empresa (MEI, EI ou EIRELLI).
       enum:
         - MEI
         - EI
         - EIRELI
     BusinessSize:
       type: string
-      description: Porte da empresa (MEI, ME ou EPP)
+      description: Porte da empresa (MEI, ME ou EPP).
       enum:
         - MEI
         - ME
@@ -469,8 +469,10 @@ components:
             mais](https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf)
           nullable: true
         phone:
+          description: Telefone de contato do representante legal da empresa.
           $ref: '#/components/schemas/Phone'
         address:
+          description: Endereço do representante legal da empresa.
           $ref: '#/components/schemas/Address'
         birthDate:
           maxLength: 10
@@ -545,12 +547,13 @@ components:
           type: string
           description: >
             Nome pelo qual a pessoa gostaria de ser chamada. [Saiba
-
             mais](https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf)
           nullable: true
         phone:
+          description: Telefone de contato do cliente.
           $ref: '#/components/schemas/Phone'
         address:
+          description: Endereço do cliente.
           $ref: '#/components/schemas/Address'
         birthDate:
           maxLength: 10
@@ -605,8 +608,10 @@ components:
         businessSize:
           $ref: '#/components/schemas/BusinessSize'
         businessAddress:
+          description: Endereço da empresa registrado no cartão CNPJ.
           $ref: '#/components/schemas/Address'
         legalRepresentative:
+          description: Representante legal da empresa.
           $ref: '#/components/schemas/LegalRepresentative'
       additionalProperties: false
     CustomerResponse:
