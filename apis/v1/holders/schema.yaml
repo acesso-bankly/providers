@@ -59,7 +59,7 @@ paths:
                     status: APPROVED
                     createdAt: '2021-08-31T21:20:58.754Z'
                     updatedAt: '2021-08-31T21:21:58.754Z'
-                  summary: Approved Customer
+                  summary: Registro da cliente aprovado
                 CustomerReproved:
                   value:
                     registerName: Peter Parker
@@ -86,7 +86,7 @@ paths:
                       - NAME_RECUSED
                     createdAt: '2021-08-31T21:20:58.754Z'
                     updatedAt: '2021-08-31T21:21:58.754Z'
-                  summary: Reproved Customer
+                  summary: Registro do cliente reprovado
         '400':
           $ref: '#/components/responses/400'
         '404':
@@ -194,7 +194,7 @@ paths:
                     status: APPROVED
                     createdAt: '2021-08-31T21:20:58.754Z'
                     updatedAt: '2021-08-31T21:21:58.754Z'
-                  summary: Approved Business
+                  summary: Registro da empresa aprovado
                 BusinessRepproved:
                   value:
                     businessName: Peter Benjamin Parker
@@ -235,7 +235,7 @@ paths:
                       - STATUS_RECUSED
                     createdAt: '2021-08-31T21:20:58.754Z'
                     updatedAt: '2021-08-31T21:21:58.754Z'
-                  summary: Reproved Business    
+                  summary: Registro da empresa reprovado
         '400':
           $ref: '#/components/responses/400'
         '404':
@@ -794,14 +794,14 @@ components:
             propertyName: '{{propertyName}}'
             messages:
               - '{{"propertyName" error message}}'
-      summary: Invalid parameter error
+      summary: Parametro inválido
     errorResponse:
       value:
         errors:
           - code: SOME_ERROR_CODE
             messages:
               - '{{Some error message}}'
-      summary: Business error
+      summary: Erro de negócio
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

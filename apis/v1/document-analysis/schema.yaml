@@ -509,14 +509,14 @@ components:
             propertyName: '{{propertyName}}'
             messages:
               - '{{"propertyName" error message}}'
-      summary: Invalid parameter error
+      summary: Parametro inválido
     errorResponse:
       value:
         errors:
           - code: SOME_ERROR_CODE
             messages:
               - '{{Some error message}}'
-      summary: Business error
+      summary: Erro de negócio
     Selfie:
       value:
         - token: string
