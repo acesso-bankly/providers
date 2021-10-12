@@ -513,6 +513,7 @@ components:
         isPoliticallyExposedPerson:
           description: Identificação do cliente como pessoa politicamente exposta.
           type: boolean
+          default: false
       additionalProperties: false
     ResultLevel:
       type: string
@@ -591,6 +592,7 @@ components:
         isPoliticallyExposedPerson:
           description: Identificação do cliente como pessoa politicamente exposta.
           type: boolean
+          default: false
       additionalProperties: false
     RegisterBusinessRequest:
       required:
@@ -714,11 +716,11 @@ components:
           type: string
           nullable: false
         businessType:
-          description: Tipo da empresa (MEI, EI, EIRELLI, LTDA ou SA).
+          description: Tipo da empresa\n(MEI, EI, EIRELLI, LTDA ou SA).
           type: string
           nullable: false
         businessSize:
-          description: Porte da empresa (MEI, ME, EPP, SMALL, MEDIUM ou LARGE).
+          description: Porte da empresa\n(MEI, ME, EPP, SMALL, MEDIUM ou LARGE).
           type: string
           nullable: false
         owners:
