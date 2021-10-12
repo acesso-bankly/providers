@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: KYC (Know Your Customer)
-  description: >-
+  description: |
     Antes de abrir uma conta de pagamento ou solicitar um cartão de crédito
     (pré-pago), conheça mais sobre o seu cliente.
   version: '1.0'
@@ -125,7 +125,7 @@ components:
     CustomerDocument:
       name: documentNumber
       in: path
-      description: Número do documento CPF do cliente. Informe somente os números.
+      description: Número do documento CPF do cliente ou representante legal da empresa. Informe somente os números.
       required: true
       style: simple
       explode: false
@@ -194,7 +194,7 @@ components:
         - SELFIE
     DocumentSide:
       type: string
-      description: >-
+      description: |
         Lado do documento (FRONT ou BACK). Quando o tipo do documento for
         selfie, este parâmetro será desprezado.
       enum:
@@ -202,39 +202,54 @@ components:
         - BACK
     ResultLevel:
       type: string
-      description: Tipo de retorno da API (ONLY_STATUS ou DETAILED).
+      description: |
+        Tipo de retorno da API (ONLY_STATUS ou DETAILED).
       default: ONLY_STATUS
       enum:
         - ONLY_STATUS
         - DETAILED
     AnalysisStatus:
       type: string
+      description: |
+        Status da análise da imagem (ANALYZING, PARTIALLY_ANALYZED, ANALYSIS_COMPLETED ou UNEXPECTED_ERROR).
       enum:
         - ANALYZING
         - PARTIALLY_ANALYZED
         - ANALYSIS_COMPLETED
         - UNEXPECTED_ERROR
-    FaceMatchStatus:
+    Confidence:
+      description: |
+        Nível de confiança da análise.
+      type: number
+      format: double
+      nullable: false
+    FaceMatchStatus: 
+      description: |
+        Resultado da análise face match (HAS_FACE_MATCH, UNMATCHED_DOCUMENT ou MANY_FACES_DETECTEDR).
       type: string
       enum:
         - HAS_FACE_MATCH
         - UNMATCHED_DOCUMENT
         - MANY_FACES_DETECTED
     FaceMatch:
+      description: |
+        Informações da Análise Face Match.
       type: object
       properties:
         status:
           $ref: '#/components/schemas/FaceMatchStatus'
         similarity:
+          description: |
+            Nível de similaridade entre as faces comparadas.
           type: number
           format: double
           nullable: true
         confidence:
-          type: number
-          format: double
-          nullable: true
+          $ref: '#/components/schemas/Confidence'
       additionalProperties: false
     FaceDetailsStatus:
+      description: |
+        Resultado da análise facial (DETECTED_FACE, MANY_FACES_DETECTED ou COULD_NOT_DETECT_FACE).
       type: string
       enum:
         - DETECTED_FACE
@@ -242,12 +257,17 @@ components:
         - COULD_NOT_DETECT_FACE
     AgeRange:
       type: object
+      description: Faixa de idade identificada.
       properties:
         low:
+          description: |
+            Idade minina detectada.
           type: integer
           format: int32
           nullable: true
         high:
+          description: |
+            Idade máxina detectada.
           type: integer
           format: int32
           nullable: true
@@ -258,23 +278,20 @@ components:
         value:
           type: object
           additionalProperties: false
-          description: Tipo do detalhe facial identificado
+          description: Tipo do detalhe facial identificado.
           nullable: true
         confidence:
-          type: number
-          description: N�vel de confian�a do resultado
-          format: float
-          nullable: true
+          $ref: '#/components/schemas/Confidence'
       additionalProperties: false
     FaceDetails:
+      description: |
+        Informações da análise facial.
       type: object
       properties:
         status:
           $ref: '#/components/schemas/FaceDetailsStatus'
         confidence:
-          type: number
-          format: float
-          nullable: true
+          $ref: '#/components/schemas/Confidence'
         ageRange:
           $ref: '#/components/schemas/AgeRange'
         gender:
@@ -284,83 +301,106 @@ components:
         eyesOpen:
           $ref: '#/components/schemas/FacialDetail'
         emotions:
+          description: |
+            Lista de expressões detectadas.
           type: array
           nullable: true
           items:
             $ref: '#/components/schemas/FacialDetail'
       additionalProperties: false
     OcrStatus:
+      description: |
+        Resultado da análise facial (DETECTED_DOCUMENT, NO_DOCUMENT_FOUND ou NO_INFO_FOUND).
       type: string
       enum:
         - DETECTED_DOCUMENT
         - NO_DOCUMENT_FOUND
         - NO_INFO_FOUND
     DocumentDetails:
+      description: |
+        Informações extraídas documento analisado.
       type: object
       properties:
         status:
           $ref: '#/components/schemas/OcrStatus'
         identifiedDocumentType:
+          description: Tipo do documento detectado
           type: string
           nullable: true
         idNumber:
+          description: Número do RG.
           type: string
           nullable: true
         cpfNumber:
+          description: Número do CPF.
           type: string
           nullable: true
         birthDate:
+          description: Data de nascimento.
           type: string
           nullable: true
         fatherName:
+          description: Nome do pai do titular do documento.
           type: string
           nullable: true
         motherName:
+          description: Nome do mãe do titular do documento.
           type: string
           nullable: true
         registerName:
+          description: Nome do titular do documento.
           type: string
           nullable: true
         validDate:
+          description: Validade do documento (Somente em CNH).
           type: string
           nullable: true
         driveLicenseCategory:
+          description: Categoria da CNH.
           type: string
           nullable: true
         driveLicenseNumber:
+          description: Número da licença de motorista (Somente em CNH).
           type: string
           nullable: true
         driveLicenseFirstQualifyingDate:
+          description: Data da primeira habilitação de motorista (Somente em CNH).
           type: string
           nullable: true
         federativeUnit:
+          description: Unidade Federativa onde o documento foi emitido.
           type: string
           nullable: true
         issuedBy:
+          description: Órgão emissor do documento.
           type: string
           nullable: true
         issuePlace:
+          description: Localidade onde o documento foi emitido.
           type: string
           nullable: true
         issueDate:
+          description: Data em que o documento foi emitido.
           type: string
           nullable: true
       additionalProperties: false
     LivenessStatus:
+      description: |
+        Resultado da análise de prova de vida (LIVENESS_FOUND, NO_LIVENESS ou COULD_NOT_DETECT_FACE).
       type: string
       enum:
         - LIVENESS_FOUND
         - NO_LIVENESS
         - COULD_NOT_DETECT_FACE
     Liveness:
+      description: |
+        Informações da análise de prova de vida.
       type: object
       properties:
         status:
           $ref: '#/components/schemas/LivenessStatus'
         confidence:
-          type: number
-          format: double
-          nullable: true
+          $ref: '#/components/schemas/Confidence'
       additionalProperties: false
     UploadDocumentResponse:
       type: object
@@ -407,7 +447,7 @@ components:
           $ref: '#/components/schemas/DocumentSide'
         image:
           type: string
-          description: >-
+          description: |
             Arquivo da imagem. Não deve ser superior à 1 MB. A resolução deve
             ser compatível com VGA. [Saiba
             mais](https://en.wikipedia.org/wiki/Video_Graphics_Array).
