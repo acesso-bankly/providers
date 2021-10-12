@@ -438,16 +438,15 @@ components:
           type: string
           description: Nome da cidade.
         state:
-          maxLength: 2
-          minLength: 2
-          type: string
           description: |
             Sigla do estado brasileiro conforme a ISO 3166-2:BR.
             _AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO_
+          $ref: '#/components/schemas/State'
         country:
           maxLength: 2
           minLength: 2
           type: string
+          default: BR
           description: |
             Sigla do país (Brasil) conforme a ISO 3166. 
             _Exemplo: BR._
@@ -559,6 +558,38 @@ components:
       enum:
         - COMPLETE
         - SIMPLE
+    State:
+      type: string
+      description: Sigla do estado brasileiro conforme a ISO 3166-2:BR.
+      enum:
+        - AP
+        - AC
+        - AL
+        - AP
+        - AM
+        - BA
+        - CE
+        - DF
+        - ES
+        - GO
+        - MA
+        - MT
+        - MS
+        - MG
+        - PA
+        - PB
+        - PR
+        - PE
+        - PI
+        - RJ
+        - RN
+        - RS
+        - RO
+        - RR
+        - SC
+        - SP
+        - SE
+        - TO
     RegisterCustomerRequest:
       required:
         - registerName
