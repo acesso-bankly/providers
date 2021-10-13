@@ -1,3 +1,8 @@
+env:
+  COMPONENTS_LOCAL_URL: 'http://localhost:23000/components#'
+  SERVER_URL: 'https://raw.githubusercontent.com/acesso-bankly/open-api/'
+  COMPONENTS_PATH: '/commons/components/schema.yaml#'
+
 name: Sync OAS to ReadMe
 on:
   push:
@@ -9,6 +14,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch      
+          
+      - uses: jacobtomlinson/gha-find-replace@2.0.0
+        name: Find and Replace Hostname
+        with:
+          find: ${{ env.COMPONENTS_LOCAL_URL }}
+          replace: ${{ format('{0}{1}{2}', env.SERVER_URL, steps.extract_branch.outputs.branch, env.COMPONENTS_PATH ) }}
+          regex: false
+
       - uses: mbowman100/swagger-validator-action@master
         name: Validate schemas
         with: 
@@ -17,33 +34,62 @@ jobs:
             ./apis/v1/document-analysis/schema.yaml
             ./apis/v1/holders/schema.yaml
             ./apis/v1/accounts/schema.yaml
+            ./apis/v1/cards/schema.yaml
+            ./apis/v1/pix/schema.yaml
+            ./apis/v1/ted/schema.yaml
+            ./apis/v1/boletos/schema.yaml
+            ./apis/v1/paybill/schema.yaml
+            ./apis/v1/events/schema.yaml
+            ./apis/v1/helpers/schema.yaml
 
   publish:
     if: ${{ success() && github.ref	== 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch      
+          
+      - uses: jacobtomlinson/gha-find-replace@2.0.0
+        name: Find and Replace Hostname
+        with:
+          find: ${{ env.COMPONENTS_LOCAL_URL }}
+          replace: ${{ format('{0}{1}{2}', env.SERVER_URL, steps.extract_branch.outputs.branch, env.COMPONENTS_PATH ) }}
+          regex: false
+
       - uses: readmeio/github-readme-sync@v2
         name: Publish Auth API Reference to readme.io
         with:
           readme-oas-key: ${{ secrets.OAUTH_APIS_README_OAS_KEY }}
           oas-file-path: './apis/v1/oauth/schema.yaml'
           api-version: 'v1.0'
+          
       - uses: readmeio/github-readme-sync@v2
         name: Publish Document Analysis API Reference to readme.io
         with:
           readme-oas-key: ${{ secrets.DOCUMENT_APIS_README_OAS_KEY }}
           oas-file-path: './apis/v1/document-analysis/schema.yaml'
           api-version: 'v1.0'      
+
       - uses: readmeio/github-readme-sync@v2
         name: Publish Holders API Reference to readme.io
         with:
           readme-oas-key: ${{ secrets.HOLDERS_APIS_README_OAS_KEY }}
           oas-file-path: './apis/v1/holders/schema.yaml'
           api-version: 'v1.0'
+
       - uses: readmeio/github-readme-sync@v2
         name: Publish Accounts API Reference to readme.io
         with:
           readme-oas-key: ${{ secrets.ACCOUNTS_API_README_OAS_KEY }}
           oas-file-path: './apis/v1/accounts/schema.yaml'
-          api-version: 'v1.0'          
+          api-version: 'v1.0'       
+
+      # - uses: readmeio/github-readme-sync@v2
+      #   name: Publish Cards API Reference to readme.io
+      #   with:
+      #     readme-oas-key: ${{ secrets.CARDS_API_README_OAS_KEY }}
+      #     oas-file-path: './apis/v1/cards/schema.yaml'
+      #     api-version: 'v1.0'                    

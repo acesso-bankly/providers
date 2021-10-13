@@ -4,10 +4,18 @@
   "description": "bankly's open api reference",
   "main": "index.js",
   "scripts": {
-    "edit:oauth-api": "openapi-editor --file ./apis/v1/oauth/schema.yaml --port 23000",
-    "edit:document-analysis-api": "openapi-editor --file ./apis/v1/document-analysis/schema.yaml --port 23001",
-    "edit:holders-api": "openapi-editor --file ./apis/v1/holders/schema.yaml --port 23002",
-    "edit:accounts-api": "openapi-editor --file ./apis/v1/accouts/schema.yaml --port 23003"
+    "dev": "nodemon -e js,json,yml,yaml index.js && openapi-editor --file ./models/components.yaml --port 23100",
+    "edit:oauth-api": "openapi-editor --file ./apis/v1/oauth/schema.yaml --port 23001",
+    "edit:document-analysis-api": "openapi-editor --file ./apis/v1/document-analysis/schema.yaml --port 23002",
+    "edit:holders-api": "openapi-editor --file ./apis/v1/holders/schema.yaml --port 23003",
+    "edit:accounts-api": "openapi-editor --file ./apis/v1/accounts/schema.yaml --port 23004",
+    "edit:cards-api": "openapi-editor --file ./apis/v1/cards/schema.yaml --port 23005",
+    "edit:pix-api": "openapi-editor --file ./apis/v1/pix/schema.yaml --port 23006",
+    "edit:ted-api": "openapi-editor --file ./apis/v1/ted/schema.yaml --port 23007",
+    "edit:boletos-api": "openapi-editor --file ./apis/v1/boletos/schema.yaml --port 23008",
+    "edit:paybill-api": "openapi-editor --file ./apis/v1/paybill/schema.yaml --port 23009",
+    "edit:events-api": "openapi-editor --file ./apis/v1/events/schema.yaml --port 23010",
+    "edit:helpers-api": "openapi-editor --file ./apis/v1/helpers/schema.yaml --port 23011"
   },
   "repository": {
     "type": "git",
@@ -28,6 +36,9 @@
   },
   "homepage": "https://bankly.com.br",
   "devDependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13",
     "openapi-editor": "^0.3.0"
   }
 }

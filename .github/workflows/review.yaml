@@ -1,3 +1,8 @@
+env:
+  COMPONENTS_LOCAL_URL: 'http://localhost:23000/components#'
+  SERVER_URL: 'https://raw.githubusercontent.com/acesso-bankly/open-api/'
+  COMPONENTS_PATH: '/commons/components/schema.yaml#'
+
 name: Build and Validate OAS
 on:
   push:
@@ -11,14 +16,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch      
+          
+      - uses: jacobtomlinson/gha-find-replace@2.0.0
+        name: Find and Replace Hostname
+        with:
+          find: ${{ env.COMPONENTS_LOCAL_URL }}
+          replace: ${{ format('{0}{1}{2}', env.SERVER_URL, steps.extract_branch.outputs.branch, env.COMPONENTS_PATH ) }}
+          regex: false
+          
       - uses: mbowman100/swagger-validator-action@master
         name: Validate schemas
         with: 
           files: |
+            ./commons/components/schema.yaml
+            ./commons/examples/schema.yaml
             ./apis/v1/oauth/schema.yaml
             ./apis/v1/document-analysis/schema.yaml
             ./apis/v1/holders/schema.yaml
             ./apis/v1/accounts/schema.yaml
+            ./apis/v1/cards/schema.yaml
+            ./apis/v1/pix/schema.yaml
+            ./apis/v1/ted/schema.yaml
+            ./apis/v1/boletos/schema.yaml
+            ./apis/v1/paybill/schema.yaml
+            ./apis/v1/events/schema.yaml
+            ./apis/v1/helpers/schema.yaml
 
   code_review:
     if: ${{ success() && github.event_name == 'pull_request' && github.event.action == 'opened' }}

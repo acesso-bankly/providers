@@ -128,60 +128,6 @@ paths:
       security:
         - Bearer: []
   /pix/entries/{addressingKeyValue}:
-    delete:
-      tags:
-        - Gestão de Chaves
-      summary: Exclua um vínculo de chave com conta.
-      description: É necessário que a chave não esteja em um processo de reinvindicação. Caso esteja, é necessário aguardar o encerramento da disputa para realizar a exclusão.
-      operationId: DeleteAsync
-      parameters:
-        - name: addressingKeyValue
-          in: path
-          required: true
-          schema:
-            type: string
-            nullable: true
-        - name: api-version
-          in: header
-          description: Versão da API. Atualmente estamos na 1.0.
-          required: true
-          schema:
-            type: string
-      responses:
-        '204':
-          description: Recurso excluído com sucesso.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              schema:
-                type: string
-        '404':
-          description: Recurso não encontrado.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-        '500':
-          description: Ocorreu algum erro inexperado no nosso servidor.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              schema:
-                type: string
-        '503':
-          description: O serviço está temporariamente indisponível.
-          headers:
-            x-bkly-correlation-id:
-              description: Id correlação da operação requisitada.
-              schema:
-                type: string
-      security:
-        - Bearer: []
     get:
       tags:
         - Gestão de Chaves
@@ -223,6 +169,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetEntryResponse'
+        '404':
+          description: Recurso não encontrado.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Ocorreu algum erro inexperado no nosso servidor.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              schema:
+                type: string
+        '503':
+          description: O serviço está temporariamente indisponível.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              schema:
+                type: string
+      security:
+        - Bearer: []
+    delete:
+      tags:
+        - Gestão de Chaves
+      summary: Exclua um vínculo de chave com conta.
+      description: É necessário que a chave não esteja em um processo de reinvindicação. Caso esteja, é necessário aguardar o encerramento da disputa para realizar a exclusão.
+      operationId: DeleteAsync
+      parameters:
+        - name: addressingKeyValue
+          in: path
+          required: true
+          schema:
+            type: string
+            nullable: true
+        - name: api-version
+          in: header
+          description: Versão da API. Atualmente estamos na 1.0.
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Recurso excluído com sucesso.
+          headers:
+            x-bkly-correlation-id:
+              description: Id correlação da operação requisitada.
+              schema:
+                type: string
         '404':
           description: Recurso não encontrado.
           headers:
