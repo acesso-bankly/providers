@@ -1,7 +1,7 @@
 env:
-  COMPONENTS_LOCAL_URL: 'http://localhost:23000/components#'
+  COMPONENTS_LOCAL_URL: 'http://localhost:3320/commons/components#'
   SERVER_URL: 'https://raw.githubusercontent.com/acesso-bankly/open-api/'
-  COMPONENTS_PATH: '/commons/components/schema.yaml#'
+  COMPONENTS_PATH: '/commons/components.yaml#'
 
 name: Build and Validate OAS
 on:
@@ -33,10 +33,9 @@ jobs:
         name: Validate schemas
         with: 
           files: |
-            ./commons/components/schema.yaml
-            ./commons/examples/schema.yaml
+            ./commons/components.yaml
             ./apis/v1/oauth/schema.yaml
-            ./apis/v1/document-analysis/schema.yaml
+            ./apis/v1/documents/schema.yaml
             ./apis/v1/holders/schema.yaml
             ./apis/v1/accounts/schema.yaml
             ./apis/v1/cards/schema.yaml

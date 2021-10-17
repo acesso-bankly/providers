@@ -9,6 +9,7 @@ paths: {}
 components:
   
   parameters:
+
     ApiVersion:
       name: api-version
       in: header
@@ -21,6 +22,17 @@ components:
       schema:
         type: string
         default: 1
+
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      description: Chave de idempotêcia para a requisição (uuid v4).
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: string
+
     CustomerDocument:
       name: documentNumber
       in: path
@@ -32,6 +44,7 @@ components:
       explode: false
       schema:
         $ref: '#/components/schemas/CustomerDocument'
+
     BusinessDocument:
       name: documentNumber
       in: path
@@ -43,6 +56,30 @@ components:
       explode: false
       schema:
         $ref: '#/components/schemas/BusinessDocument'
+
+    AccountNumber:
+      name: accountNumber
+      in: path
+      description: |
+        Número da conta de pagamento.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/AccountNumber'
+
+    BankBranch:
+      name: branch
+      in: path
+      description: |
+        Agencia bancária.
+        _Default: **0001**._
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/BankBranch'
+
     ResultLevel:
       name: resultLevel
       in: query
@@ -54,6 +91,7 @@ components:
       explode: true
       schema:
         $ref: '#/components/schemas/ResultLevel'
+
   schemas:
 
     Error:
@@ -101,7 +139,21 @@ components:
       type: string
       maxLength: 14
       minLength: 14
+    
+    AccountNumber:
+      description: Número da conta de pagamento.
+      type: string
+      minLength: 3
+      maxLength: 13
 
+    BankBranch:
+      type: string
+      minLength: 4
+      maxLength: 4
+      description: |
+        Agencia bancária.
+        _Default: **0001**._    
+    
     Address:
       description: Endereço do cliente, da empresa ou de seu representante legal.
       required:
@@ -322,6 +374,7 @@ components:
       bearerFormat: JWT
   
   examples:
+
     invalidParameterErrorResponse:
       value:
         errors:
@@ -330,6 +383,7 @@ components:
             messages:
               - '{{"propertyName" error message}}'
       summary: Parametro inválido
+  
     errorResponse:
       value:
         errors:
@@ -337,9 +391,3 @@ components:
             messages:
               - '{{Some error message}}'
       summary: Erro de negócio
-x-readme:
-  explorer-enabled: true
-  proxy-enabled: true
-  samples-enabled: true
-  samples-languages:
-    - curl
