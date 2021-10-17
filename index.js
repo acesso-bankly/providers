@@ -1,18 +1,58 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+
 const app = express();
-const port = 23000;
+const port = 3320;
 
-console.log(__dirname);
+app.use(cors());
 
-app.use(cors())
-app.use('/components', express.static(__dirname + '/commons/components/schema.yaml'));
-app.use('/examples', express.static(__dirname + '/commons/examples/schema.yaml'));
-app.use('/document-analysis', express.static(__dirname + '/apis/v1/document-analysis/schema.yaml'));
-app.use('/holders', express.static(__dirname + '/apis/v1/holders/schema.yaml'));
-app.use('/accounts', express.static(__dirname + '/apis/v1/accounts/schema.yaml'));
+// commons components
+app.use(
+  "/commons/components",
+  express.static(__dirname + "/commons/components.yaml")
+);
 
+// documents api
+app.use(
+  "/documents/schema",
+  express.static(__dirname + "/apis/v1/documents/schema.yaml")
+);
+
+// holders api
+app.use(
+  "/holders/schema",
+  express.static(__dirname + "/apis/v1/holders/schema.yaml")
+);
+
+// accounts api
+app.use(
+  "/accounts/schema",
+  express.static(__dirname + "/apis/v1/accounts/schema.yaml")
+);
+
+var options = {
+  explorer: true,
+  swaggerOptions: {
+    urls: [
+      {
+        url: "/documents/schema",
+        name: "Documents",
+      },
+      {
+        url: "/holders/schema",
+        name: "Holders",
+      },
+      {
+        url: "/accounts/schema",
+        name: "Accounts",
+      },
+    ],
+  },
+};
+
+app.use("/reference", swaggerUi.serve, swaggerUi.setup(null, options));
 
 app.listen(port, () => {
-    console.log(`OAS Server listening at http://localhost:${port}`)
+  console.log(`Bankly's Open Api Reference Server listening at http://localhost:${port}`);
 });
