@@ -43,12 +43,12 @@ $ npm run edit:{api}
 
 ### **Passo 1:** 
 
-Crie uma branch com um dos prefixos: _feature/_ ou _enchancement/_ ou _fix/_ 
+Crie uma branch com um dos prefixos: _feature/_ ou _enhancement/_ ou _fix/_ 
 
 Ex: 
 
 - feature/adiciona-idempotency-header
-- enchancement/descricao-api-version
+- enhancement/descricao-api-version
 - fix/descricao-api-version
 
 **⚠️ IMPORTANTE! Branchs que não respeitam a convenção proposta acima não serão revisadas**
@@ -59,7 +59,7 @@ Abra o editor da api que deseja trabalha e acesso ```http://127.0.0.1:33201/?url
 
 ### **Passo 3:**  
 
-Após fazer as atualizações commit as mudanças e submeta uma Pull Request
+Após fazer as atualizações commit as mudanças e submeta uma Pull Request apontando para a branch **develop**
 
 **🗒️ DICA! Faça commits pequenos e centrados na alteração que está propondo**
 
