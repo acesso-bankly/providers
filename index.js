@@ -31,6 +31,12 @@ app.use(
   express.static(__dirname + "/apis/v1/accounts/schema.yaml")
 );
 
+// cards api
+app.use(
+  "/cards/schema",
+  express.static(__dirname + "/apis/v1/cards/schema.yaml")
+);
+
 var options = {
   explorer: true,
   swaggerOptions: {
@@ -46,6 +52,10 @@ var options = {
       {
         url: "/accounts/schema",
         name: "Accounts",
+      },
+      {
+        url: "/cards/schema",
+        name: "Cards",
       },
     ],
   },

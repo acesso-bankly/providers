@@ -14,7 +14,7 @@
     "edit:documents": "npm run start && pm2 --name holders_api_oas start ./apis/v1/documents/oas.editor.js",
     "edit:holders": "npm run start && pm2 --name holders_api_oas start ./apis/v1/holders/oas.editor.js",
     "edit:accounts": "npm run start && pm2 --name holders_api_oas start ./apis/v1/accounts/oas.editor.js",
-    "edit:cards": "openapi-editor --file ./apis/v1/cards/schema.yaml --port 23006",
+    "edit:cards": "npm run start && pm2 --name holders_api_oas start ./apis/v1/cards/oas.editor.js",
     "edit:pix": "openapi-editor --file ./apis/v1/pix/schema.yaml --port 23007",
     "edit:ted": "openapi-editor --file ./apis/v1/ted/schema.yaml --port 23008",
     "edit:boletos": "openapi-editor --file ./apis/v1/boletos/schema.yaml --port 23009",

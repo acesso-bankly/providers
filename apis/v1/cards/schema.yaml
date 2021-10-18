@@ -1,19 +1,167 @@
-openapi: 3.0.1
+openapi: 3.0.3
 info:
   version: 1.0.0
   title: Gestão de cartões
-  description: Solicite e gerencie cartões vinculados à conta do seu cliente em poucos minutos. Consulte também nossa [documentação](https://bankly.readme.io/v1.0/docs/) para mais detalhes sobre os fluxos de negócio.
-
+  description: >-
+    Solicite e gerencie cartões vinculados à conta do seu cliente em poucos
+    minutos. Consulte também nossa
+    [documentação](https://bankly.readme.io/v1.0/docs/) para mais detalhes sobre
+    os fluxos de negócio.
 servers:
-  - url: https://api.sandbox.bankly.com.br
+  - url: 'https://api.sandbox.bankly.com.br'
+paths:
+  /cards/virtual:
+    post:
+      summary: Crie cartões virtuais
+      description: |
+        <div class="bkly-ref-description">
+          <p>Crie um cartão virtual que será utilizado em compras não presenciais.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: card.create</span>
+        </div>
+      operationId: PostVirtualCard
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Cartões Virtual
 
-paths: {}
+  /cards/physical:
+    post:
+      summary: Crie cartões físicos
+      description: |
+        <div class="bkly-ref-description">
+          <p>Crie um cartão físico que será embossado e entrege no endereço informado pelo cliente.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: card.create</span>
+        </div>
+      operationId: PostPhysicalCard
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Cartões Físico
+
+  /cards/multiple:
+    post:
+      summary: Crie cartões multiplo
+      description: |
+        <div class="bkly-ref-description">
+          <p>Crie um cartão físico múltiplo (pré e pós) que será embossado e entrege no endereço informado pelo cliente.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: card.create</span>
+        </div>
+        [block:callout]
+        {
+          "type": "warning",
+          "title": "Importante",
+          "body": "O cartão multíplo tem como principal caracteristica ter no mesmo plástico um número pré e um pós, porém um dos números ficará adormecido enquanto o outro estiver ativo."
+        }
+        [/block]
+      operationId: PostMultipleCard
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Cartões Físico
+
+  /cards/{proxy}/duplicate:
+    post:
+      summary: Crie uma segunda via de cartão
+      description: |
+        <div class="bkly-ref-description">
+          <p>Crie uma segunda via de cartão um cartão físico com as mesmas caracteristicas da primeira via.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: card.create</span>
+        </div>
+        [block:callout]
+        {
+          "type": "warning",
+          "title": "Importante",
+          "body": "Quando a segunda via for emitida, a primeira via será cancelada automaticamente."
+        }
+        [/block]
+      operationId: PostDuplicateCard
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Cartões Físico
+
+  /cards/{proxy}:
+    get:
+      summary: Por proxy
+      description: |
+        <div class="bkly-ref-description">
+          <p>Obtenha dados de um cartão consultando pelo seu proxy.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: card.read</span>
+        </div>
+      operationId: GetCardByProxy
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Consulta de Cartões
+
+  /cards/document/{documentNumber}:
+    get:
+      summary: Por documento (CPF ou CNPJ)
+      description: |
+        <div class="bkly-ref-description">
+          <p>Obtenha os cartões vinculado ao número de documento (CPF ou CNPJ) do titular.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: card.read</span>
+        </div>
+      operationId: ListCardsByDocument
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Consulta de Cartões
+
+  /cards/account/{accountNumber}:
+    get:
+      summary: Por código de ativação
+      description: |
+        <div class="bkly-ref-description">
+          <p>Obtenha os cartões vinculados a uma conta de pagamentos.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: card.read</span>
+        </div>
+      operationId: ListCardsByAccountNumber
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Consulta de Cartões
+
+  /cards/activatecode/{activationCode}:
+    get:
+      summary: Por código de ativação
+      description: |
+        <div class="bkly-ref-description">
+          <p>Obtenha os cartões através do seu código de ativação.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: card.read</span>
+        </div>
+      operationId: ListCardActivationCode
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Consulta de Cartões
+
+  /cards/{proxy}/pci:
+    post:
+      summary: Dados de segurança do cartão
+      description: |
+        <div class="bkly-ref-description">
+          <p>Obtém os dados de PCI do cartão (PAN, CVV e data de validade).</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: card.read</span>
+        </div>
+      operationId: GetCardPCIData
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Consulta de Cartões
 
 security:
   - Bearer: []
-
 components: {}
-  
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
