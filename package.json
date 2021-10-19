@@ -19,7 +19,7 @@
     "edit:ted": "openapi-editor --file ./apis/v1/ted/schema.yaml --port 23008",
     "edit:boletos": "openapi-editor --file ./apis/v1/boletos/schema.yaml --port 23009",
     "edit:paybill": "openapi-editor --file ./apis/v1/paybill/schema.yaml --port 23010",
-    "edit:events": "openapi-editor --file ./apis/v1/events/schema.yaml --port 23011",
+    "edit:events": "npm run start && pm2 --name holders_api_oas start ./apis/v1/events/oas.editor.js",
     "edit:helpers": "openapi-editor --file ./apis/v1/helpers/schema.yaml --port 23012"
   },
   "repository": {
