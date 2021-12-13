@@ -68,17 +68,6 @@ components:
       schema:
         $ref: '#/components/schemas/AccountNumber'
 
-    AccountNumberQuery:
-      name: account
-      in: query
-      description: |
-        Número da conta de pagamento.
-      required: true
-      style: simple
-      explode: false
-      schema:
-        $ref: '#/components/schemas/AccountNumber'
-
     BankBranch:
       name: branch
       in: path
@@ -180,7 +169,7 @@ components:
       minLength: 3
       maxLength: 13
 
-    BankBranch:      
+    BankBranch:
       type: string
       minLength: 4
       maxLength: 4
