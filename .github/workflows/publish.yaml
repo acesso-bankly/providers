@@ -43,7 +43,7 @@ jobs:
             ./apis/v1/helpers/schema.yaml
             ./apis/v1/pix/schema.yaml
   publish:
-    if: ${{ success() && github.ref=='refs/heads/ted' }}
+    if: ${{ success() && github.ref=='refs/heads/ci' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
