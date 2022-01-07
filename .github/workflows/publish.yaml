@@ -65,3 +65,10 @@ jobs:
           readme-oas-key: ${{ secrets.HOLDERS_APIS_README_OAS_KEY }}
           oas-file-path: './apis/v1/holders/schema.yaml'
           api-version: 'v1'
+
+      - uses: readmeio/github-readme-sync@v2
+        name: Publish Accounts API Reference to readme.io
+        with:
+          readme-oas-key: ${{ secrets.ACCOUNTS_API_README_OAS_KEY }}
+          oas-file-path: './apis/v1/accounts/schema.yaml'
+          api-version: 'v1'
