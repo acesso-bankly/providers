@@ -3,11 +3,11 @@ env:
   SERVER_URL: 'https://raw.githubusercontent.com/acesso-bankly/open-api/'
   COMPONENTS_PATH: '/commons/components.yaml#'
 
-name: Sync OAS to ReadMe - ci
+name: Sync OAS to ReadMe
 on:
   push:
     branches:
-      - ci
+      - main
 
 jobs:
   validate:
@@ -43,7 +43,7 @@ jobs:
             ./apis/v1/helpers/schema.yaml
             ./apis/v1/pix/schema.yaml
   publish:
-    if: ${{ success() && github.ref=='refs/heads/ci' }}
+    if: ${{ success() && github.ref=='refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
