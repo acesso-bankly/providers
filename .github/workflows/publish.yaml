@@ -104,6 +104,6 @@ jobs:
       - uses: readmeio/github-readme-sync@v2
         name: Publish TED API Reference to readme.io
         with:
-          readme-oas-key: ${{ secrets.TED_API_README_OAS_KEY_DEV }}
+          readme-oas-key: ${{ secrets.TED_API_README_OAS_KEY }}
           oas-file-path: './apis/v1/ted/schema.yaml'
           api-version: 'v1'
