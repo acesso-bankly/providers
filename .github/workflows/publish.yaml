@@ -53,7 +53,7 @@ jobs:
         id: extract_branch      
           
       - uses: jacobtomlinson/gha-find-replace@2.0.0
-        name: Find and Replace Hostnames
+        name: Find and Replace Hostname
         with:
           find: ${{ env.COMPONENTS_LOCAL_URL }}
           replace: ${{ format('{0}{1}{2}', env.SERVER_URL, steps.extract_branch.outputs.branch, env.COMPONENTS_PATH ) }}
