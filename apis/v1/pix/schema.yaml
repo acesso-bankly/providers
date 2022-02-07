@@ -160,6 +160,12 @@ paths:
           required: true
           schema:
             type : string
+        - name: x-correlation-id
+          in: header 
+          description: Informe um GUID v4, gerado randomicamente. A cada requisição, deve-se gerar um novo GUID.
+          required: true
+          schema:
+            type : string
       responses:
         '200':
           description: Recurso encontrado.
@@ -208,6 +214,12 @@ paths:
             type: string
         - name: authorization
           in: header 
+          required: true
+          schema:
+            type : string
+        - name: x-correlation-id
+          in: header 
+          description: Informe um GUID v4, gerado randomicamente. A cada requisição, deve-se gerar um novo GUID.
           required: true
           schema:
             type : string
@@ -311,6 +323,12 @@ paths:
             type: string
         - name: authorization
           in: header 
+          required: true
+          schema:
+            type : string
+        - name: x-correlation-id
+          in: header 
+          description: Informe um GUID v4, gerado randomicamente. A cada requisição, deve-se gerar um novo GUID.
           required: true
           schema:
             type : string
@@ -429,6 +447,12 @@ paths:
             type: string
         - name: authorization
           in: header 
+          required: true
+          schema:
+            type : string
+        - name: x-correlation-id
+          in: header 
+          description: Informe um GUID v4, gerado randomicamente. A cada requisição, deve-se gerar um novo GUID.
           required: true
           schema:
             type : string
@@ -670,6 +694,34 @@ components:
           items:
             $ref: '#/components/schemas/Error'
           nullable: true
+      additionalProperties: false
+
+    BankStatus:
+      type: object
+      properties:
+        ispb:
+          type: string
+          nullable: true
+        compe:
+          type: string
+          nullable: true
+          description: <code>compe</code> do banco do sender não é retornado em caso de Pix externo.
+        name:
+          type: string
+          nullable: true
+          description: <code>name</code> do banco do sender não é retornado em caso de Pix externo.
+      additionalProperties: false
+    
+    BankName:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Retorna apenas em caso de leitura de QR Code estático.
+        ispb: 
+          type: string
+          description: Retorna apenas em caso de leitura de QR Code dinâmico.
+
       additionalProperties: false
 
     BankStatus:
