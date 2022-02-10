@@ -140,12 +140,19 @@ paths:
       tags:
         - Pessoa física
       summary: |
-        Cancelamento de registro pessoa física
+        Offboarding de pessoa física
       description: |
         <div class="bkly-ref-description">
           <p>Solicite o o cancelamento de relacionamento do cliente pessoa física.</p> 
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: customer.cancel</span>
         </div>
+        [block:callout]
+        {
+          "type": "warning",
+          "title": "Importante",
+          "body": "É preciso realizar a exclusão de <b> todas as chaves Pix </b> atreladas ao documento antes de solicitar o seu Offboarding."
+        }
+        [/block]
       operationId: CancelCustomerRegistration
       parameters:
         - $ref: >-
@@ -326,12 +333,19 @@ paths:
       tags:
         - Pessoa jurídica
       summary: |
-        Cancelamento de registro pessoa jurídica
+        Offboarding de pessoa jurídica
       description: |
         <div class="bkly-ref-description">
           <p>Solicite o o cancelamento de relacionamento do cliente pessoa jurídica.</p> 
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: business.cancel</span>
         </div>
+        [block:callout]
+        {
+          "type": "warning",
+          "title": "Importante",
+          "body": "É preciso realizar a exclusão de <b> todas as chaves Pix </b> atreladas ao documento antes de solicitar o seu Offboarding."
+        }
+        [/block]
       operationId: CancelBusinessRegistration
       parameters:
         - $ref: >-
