@@ -287,7 +287,7 @@ paths:
         - Endereços
       summary: Liste cidades através da sigla do estado.
       description: Você pode listar cidades através da sigla do estado.
-      operationId: GetAddress
+      operationId: GetCities
       parameters:
         - name: state
           in: path
