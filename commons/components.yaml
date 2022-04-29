@@ -123,6 +123,14 @@ components:
       explode: true
       schema:
         $ref: '#/components/schemas/AccountNumber'
+    
+    X-Correlation-Id:  
+      name: x-correlation-id
+      in: header 
+      description: Informe um GUID v4, gerado randomicamente. A cada requisição, deve-se gerar um novo GUID.
+      required: true
+      schema:
+        $ref: '#/components/schemas/X-Correlation-Id'
 
   schemas:
 
@@ -311,6 +319,10 @@ components:
         - SP
         - SE
         - TO
+    
+    X-Correlation-Id:
+      type: string
+      description: Informe um GUID v4, gerado randomicamente. A cada requisição, deve-se gerar um novo GUID.
 
   headers:
     CorrelationId:
