@@ -121,7 +121,7 @@ paths:
         - $ref: 'http://localhost:3320/commons/components#/components/parameters/ApiVersion'
         - name: documentNumber
           in: query
-          description: Número do documento do títular da conta.
+          description: Número do documento do titular da conta.
           schema:
             type: string
             nullable: true
@@ -185,7 +185,8 @@ paths:
               "$ref": "#/components/schemas/ClaimResponse"
       responses:
         '200':
-          description: Claim canceled.
+          description: Reivindicação cancelada.
+
           headers:
             x-bkly-correlation-id:
               description: Id correlação da operação requisitada.
@@ -230,7 +231,8 @@ paths:
               "$ref": "#/components/schemas/ClaimResponse"
       responses:
         '200':
-          description: Claim confirmed.
+          description: Reivindicação confirmada.
+
           headers:
             x-bkly-correlation-id:
               description: Id correlação da operação requisitada.
