@@ -66,7 +66,7 @@ paths:
   /pix/claims:
     post:
       tags:
-        - Portabilidade
+        - Reivindicação de chaves
       summary: Criação de um pedido de reivindicação de chaves
       description: |
         <div class="bkly-ref-description">
@@ -76,6 +76,11 @@ paths:
         </div>
       parameters:
         - $ref: 'http://localhost:3320/commons/components#/components/parameters/ApiVersion'
+        - name: authorization
+          in: header
+          required: true
+          schema:
+            type : string
         - name: x-bkly-pix-user-id
           in: header
           description: Informe o número do documento do cliente que solicita a consulta.
@@ -109,7 +114,7 @@ paths:
         - Bearer: []
     get:
       tags:
-        - Portabilidade
+        - Reivindicação de chaves
       summary: Consulta do pedido de reivindicação de chave
       description: |
         <div class="bkly-ref-description">
@@ -119,6 +124,11 @@ paths:
         </div>
       parameters:
         - $ref: 'http://localhost:3320/commons/components#/components/parameters/ApiVersion'
+        - name: authorization
+          in: header
+          required: true
+          schema:
+            type : string
         - name: documentNumber
           in: query
           description: Número do documento do titular da conta.
@@ -156,7 +166,7 @@ paths:
   /pix/claims/{claimId}:cancel:
     patch:
       tags:
-        - Portabilidade
+        - Reivindicação de chaves
       summary: Cancelamento de um pedido de reivindicação
       description: |
         <div class="bkly-ref-description">
@@ -172,6 +182,11 @@ paths:
           schema:
             type: string
             nullable: true
+        - name: authorization
+          in: header
+          required: true
+          schema:
+            type : string
         - name: x-bkly-pix-user-id
           in: header
           description: Informe o número do documento do cliente que solicita a consulta.
@@ -202,7 +217,7 @@ paths:
   /pix/claims/{claimId}:confirm:
     patch:
       tags:
-        - Portabilidade
+        - Reivindicação de chaves
       summary: Confirmação de um pedido de reivindicação
       description: |
         <div class="bkly-ref-description">
@@ -218,6 +233,11 @@ paths:
           schema:
             type: string
             nullable: true
+        - name: authorization
+          in: header
+          required: true
+          schema:
+            type : string
         - name: x-bkly-pix-user-id
           in: header
           description: Informe o número do documento do cliente que solicita a consulta.
@@ -248,7 +268,7 @@ paths:
   /pix/claims/{claimId}:complete:
     patch:
       tags:
-        - Portabilidade
+        - Reivindicação de chaves
       summary: Conclusão de um pedido de reivindicação de chaves
       description: |
         <div class="bkly-ref-description">
@@ -264,6 +284,11 @@ paths:
           schema:
             type: string
             nullable: true
+        - name: authorization
+          in: header
+          required: true
+          schema:
+            type : string
         - name: x-bkly-pix-user-id
           in: header
           description: Informe o número do documento do cliente que solicita a consulta.
@@ -784,6 +809,11 @@ paths:
       operationId: CreateDynamicQRCodePaymentAsync
       parameters:
         - $ref: 'http://localhost:3320/commons/components#/components/parameters/ApiVersion'
+        - name: authorization
+          in: header
+          required: true
+          schema:
+            type : string
       requestBody:
         content:
           application/json:
