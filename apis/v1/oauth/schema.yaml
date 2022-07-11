@@ -7,6 +7,8 @@ servers:
 paths:
   /connect/token:
     post:
+      tags:
+        - Token 
       summary: Token de acesso
       description: |
         <div class="bkly-ref-description">
@@ -50,6 +52,8 @@ paths:
                   summary: Exemplo de erro
   /totp:
     post:
+      tags:
+        - TOTP 
       summary: Geração do hash e do código numérico
       description: |
         <div class="bkly-ref-description">
@@ -57,8 +61,6 @@ paths:
           <span class="bkly-ref-small-stable-tag">stable</span>
           <span class="bkly-ref-scope-tag">scope: totp.create</span>
         </div>
-      tags:
-        - TOTP
       operationId: CreateTotpAsync
       parameters:
         - name: api-version
@@ -104,6 +106,8 @@ paths:
       security:
         - Bearer: []
     patch:
+      tags:
+        - TOTP 
       summary: Validação do hash e do código numérico
       description: |
         <div class="bkly-ref-description">
@@ -111,8 +115,6 @@ paths:
           <span class="bkly-ref-small-stable-tag">stable</span>
           <span class="bkly-ref-scope-tag">scope: totp.validate</span>
         </div>
-      tags:
-        - TOTP
       parameters:
         - name: api-version
           in: header
