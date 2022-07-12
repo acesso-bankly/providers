@@ -45,9 +45,7 @@ components:
     CustomerDocument:
       name: documentNumber
       in: path
-      description: |
-        Número do documento CPF do cliente. 
-        **_Informe somente os números._**
+      description: Número do documento CPF do cliente pessoal ou representante legal da empresa. Informe somente os números.
       required: true
       style: simple
       explode: false
@@ -57,9 +55,7 @@ components:
     BusinessDocument:
       name: documentNumber
       in: path
-      description: |
-        Número do documento CNPJ da empresa. 
-        **_Informe somente os números._**
+      description: Número do documento CNPJ da empresa. Informe somente os números.
       required: true
       style: simple
       explode: false
@@ -168,7 +164,7 @@ components:
       additionalProperties: false
 
     CustomerDocument:
-      description: Número do documento CPF do cliente.
+      description: Número do documento CPF do cliente do cliente pessoal ou representante legal.
       type: string
       maxLength: 11
       minLength: 11
@@ -178,6 +174,7 @@ components:
       type: string
       maxLength: 14
       minLength: 14
+      pattern: "^[0-9]*$"
     
     AccountNumber:
       description: Número da conta de pagamento.
