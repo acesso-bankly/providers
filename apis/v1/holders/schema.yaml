@@ -400,7 +400,7 @@ paths:
             schema:
               $ref: "#/components/schemas/RegisterCorporationBusinessRequest"
       responses:
-        '201':
+        '202':
           description: Requisição foi aceita e está sendo processada.
           headers:
             x-bkly-correlation-id:
@@ -650,6 +650,13 @@ components:
       type: string
     Owner:
       type: object
+      required:
+        - incomeDeclared
+        - participationPercentage
+        - documentNumber
+        - address
+        - phone
+        - email
       properties:
         incomeDeclared:
           type: number
@@ -705,8 +712,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/LegalRepresentative"
-          description: Representantes legais da empresa. Apenas para sócio pessoa
-            jurídica.
+          description: Representantes legais da empresa. Apenas para sócio pessoa jurídica.
           nullable: true
         owners:
           type: array
@@ -765,7 +771,7 @@ components:
           type: string
           nullable: true
         idCardBack: 
-          description: Imagem de trás do documento.
+          description: Imagem do verso do documento.
           type: string
           nullable: true
       additionalProperties: false
@@ -899,6 +905,14 @@ components:
       additionalProperties: false
     LegalRepresentativePerson:
       type: object
+      required:
+        - birthDate
+        - motherName
+        - email
+        - isPoliticallyExposedPerson
+        - registerName
+        - address
+        - documentNumber
       properties:
         powerOfAttorney:
           $ref: "#/components/schemas/PowerOfAttorney"
