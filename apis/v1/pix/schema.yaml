@@ -23,6 +23,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/CustomerDocumentNumber"
         - $ref: "#/components/parameters/ContactDocumentNumber"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       responses:
         "202":
           $ref: "http://localhost:3320/commons/components#/components/responses/202"
@@ -32,6 +34,8 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/422"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
+      security:
+        - Bearer: []
   /customers/{documentNumber}/bookmarks/{contactDocumentNumber}/disable:
     patch:
       tags:
@@ -47,6 +51,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/CustomerDocumentNumber"
         - $ref: "#/components/parameters/ContactDocumentNumber"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       responses:
         "204":
           description: A requisição foi aceita e está sendo processada.
@@ -55,6 +61,8 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/400"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
+      security:
+        - Bearer: []
   /customers/{documentNumber}/bookmarks/{contactDocumentNumber}:
     get:
       tags:
@@ -70,6 +78,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/CustomerDocumentNumber"
         - $ref: "#/components/parameters/ContactDocumentNumber"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       responses:
         "200":
           description: Success
@@ -83,6 +93,8 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/400"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
+      security:
+        - Bearer: []
   /customers/{documentNumber}/bookmarks:
     get:
       tags:
@@ -97,6 +109,8 @@ paths:
       operationId: ListBookmarksForCustomerAsync
       parameters:
       - $ref: "#/components/parameters/CustomerDocumentNumber"
+      - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+      - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       responses:
         "200":
           description: Success
@@ -112,7 +126,9 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/404"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
-
+      security:
+        - Bearer: []
+  
   /business/{documentNumber}/bookmarks/{contactDocumentNumber}/enable:
     patch:
       tags:
@@ -128,6 +144,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/BusinessDocumentNumber"
         - $ref: "#/components/parameters/ContactDocumentNumber"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       responses:
         "202":
           $ref: "http://localhost:3320/commons/components#/components/responses/202"
@@ -137,6 +155,8 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/422"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
+      security:
+        - Bearer: []
   /business/{documentNumber}/bookmarks/{contactDocumentNumber}/disable:
     patch:
       tags:
@@ -152,6 +172,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/BusinessDocumentNumber"
         - $ref: "#/components/parameters/ContactDocumentNumber"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       responses:
         "204":
           description: A requisição foi aceita e está sendo processada.
@@ -160,6 +182,8 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/400"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
+      security:
+        - Bearer: []
   /business/{documentNumber}/bookmarks/{contactDocumentNumber}:
     get:
       tags:
@@ -175,6 +199,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/BusinessDocumentNumber"
         - $ref: "#/components/parameters/ContactDocumentNumber"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       responses:
         "200":
           description: Success
@@ -188,6 +214,8 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/400"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
+      security:
+        - Bearer: []
   /business/{documentNumber}/bookmarks:
     get:
       tags:
@@ -202,6 +230,8 @@ paths:
       operationId: ListBookmarksForBusinessAsync
       parameters:
       - $ref: "#/components/parameters/BusinessDocumentNumber"
+      - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+      - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       responses:
         "200":
           description: Success
@@ -217,7 +247,8 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/404"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
-  
+      security:
+        - Bearer: []
 
   /accounts/{accountNumber}/addressing-keys:
     get:
