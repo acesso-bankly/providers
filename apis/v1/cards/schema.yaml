@@ -112,7 +112,7 @@ paths:
             '500':
               statusCode: 500
   
-  /cards/{authenticationCode}/bindNoName:
+  /cards/activateCode/{activateCode}/binding/:
     patch:
       tags:
         - Cartões No Name
@@ -125,12 +125,12 @@ paths:
         </div>
       operationId: cardbindNoName
       parameters:
-        - name: authenticationCode
+        - name: activateCode
           in: path
           required: true
           schema:
             type: string
-            description: Código de autenticação do cartão (12 caracteres).
+            description: Código de ativação do cartão (12 caracteres).
         - $ref: "#/components/parameters/apiVersion"
         - $ref: "#/components/parameters/authorization"
       requestBody:
@@ -209,11 +209,11 @@ paths:
           '500':
             statusCode: 500
 
-  /cards/batches/:{batchId}:
+  /cards/batches/:{lotId}:
     get:
       tags:
         - Cartões No Name
-      summary: Consulta por lote
+      summary: Consulta de lote por ID
       description: |
         <div class="bkly-ref-description">
           <p>Obtenha os dados de um lote específico de cartões.</p> 
@@ -222,7 +222,7 @@ paths:
         </div>
       operationId: cardGetLotById
       parameters:
-        - name: batchId
+        - name: lotId
           in: path
           required: true
           schema:
@@ -258,17 +258,6 @@ paths:
                         "2500011000021160417",
                         "2500011000068618940" 
                     ]
-        '400':
-          description: Existem erros no preenchimento da requisição.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/cardErrorResponse"
-              examples:
-                response:
-                  value:
-                    reference: https://bankly.readme.io/reference
-                    errors: [{ code: required, message: [ api-version must not be empty. ], reasons: [] }]
         '401':
           description: Sem autorização para realizar a solicitação.
         '404':
@@ -339,21 +328,10 @@ paths:
                     companyKey: "Acesso"
                     dateOrder: "2021-06-07T08:30:40"
                     programId: 1
-        '204':
-          description: Não foram encontrados lotes.              
-        '400':
-          description: Existem erros no preenchimento da requisição.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/cardErrorResponse"
-              examples:
-                response:
-                  value:
-                    reference: https://bankly.readme.io/reference
-                    errors: [{ code: required, message: [ api-version must not be empty. ], reasons: [] }]
         '401':
           description: Sem autorização para realizar a solicitação.
+        '404':
+          description: Não foram encontrados lotes para essa company key.              
         '500':
           description: Ocorrência de erro inesperado.
           content:
@@ -2462,22 +2440,19 @@ components:
     createCardInLotResponse:
       type: object
       properties:
-        batchId:
+        lotId:
           type: string
           description: Id do lote.
 
     cardLotsResponse:
       type: object
       properties:
-        batchId:
+        lotId:
           type: string
           description: Id do lote.
         quantityOrder:
           type: integer
           description: Quantidade de cartões solicitados.    
-        companyKey:
-          type: string
-          description: Identificador da companhia.
         dateOrder:
           type: string
           description: Data da solicitação de criação do lote.
@@ -2488,7 +2463,7 @@ components:
     cardLotResponse:
       type: object
       properties:
-        batchId:
+        lotId:
           type: string
           description: Id do lote.
         quantityOrder:
