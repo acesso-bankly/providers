@@ -162,7 +162,7 @@ paths:
       summary: Geração de uma forma de pagamento
       description: |
         <div class="bkly-ref-description">
-          <p>Gere um boleto de pagamento de uma fatura específia, por meio do seu ID.</p> 
+          <p>Gere uma forma de pagamento para uma fatura específica, por meio do seu ID.</p> 
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: invoice.write</span>
         </div>
       parameters:
@@ -308,6 +308,7 @@ components:
       schema:
         type: string
         nullable: true
+        description: Número do documento do titular do cartão.
 
     StatementId:
       name: statementId
@@ -316,6 +317,7 @@ components:
       schema:
         type: integer
         format: int32
+        description: Identificador único da fatura.
 
     Proxy:
       name: proxy
@@ -324,6 +326,8 @@ components:
       schema:
         type: string
         nullable: true
+        description: Identificador do cartão utilizado na transação.
+  
   schemas:
     CycleType:
       enum:
