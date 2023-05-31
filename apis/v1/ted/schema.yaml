@@ -1,0 +1,346 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: TED
+  description: Realize transferencias de valores através do canal de pagamentos TED. Consulte também nossa [documentação](https://bankly.readme.io/v1.0/docs/) para mais detalhes sobre os fluxos de negócio.
+servers:
+  - url: 'https://api-mtls.sandbox.bankly.com.br'
+paths:
+  /fund-transfers:
+    post:
+      tags:
+        - Operações via TED
+      summary: Transferência via TED
+      description: |
+        <div class="bkly-ref-description">
+          <p>Realize a transferência de valores via TED entre contas pertencentes ao Bankly e do Bankly para contas de outras instituições financeiras.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: ted.cashout.create</span>
+        </div>  
+      parameters:
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/X-Correlation-Id'
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/ApiVersion'     
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/IdempotencyKey'
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/Authorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  description: Valor a ser transferido.
+                sender:
+                  $ref: '#/components/schemas/sender'
+                recipient:
+                  $ref: '#/components/schemas/recipient'
+                description:
+                  type: string
+                  description: Descrição da transferência.        
+              required:
+              - amount
+              - sender
+              - recipient              
+      responses:
+        '202':
+          description: A transferência via TED foi criada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authenticationCode:
+                    type: string
+                    description: Código de autenticação da transação realizada.
+        '400':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/400'
+        '403':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/403'
+        '409':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/409'
+        '422':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/422'
+        '500':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/500'
+    get:
+      tags:
+        - Operações via TED
+      summary: Consulta por conta
+      description: |
+        <div class="bkly-ref-description">
+          <p>Consulte todas as TEDs realizadas a partir da conta informada.</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: ted.cashout.read</span>
+        </div>  
+      parameters:
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/ApiVersion'
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/X-Correlation-Id'
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/Authorization'
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/BankBranchQuery'          
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/AccountNumberQuery'          
+        - in: query 
+          name: pageSize
+          description: Número de resultados a serem exibidos por página (o padrão é 100).
+          schema:
+            type : integer
+        - in: query 
+          name: nextPage
+          description: <i>Token</i> identificador da próxima página solicitada. Ele pode ser obtido no retorno da primeira consulta de <i>status</i>.
+          schema:
+            type : integer
+
+      responses:
+        '200':
+          description: Recurso encontrado.
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  nextPage:
+                    type: string
+                    description: Se o campo <code>pageSize</code> tiver sido enviado na requisição e se ainda houver dados não apresentados na primeira página retornada, o campo <code>nextPage</code> será retornado com um <i>token</i> que deverá ser utilizado na próxima consulta para visualizar as demais páginas.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        companyKey:
+                          type: string
+                          description: Chave que identifica o parceiro dentro do Bankly.
+                        authenticationCode:
+                          type: string
+                          description: Código identificador da transação.
+                        amount:
+                          type: number
+                          format: double
+                          example: 20.55
+                          description: Valor transferido.
+                        description:
+                          type: string
+                          description: Descrição da transferência.
+                        correlationId:
+                          type: string
+                          description: GUID informado em cada requisição realizada no <i>endpoint</i>.
+                        sender:
+                          $ref: '#/components/schemas/holderComplete'
+                        recipient:
+                          $ref: '#/components/schemas/holderComplete'
+                        channel:
+                          type: string
+                          description: 	Indica se a transação é interna (INTERNAL) ou externa (EXTERNAL).
+                        status:
+                          type: string
+                          $ref: "#/components/schemas/tedStatus"
+                          description: Situação da transação.
+                        createdAt:
+                          type: string
+                          format: date-time
+                          description: Data de criação da transferência.
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          description: Data de de atualização dos dados da transferência.
+        '400':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/400'
+        '403':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/403'
+        '409':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/409'
+        '422':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/422'
+        '500':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/500'                  
+  
+  /fund-transfers/{authenticationCode}:
+    get:
+      tags:
+        - Operações via TED
+      summary: Consulta por código de autenticação
+      description: |
+        <div class="bkly-ref-description">
+          <p>Realize a consulta específica de uma transferência via TED por meio de seu código de autenticação (<code>authenticationCode</code>).</p> 
+          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: ted.cashout.read</span>
+        </div>  
+      parameters:
+        - in: path 
+          name: authenticationCode
+          description: Código de autenticação da transação a ser consultada.
+          required: true
+          schema:
+            type : string
+        - in: query 
+          name: branch
+          description: Agência da conta da conta a partir da qual se realizou a transferência.
+          required: true
+          schema:
+            type : string
+        - in: query 
+          name: account
+          description: Conta a partir da qual se realizou a transferência.
+          required: true
+          schema:
+            type : string
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/X-Correlation-Id'
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/ApiVersion'
+        - $ref: 'http://localhost:3320/commons/components#/components/parameters/Authorization'
+      responses:
+        '200':
+          description: Recurso encontrado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  companyKey:
+                    type: string
+                  authenticationCode:
+                    type: string
+                    description: Código identificador da transação.
+                  amount:
+                    type: number
+                    format: double
+                    example: 20.55
+                    description: Valor transferido.
+                  description:
+                    type: string
+                    description: Descrição da transferência.
+                  correlationId:
+                    type: string
+                    description: GUID informado em cada requisição realizada no <i>endpoint</i>.
+                  sender:
+                    $ref: '#/components/schemas/holderComplete'
+                  recipient:
+                    $ref: '#/components/schemas/holderComplete'
+                  channel:
+                    type: string
+                    description: 	Indica se a transação é interna (INTERNAL) ou externa (EXTERNAL).
+                  status:
+                    type: string
+                    $ref: "#/components/schemas/tedStatus"
+                    description: Situação da transação.
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: Data de criação da transferência.
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: Data de de atualização dos dados da transferência.
+        '400':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/400'
+        '403':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/403'
+        '409':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/409'
+        '422':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/422'
+        '500':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/500'               
+                     
+security:
+  - Bearer: []
+components:
+  schemas:
+    account:
+      type: object
+      properties:
+        branch:
+          $ref: 'http://localhost:3320/commons/components#/components/schemas/BankBranch'
+        number:
+          type: string
+          description: Número da conta.
+        bank:
+          $ref: '#/components/schemas/bank'
+    
+    bank:
+      type: object
+      properties:
+        ispb:
+          type: string
+        name:
+          type: string
+        compe:
+          type: string
+   
+    holderComplete:
+      type: object
+      properties:
+        document:
+          type: string
+        name:
+          type: string
+        account:
+          $ref: '#/components/schemas/account'
+          
+    recipient:
+      type: object
+      properties:
+        accountType:
+          type: string
+          description: Tipo de conta, o qual pode ser “CHECKING” para conta corrente, “SALARY” para conta salário, “SAVINGS” para conta poupança e “PAYMENT” para conta de pagamento.
+        document:
+          type: string
+          description: Número do documento.
+        bankCode:
+          type: string
+          description: Código do banco.
+        branch:
+          $ref: 'http://localhost:3320/commons/components#/components/schemas/BankBranch'
+        account:
+          type: string
+          description: Número da conta.
+        name:
+          type: string
+          description: Nome do recebedor.
+      required:  
+        - branch
+        - account
+        - document
+        - name
+        - accountType
+        - bankCode
+
+    sender:
+      type: object
+      properties:
+        document:
+          type: string
+          description: Número do documento.
+        name:
+          type: string   
+          description: Nome do pagador.     
+        branch:
+          $ref: 'http://localhost:3320/commons/components#/components/schemas/BankBranch'
+        account:
+          $ref: 'http://localhost:3320/commons/components#/components/schemas/AccountNumber'
+      additionalProperties: false
+      required:
+        - document
+        - name
+        - branch
+        - account
+
+    tedStatus:
+      type: string
+      enum:
+        - CREATED
+        - IN PROCESS
+        - APPROVED
+        - REPROVED
+        - DONE
+        - UNDONE
+        - CANCELED
+
+  securitySchemes:
+    Bearer:
+      type: http
+      description: Inclua o token de autorização do tipo Bearer
+      scheme: bearer
+
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+  samples-languages:
+    - curl
+
