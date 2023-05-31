@@ -1,7 +1,7 @@
 {
-    "name": "bankly-open-api-reference",
+    "name": "bankly-providers-reference",
     "version": "1.0.0",
-    "description": "Bankly's Open Api Reference",
+    "description": "Bankly's Providers Reference",
     "main": "index.js",
     "scripts": {
       "start": "pm2 kill && pm2 --name bankly_oas start --force index.js && start http://localhost:3320/reference/",
@@ -22,7 +22,7 @@
     },
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/acesso-bankly/open-api.git"
+      "url": "git+https://github.com/acesso-bankly/providers.git"
     },
     "keywords": [
       "bankly",
@@ -30,7 +30,8 @@
       "apis",
       "rest",
       "restful",
-      "openapi"
+      "openapi",
+      "providers"
     ],
     "license": "SEE LICENSE IN ./LICENSE",
     "bugs": {

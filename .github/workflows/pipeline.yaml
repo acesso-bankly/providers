@@ -1,6 +1,6 @@
 env:
   COMPONENTS_LOCAL_URL: 'http://localhost:3320/commons/components#'
-  SERVER_URL: 'https://raw.githubusercontent.com/acesso-bankly/open-api/'
+  SERVER_URL: 'https://raw.githubusercontent.com/acesso-bankly/providers/'
   COMPONENTS_PATH: '/commons/components.yaml#'
   ORIGIN_BRANCH: ${{ github.head_ref }}
 
