@@ -1,4 +1,4 @@
-providers: 1.0.0
+openapi: 3.0.1
 info:
   title: Gestão de Contas
   description: Abra e gerencie contas de pagamento do seu cliente pessoa física ou jurídica.
