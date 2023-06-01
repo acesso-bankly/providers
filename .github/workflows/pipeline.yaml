@@ -79,7 +79,7 @@ jobs:
       - uses: readmeio/rdme@v8
         name: Publish Holders API Reference to readme.io
         with:
-          rdme: openapi './apis/v1/holders/schema.yaml' --id=DEVELOPMENT --key=${{ secrets.DEVELOPMENT }}
+          rdme: openapi './apis/v1/holders/schema.yaml' --id=development --key=${{ secrets.DEVELOPMENT }}
   
   deployProd:
     name: "Deploy / Prod"
