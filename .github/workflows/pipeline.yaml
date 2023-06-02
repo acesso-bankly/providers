@@ -86,6 +86,7 @@ jobs:
         name: Publish Accounts API Reference to readme.io
         with:
           rdme: openapi './apis/v1/accounts/schema.yaml' --id=${{ secrets.ACCOUNTS_API_README_ID_KEY_DEV }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
+  
   deployProd:
     name: "Deploy / Prod"
     environment: production
