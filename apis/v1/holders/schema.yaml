@@ -611,7 +611,9 @@ components:
           format: date-time
           nullable: true
         reasons:
-          type: string
+          type: array
+          items:
+            type: string
           description: jjj
         document:
           type: object
