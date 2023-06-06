@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Gestão de Clientes
+  title: Registro de clientes
   description: |
     Registre, atualize, consulte o cadasto de clientes pessoa física ou
     jurídica. Um cliente com cadastro pode se tornar titular de contas de
@@ -548,8 +548,88 @@ components:
         - SA
         - TS
       type: string
-
+   
     CustomerResponse:
+      type: object
+      properties:
+        profile:
+          type: string
+          description: jjj
+        status:
+          type: string
+          description: jjj
+        registerName:
+          type: string
+          description: jjj
+        socialName:
+          type: string
+          description: jjj
+        phone:
+          description: Objeto que contém informações sobre o telefone do cliente.
+          $ref: "#/components/schemas/PhoneResponse"
+        address:
+          description: Objeto que contém informações sobre o endereço informado no registro do cliente.
+          $ref: "#/components/schemas/AddressResponse"
+        motherName:
+          description: Nome da mãe informado no registro do cliente.
+          type: string
+          nullable: true
+        assertedIncome:
+          type: object
+          properties:
+            value:
+              type: number
+              description: kkk
+            currency:
+              type: string
+              description: kkk
+          description: jjj
+        occupation:
+          $ref: "#/components/schemas/OccupationResponse"
+        pep:
+          type: object
+          properties:
+            level:
+              type: string
+              description: kkk
+            verified:
+              type: boolean
+              description: PERGUNTAR PRA LÊ
+        documentation:
+          $ref: "#/components/schemas/SendedDocumentationResponse"
+        birthDate:
+          description: Data de nascimento do cliente.
+          type: string
+          format: date-time
+        createdAt:
+          description: Data do primeiro registro do cliente.
+          type: string
+          format: date-time
+        updatedAt:
+          description: Data da atualização do registro do cliente.
+          type: string
+          format: date-time
+          nullable: true
+        reasons:
+          type: string
+          description: jjj
+        document:
+          type: object
+          description: Objeto que contém informações sobre o documento do cliente.
+          properties:
+            value:
+              type: string
+              description: Número do documento.
+            type:
+              type: string
+              description: Tipo do documento, o qual pode ser "CPF" ou "CNPJ".
+        email:
+          description: E-mail de contato do cliente.
+          type: string
+          nullable: true
+      additionalProperties: false
+
+    CustomerResponseDeprecated:
       type: object
       properties:
         documentNumber:
@@ -1240,6 +1320,7 @@ components:
     OccupationResponse:
       type: string
       description: Código de ocupação do cliente. Para conhecer a descrição dos códigos das ocupações, consulte a documentação [Código de ocupação do cliente](https://docs.bankly.com.br/docs/codigo-de-ocupacao-cliente). 
+      enum:
         - OCP0001 
         - OCP0002	
         - OCP0003	
