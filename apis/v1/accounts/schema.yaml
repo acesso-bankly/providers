@@ -98,6 +98,13 @@ paths:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/Size"
+        - $ref: "#/components/parameters/Code"
+        - $ref: "#/components/parameters/Ispb"
+        - $ref: "#/components/parameters/Branch"
+        - $ref: "#/components/parameters/Type"
+        - $ref: "#/components/parameters/Status"
       responses:
         "200":
           description: Recurso encontrado.
@@ -889,6 +896,68 @@ components:
       schema:
         type: string
         nullable: true
+
+    Page:
+      name: page
+      in: query
+      description: Número da página.
+      required: false
+      schema:
+        type: string
+
+    Size:
+      name: size
+      in: query
+      description: Quantidade de registros que serão retornados.
+      required: false
+      schema:
+        type: string
+
+    Code:
+      name: code
+      in: query
+      description: Código do banco.
+      required: false
+      schema:
+        type: string
+
+    Ispb:
+      name: ispb
+      in: query
+      description: ISPB do banco.
+      required: false
+      schema:
+        type: string
+
+    Branch:
+      name: branch
+      in: query
+      description: Número da agência bancária.
+      required: false
+      schema:
+        type: string
+
+    Type:
+      name: type
+      in: query
+      description: Tipo da conta.
+      required: false
+      schema:
+        enum:
+        - Payment
+        - Checking
+        type: string
+
+    Status:
+      name: status
+      in: query
+      description: Situação da conta.
+      required: false
+      schema:
+        enum:
+        - Active
+        - Closed
+        type: string
 
   schemas:
     PaymentAccountHolder:
