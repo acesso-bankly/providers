@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Registro de clientes
+  title: Registro do cliente
   description: |
     Registre, atualize, consulte o cadasto de clientes pessoa física ou
     jurídica. Um cliente com cadastro pode se tornar titular de contas de
@@ -601,7 +601,11 @@ components:
           properties:
             level:
               type: string
-              description: kkk
+              enum:
+              - NONE
+              - SELF
+              - RELATED
+              description: Nível de exposição política do cliente.
             verified:
               type: boolean
               description: Indica se a situação de vínculo com pessoa politicamente exposta foi verificada na análise de KYC. O valor default desse campo é <code>false</code>.
