@@ -704,6 +704,7 @@ components:
           $ref: "#/components/schemas/SendedDocumentationResponse"
       additionalProperties: false
     
+    
     DataUpdateCustomerRequest:
       type: object
       properties:
