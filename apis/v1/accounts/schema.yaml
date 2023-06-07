@@ -384,7 +384,6 @@ paths:
       security:
         - Bearer: []
 
-
   /accounts/{accountNumber}/pockets:
     post:
       tags:
