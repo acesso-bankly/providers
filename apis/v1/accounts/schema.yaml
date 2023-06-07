@@ -103,7 +103,7 @@ paths:
         - $ref: "#/components/parameters/Code"
         - $ref: "#/components/parameters/Ispb"
         - $ref: "#/components/parameters/Branch"
-        - $ref: "#/components/parameters/Type"
+        - $ref: "#/components/parameters/AccountType"
         - $ref: "#/components/parameters/Status"
       responses:
         "200":
@@ -174,6 +174,53 @@ paths:
               examples:
                 accountDetailedExample:
                   $ref: "#/components/examples/accountDetailedExamplePost"
+        "400":
+          $ref: "http://localhost:3320/commons/components#/components/responses/400"
+        "403":
+          $ref: "http://localhost:3320/commons/components#/components/responses/403"
+        "409":
+          $ref: "http://localhost:3320/commons/components#/components/responses/409"
+        "422":
+          $ref: "http://localhost:3320/commons/components#/components/responses/422"
+        "500":
+          $ref: "http://localhost:3320/commons/components#/components/responses/500"
+
+  /accounts/{accountNumber}/balances:
+    get:
+      tags:
+        - Conta de pagamentos
+      summary: Consulta do saldo de uma conta
+      description: |
+        <div class="bkly-ref-description">
+          <p>Consulte o saldo de uma conta de pagamentos.</p> 
+          Canal <b>stable</b> 
+          <b>Scope: account.read</b>
+        </div>
+      operationId: GetAccount
+      parameters:
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/AccountNumber"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/X-Correlation-Id"
+        - $ref: "#/components/parameters/BalanceType"
+        - $ref: "#/components/parameters/BalanceCurrency"
+      responses:
+        "200":
+          description: Recurso encontrado.
+          headers:
+            x-bkly-correlation-id:
+              $ref: "http://localhost:3320/commons/components#/components/headers/CorrelationId"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BalanceResponse"
+              examples:
+                BalanceDefaultResponse:
+                  $ref: "#/components/examples/BalanceDefaultResponse"
+                BalanceBlockedResponse:
+                  $ref: "#/components/examples/BalanceBlockedResponse"
+                BalanceResidualResponse:
+                  $ref: "#/components/examples/BalanceResidualResponse"
         "400":
           $ref: "http://localhost:3320/commons/components#/components/responses/400"
         "403":
@@ -345,6 +392,9 @@ paths:
       security:
         - Bearer: []
 
+
+
+
   /accounts/{accountNumber}/pockets:
     post:
       tags:
@@ -475,7 +525,7 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
         "503":
           $ref: "http://localhost:3320/commons/components#/components/responses/503"
-
+  
   /pockets/{pocketNumber}:
     get:
       tags:
@@ -897,6 +947,27 @@ components:
         type: string
         nullable: true
 
+    BalanceType:
+      name: type
+      in: query
+      description: Tipo do saldo que será retornado.
+      required: false
+      schema:
+        type: string
+        enum:
+          - RESIDUAL
+          - BLOCKED
+          - DEFAULT
+        nullable: true
+
+    BalanceCurrency:
+      name: currency
+      in: query
+      description: Código da moeda que deverá ser consultada.
+      required: false
+      schema:
+        type: string
+
     Page:
       name: page
       in: query
@@ -937,7 +1008,7 @@ components:
       schema:
         type: string
 
-    Type:
+    AccountType:
       name: type
       in: query
       description: Tipo da conta.
@@ -2135,6 +2206,46 @@ components:
           $ref: "#/components/schemas/ReasonType"
       additionalProperties: false
 
+    BalanceResponse:
+      type: object
+      properties:
+        available:
+          type: object
+          properties:
+            value:
+              type: number
+              description: Valor do saldo disponível.
+            currency:
+              type: string
+              description: Código da moeda com base na ISO 4217.
+        hold:
+          type: object
+          properties:
+            value:
+              type: number
+              description: Valor do saldo em processamento.
+            currency:
+              type: string
+              description: Código da moeda com base na ISO 4217.
+        blocked:
+          type: object
+          properties:
+            value:
+              type: number
+              description: Valor do saldo bloqueado.
+            currency:
+              type: string
+              description: Código da moeda com base na ISO 4217.
+        residual:
+          type: object
+          properties:
+            value:
+              type: number
+              description: Valor do saldo remanescente.
+            currency:
+              type: string
+              description: Código da moeda com base na ISO 4217.
+
   examples:
     
     accountDetailedExample:
@@ -2159,6 +2270,30 @@ components:
           name: "Acesso Soluções De Pagamento SA - Instituição de Pagamento"
         programId: "d83c37b2-fb71-477c-b689-8ec95ab810c8"
       summary: Conta de pagamento com saldo
+
+    BalanceDefaultResponse:
+      value:
+        available:
+          value: 100.00
+          currency: "BRL"
+        hold:
+          value: 90.00
+          currency: "BRL"
+      summary: Saldo disponível e em processamento
+
+    BalanceBlockedResponse:
+      value:
+        blocked:
+          value: 100.00
+          currency: "BRL"
+      summary: Saldo bloqueado
+
+    BalanceResidualResponse:
+      value:
+        residual:
+          value: 100.00
+          currency: "BRL"
+      summary: Saldo remanescente
 
     accountDetailedExamplePost:
       value:

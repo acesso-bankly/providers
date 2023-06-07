@@ -8,6 +8,7 @@ info:
   version: "1.0"
 servers:
   - url: "https://api-mtls.sandbox.bankly.com.br"
+
 paths:
   /customers/{documentNumber}:
     put:
@@ -17,8 +18,8 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>Registre um cliente pessoa física. Se os dados informados já existirem, eles serão sobrepostos. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getcustomerregistration">Consulta do registro do cliente</a>.</p>
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: customer.write</span>
+          Endpoint <b>stable</b> 
+          <b>scope: customer.write</b>
         </div>      
         [block:callout]
         {
@@ -59,8 +60,8 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de um cliente.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: customer.read</span>
+          <b>stable</b> 
+          <b>scope: customer.read</b>
         </div>
       operationId: GetCustomerRegistration
       parameters:
@@ -94,8 +95,8 @@ paths:
       description: |
         <div class="bkly-ref-description">
             <p>Realize a atualização de determinados dados cadastrais de clientes do tipo pessoa física.</p>
-            <span class="bkly-ref-small-stable-tag">stable</span> 
-            <span class="bkly-ref-scope-tag">scope: customer.update</span>
+            <b>stable</b> 
+            <b>scope: customer.update</b>
           </div>   
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
@@ -133,8 +134,8 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>Solicite o o cancelamento de relacionamento do cliente pessoa física.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: customer.cancel</span>
+          <b>stable</b> 
+          <b>scope: customer.cancel</b>
         </div>
       operationId: CancelCustomerRegistration
       parameters:
@@ -168,8 +169,8 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>Registre um cliente pessoa jurídica. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: business.write</span>
+          <b>stable</b> 
+          <b>scope: business.write</b>
         </div>        
         [block:callout]
         {
@@ -210,8 +211,8 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de uma empresa.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: business.read</span>
+          <b>stable</b> 
+          <b>scope: business.read</b>
         </div>
       operationId: GetBusinessRegistration
       parameters:
@@ -246,8 +247,8 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>Registre (ou substitua) uma nova empresa (LTDA, S.A. ou TS). O pedido de registro será analisado e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>. Caso o cadastro não exista, ele será criado. Se já existir, os dados serão sobrepostos.</p>
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: business.corporation.write</span>
+          <b>stable</b> 
+          <b>scope: business.corporation.write</b>
         </div>
       operationId: RegisterCorporationBusinessAsync
       parameters:
@@ -289,8 +290,8 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>Solicite o o cancelamento de relacionamento do cliente pessoa jurídica.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: business.cancel</span>
+          <b>stable</b> 
+          <b>scope: business.cancel</b>
         </div>
       operationId: CancelBusinessRegistration
       parameters:
@@ -554,16 +555,25 @@ components:
       properties:
         profile:
           type: string
-          description: jjj
+          enum:
+          - SIMPLE
+          - COMPLETE
+          description: Perfil do cliente, baseado em seu registro.
         status:
           type: string
-          description: jjj
+          enum:
+          - PENDING_APPROVAL
+          - APPROVED
+          - IN_ANALYSIS
+          - REPROVED
+          - BLOCKLISTED
+          description: Situação da análise KYC realizada no registro do cliente.
         registerName:
           type: string
-          description: jjj
+          description: Nome conforme consta no documento de identificação (RG, CNH, RNE, DNI ou CRNM) do cliente.
         socialName:
           type: string
-          description: jjj
+          description: Nome pelo qual a pessoa gostaria de ser chamada. Saiba mais na documentação <a href="https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf">Cartilha do nome social</a>.
         phone:
           description: Objeto que contém informações sobre o telefone do cliente.
           $ref: "#/components/schemas/PhoneResponse"
@@ -579,11 +589,11 @@ components:
           properties:
             value:
               type: number
-              description: kkk
+              description: Valor da renda declarada.
             currency:
               type: string
-              description: kkk
-          description: jjj
+              description: Código da moeda com base na ISO 4217.
+          description: Objeto que contém informações sobre a renda declarada do cliente.
         occupation:
           $ref: "#/components/schemas/OccupationResponse"
         pep:
@@ -594,7 +604,7 @@ components:
               description: kkk
             verified:
               type: boolean
-              description: PERGUNTAR PRA LÊ
+              description: Indica se a situação de vínculo com pessoa politicamente exposta foi verificada na análise de KYC. O valor default desse campo é <code>false</code>.
         documentation:
           $ref: "#/components/schemas/SendedDocumentationResponse"
         birthDate:
@@ -614,7 +624,7 @@ components:
           type: array
           items:
             type: string
-          description: jjj
+          description: Lista contendo os motivos de reprovação do registro.
         document:
           type: object
           description: Objeto que contém informações sobre o documento do cliente.
