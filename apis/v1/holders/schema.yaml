@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Gestão de Clientes
+  title: Registro do cliente
   description: |
     Registre, atualize, consulte o cadasto de clientes pessoa física ou
     jurídica. Um cliente com cadastro pode se tornar titular de contas de
@@ -8,6 +8,7 @@ info:
   version: "1.0"
 servers:
   - url: "https://api-mtls.sandbox.bankly.com.br"
+
 paths:
   /customers/{documentNumber}:
     put:
@@ -16,9 +17,8 @@ paths:
       summary: Registro de pessoa física
       description: |
         <div class="bkly-ref-description">
-          <p>Registre um cliente pessoa física. Se os dados informados já existirem, eles serão sobrepostos. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getcustomerregistration">Consulta do registro do cliente</a>.</p>
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: customer.write</span>
+          <p>[Stable] Registre um cliente pessoa física. Se os dados informados já existirem, eles serão sobrepostos. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getcustomerregistration">Consulta do registro do cliente</a>.</p>
+          <b>Scope: customer.write</b>
         </div>      
         [block:callout]
         {
@@ -58,9 +58,8 @@ paths:
         Consulta do registro do cliente
       description: |
         <div class="bkly-ref-description">
-          <p>Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de um cliente.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: customer.read</span>
+          <p>[Stable] Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de um cliente.</p>  
+          <b>Scope: customer.read</b>
         </div>
       operationId: GetCustomerRegistration
       parameters:
@@ -93,9 +92,8 @@ paths:
       summary: Atualização cadastral
       description: |
         <div class="bkly-ref-description">
-            <p>Realize a atualização de determinados dados cadastrais de clientes do tipo pessoa física.</p>
-            <span class="bkly-ref-small-stable-tag">stable</span> 
-            <span class="bkly-ref-scope-tag">scope: customer.update</span>
+            <p>[Stable] Realize a atualização de determinados dados cadastrais de clientes do tipo pessoa física.</p> 
+            <b>Scope: customer.update</b>
           </div>   
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
@@ -132,9 +130,8 @@ paths:
         Offboarding de pessoa física
       description: |
         <div class="bkly-ref-description">
-          <p>Solicite o o cancelamento de relacionamento do cliente pessoa física.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: customer.cancel</span>
+          <p>[Stable] Solicite o o cancelamento de relacionamento do cliente pessoa física.</p> 
+          <b>Scope: customer.cancel</b>
         </div>
       operationId: CancelCustomerRegistration
       parameters:
@@ -167,9 +164,8 @@ paths:
       summary: Registro de pessoa jurídica (MEI, EI, EIRELI ou SLU)
       description: |
         <div class="bkly-ref-description">
-          <p>Registre um cliente pessoa jurídica. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: business.write</span>
+          <p>[Stable] Registre um cliente pessoa jurídica. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>.</p>  
+          <b>Scope: business.write</b>
         </div>        
         [block:callout]
         {
@@ -209,9 +205,8 @@ paths:
         Consulta do registro da empresa
       description: |
         <div class="bkly-ref-description">
-          <p>Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de uma empresa.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: business.read</span>
+          <p>[Stable] Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de uma empresa.</p>  
+          <b>Scope: business.read</b>
         </div>
       operationId: GetBusinessRegistration
       parameters:
@@ -245,9 +240,8 @@ paths:
       summary: Registro de pessoa jurídica (LTDA, S.A. ou TS)
       description: |
         <div class="bkly-ref-description">
-          <p>Registre (ou substitua) uma nova empresa (LTDA, S.A. ou TS). O pedido de registro será analisado e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>. Caso o cadastro não exista, ele será criado. Se já existir, os dados serão sobrepostos.</p>
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: business.corporation.write</span>
+          <p>[Stable] Registre (ou substitua) uma nova empresa (LTDA, S.A. ou TS). O pedido de registro será analisado e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>. Caso o cadastro não exista, ele será criado. Se já existir, os dados serão sobrepostos.</p> 
+          <b>Scope: business.corporation.write</b>
         </div>
       operationId: RegisterCorporationBusinessAsync
       parameters:
@@ -288,9 +282,8 @@ paths:
         Offboarding de pessoa jurídica
       description: |
         <div class="bkly-ref-description">
-          <p>Solicite o o cancelamento de relacionamento do cliente pessoa jurídica.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: business.cancel</span>
+          <p>[Stable] Solicite o o cancelamento de relacionamento do cliente pessoa jurídica.</p> 
+          <b>Scope: business.cancel</b>
         </div>
       operationId: CancelBusinessRegistration
       parameters:
@@ -548,8 +541,101 @@ components:
         - SA
         - TS
       type: string
-
+   
     CustomerResponse:
+      type: object
+      properties:
+        profile:
+          type: string
+          enum:
+          - SIMPLE
+          - COMPLETE
+          description: Perfil do cliente, baseado em seu registro.
+        status:
+          type: string
+          enum:
+          - PENDING_APPROVAL
+          - APPROVED
+          - IN_ANALYSIS
+          - REPROVED
+          - BLOCKLISTED
+          description: Situação da análise KYC realizada no registro do cliente.
+        registerName:
+          type: string
+          description: Nome conforme consta no documento de identificação (RG, CNH, RNE, DNI ou CRNM) do cliente.
+        socialName:
+          type: string
+          description: Nome pelo qual a pessoa gostaria de ser chamada. Saiba mais na documentação <a href="https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf">Cartilha do nome social</a>.
+        phone:
+          description: Objeto que contém informações sobre o telefone do cliente.
+          $ref: "#/components/schemas/PhoneResponse"
+        address:
+          description: Objeto que contém informações sobre o endereço informado no registro do cliente.
+          $ref: "#/components/schemas/AddressResponse"
+        motherName:
+          description: Nome da mãe informado no registro do cliente.
+          type: string
+          nullable: true
+        assertedIncome:
+          type: object
+          properties:
+            value:
+              type: number
+              description: Valor da renda declarada.
+            currency:
+              type: string
+              description: Código da moeda com base na ISO 4217.
+          description: Objeto que contém informações sobre a renda declarada do cliente.
+        occupation:
+          $ref: "#/components/schemas/OccupationResponse"
+        pep:
+          type: object
+          description: Objeto onde deve ser informado o nível de exposição política do cliente, atendendo à Circular nº 3.978.
+          properties:
+            level:
+              type: string
+              enum:
+              - NONE
+              - SELF
+              - RELATED
+              description: Nível de exposição política do cliente.
+        documentation:
+          $ref: "#/components/schemas/SendedDocumentationResponse"
+        birthDate:
+          description: Data de nascimento do cliente.
+          type: string
+          format: date-time
+        createdAt:
+          description: Data do primeiro registro do cliente.
+          type: string
+          format: date-time
+        updatedAt:
+          description: Data da atualização do registro do cliente.
+          type: string
+          format: date-time
+          nullable: true
+        reasons:
+          type: array
+          items:
+            type: string
+          description: Lista contendo os motivos de reprovação do registro.
+        document:
+          type: object
+          description: Objeto que contém informações sobre o documento do cliente.
+          properties:
+            value:
+              type: string
+              description: Número do documento.
+            type:
+              type: string
+              description: Tipo do documento, o qual pode ser "CPF" ou "CNPJ".
+        email:
+          description: E-mail de contato do cliente.
+          type: string
+          nullable: true
+      additionalProperties: false
+
+    CustomerResponseDeprecated:
       type: object
       properties:
         documentNumber:
@@ -618,6 +704,7 @@ components:
           $ref: "#/components/schemas/SendedDocumentationResponse"
       additionalProperties: false
     
+
     DataUpdateCustomerRequest:
       type: object
       properties:
@@ -1240,6 +1327,7 @@ components:
     OccupationResponse:
       type: string
       description: Código de ocupação do cliente. Para conhecer a descrição dos códigos das ocupações, consulte a documentação [Código de ocupação do cliente](https://docs.bankly.com.br/docs/codigo-de-ocupacao-cliente). 
+      enum:
         - OCP0001 
         - OCP0002	
         - OCP0003	

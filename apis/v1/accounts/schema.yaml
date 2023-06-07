@@ -13,9 +13,8 @@ paths:
       summary: Consulta de dados de uma conta
       description: |
         <div class="bkly-ref-description">
-          <p>Consulte todos os dados de uma conta de pagamentos. Opcionalmente, você pode obter o saldo dessa conta.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: account.read</span>
+          <p>[Stable] Consulte todos os dados de uma conta de pagamentos. Opcionalmente, você pode obter o saldo dessa conta.</p>  
+          <b>Scope: account.read</b>
         </div>
       operationId: GetAccount
       parameters:
@@ -55,9 +54,8 @@ paths:
         Encerramento de conta
       description: |
         <div class="bkly-ref-description">
-          <p>Solicite o encerramento da conta do cliente.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: account.close</span>
+          <p>[Stable] Solicite o encerramento da conta do cliente.</p> 
+          <b>Scope: account.close</b>
         </div>
       operationId: CancelCustomerRegistration
       parameters:
@@ -89,15 +87,21 @@ paths:
       summary: Consulta de contas
       description: |
         <div class="bkly-ref-description">
-          <p>Retornaremos uma lista com todas as contas desse cliente, independentemente de seus <i>status</i>.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: account.read</span>
+          <p>[Stable] Retornaremos uma lista com todas as contas desse cliente, independentemente de seus <i>status</i>.</p> 
+          <b>Scope: account.read</b>
         </div>
       operationId: GetPersonalAccounts
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/Size"
+        - $ref: "#/components/parameters/Code"
+        - $ref: "#/components/parameters/Ispb"
+        - $ref: "#/components/parameters/Branch"
+        - $ref: "#/components/parameters/AccountType"
+        - $ref: "#/components/parameters/Status"
       responses:
         "200":
           description: Recurso encontrado.
@@ -129,9 +133,8 @@ paths:
       summary: Abertura de conta
       description: |
         <div class="bkly-ref-description">
-          <p>Este <i>endpoint</i> permite a criação de contas de pagamento para clientes do tipo pessoa física que tiveram seu registro previamente aprovado.</p>
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: account.create</span>
+          <p>[Stable] Este <i>endpoint</i> permite a criação de contas de pagamento para clientes do tipo pessoa física que tiveram seu registro previamente aprovado.</p>
+          <b>Scope: account.create</b>
         </div>
         [block:callout]
           {
@@ -178,6 +181,52 @@ paths:
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
 
+  /accounts/{accountNumber}/balances:
+    get:
+      tags:
+        - Conta de pagamentos
+      summary: Consulta do saldo de uma conta
+      description: |
+        <div class="bkly-ref-description">
+          <p>[Stable] Consulte o saldo de uma conta de pagamentos.</p>
+          <b>Scope: account.read</b>
+        </div>
+      operationId: GetAccountBalance
+      parameters:
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/AccountNumber"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/X-Correlation-Id"
+        - $ref: "#/components/parameters/BalanceType"
+        - $ref: "#/components/parameters/BalanceCurrency"
+      responses:
+        "200":
+          description: Recurso encontrado.
+          headers:
+            x-bkly-correlation-id:
+              $ref: "http://localhost:3320/commons/components#/components/headers/CorrelationId"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BalanceResponse"
+              examples:
+                BalanceDefaultResponse:
+                  $ref: "#/components/examples/balanceDefaultResponse"
+                BalanceBlockedResponse:
+                  $ref: "#/components/examples/balanceBlockedResponse"
+                BalanceResidualResponse:
+                  $ref: "#/components/examples/balanceResidualResponse"
+        "400":
+          $ref: "http://localhost:3320/commons/components#/components/responses/400"
+        "403":
+          $ref: "http://localhost:3320/commons/components#/components/responses/403"
+        "409":
+          $ref: "http://localhost:3320/commons/components#/components/responses/409"
+        "422":
+          $ref: "http://localhost:3320/commons/components#/components/responses/422"
+        "500":
+          $ref: "http://localhost:3320/commons/components#/components/responses/500"
+
   /business/{documentNumber}/accounts:
     get:
       tags:
@@ -185,9 +234,8 @@ paths:
       summary: Consulta de contas
       description: |
         <div class="bkly-ref-description">
-          <p>Retornaremos uma lista com todas as contas dessa empresa, independentemente de seus <i>status</i>.</p>
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: account.read</span>
+          <p>[Stable] Retornaremos uma lista com todas as contas dessa empresa, independentemente de seus <i>status</i>.</p>
+          <b>Scope: account.read</b>
         </div>
       operationId: GetBusinessAccounts
       parameters:
@@ -225,9 +273,8 @@ paths:
       summary: Abertura de conta
       description: |
         <div class="bkly-ref-description">
-          <p>Este <i>endpoint</i> permite a criação de contas de pagamento para clientes do tipo pessoa jurídica que tiveram seu registro previamente aprovado.</p>
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: account.create</span>
+          <p>[Stable] Este <i>endpoint</i> permite a criação de contas de pagamento para clientes do tipo pessoa jurídica que tiveram seu registro previamente aprovado.</p>
+          <b>Scope: account.create</b>
         </div>  
         [block:callout]
           {
@@ -280,9 +327,8 @@ paths:
       summary: Informe de rendimentos
       description: |
         <div class="bkly-ref-description">
-        Obtenha os dados necessários para gerar o Informe de Rendimentos de contas de pagamentos (pessoa física ou jurídica) e de outras fontes pagadoras. <br />É possível refinar a busca informando o ano calendário desejado (o padrão é sempre o ano vigente). <br />
-        <span class="bkly-ref-small-stable-tag">stable</span>
-        <span class="bkly-ref-scope-tag">scope: income.report.read</span>
+        [Stable] Obtenha os dados necessários para gerar o Informe de Rendimentos de contas de pagamentos (pessoa física ou jurídica) e de outras fontes pagadoras. <br />É possível refinar a busca informando o ano calendário desejado (o padrão é sempre o ano vigente). <br />
+        <b>Scope: income.report.read</b>
         </div>
         [block:callout]
           {
@@ -345,9 +391,8 @@ paths:
       summary: Criação de conta pocket
       description: |
         <div class="bkly-ref-description">
-          <p>Crie uma conta pocket para que seja possível guardar dinheiro fora da conta de pagamento.</p> 
-          <span class="bkly-ref-small-stable-tag">beta</span> 
-          <span class="bkly-ref-scope-tag">pocket.create</span>
+          <p>[Beta] Crie uma conta pocket para que seja possível guardar dinheiro fora da conta de pagamento.</p> 
+          <b>Scope: pocket.create</b>
         </div>
         [block:callout]
         {
@@ -409,9 +454,8 @@ paths:
       summary: Consulta dos dados de todas as contas pockets
       description: |
         <div class="bkly-ref-description">
-          <p>Obtenha uma lista com os dados de todas as contas pockets associadas a uma conta de pagamento. A busca permite filtrar pelo status e pelo tipo da conta pocket.</p> 
-          <span class="bkly-ref-small-stable-tag">beta</span> 
-          <span class="bkly-ref-scope-tag">pocket.read</span>
+          <p>[Beta] Obtenha uma lista com os dados de todas as contas pockets associadas a uma conta de pagamento. A busca permite filtrar pelo status e pelo tipo da conta pocket.</p> 
+          <b>pocket.read</b>
         </div>
       operationId: GetPocketsByAccountNumberAsync
       parameters:
@@ -468,7 +512,7 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
         "503":
           $ref: "http://localhost:3320/commons/components#/components/responses/503"
-
+  
   /pockets/{pocketNumber}:
     get:
       tags:
@@ -476,9 +520,8 @@ paths:
       summary: Consulta dos dados de uma conta pocket
       description: |
         <div class="bkly-ref-description">
-          <p>Consulte os dados de uma conta pocket específica.</p> 
-          <span class="bkly-ref-small-stable-tag">beta</span> 
-          <span class="bkly-ref-scope-tag">pocket.read</span>
+          <p>[Beta] Consulte os dados de uma conta pocket específica.</p> 
+          <b>Scope: pocket.read</b>
         </div>
       operationId: GetPocketAsync
       parameters:
@@ -521,9 +564,8 @@ paths:
       summary: Consulta do saldo de uma conta pocket
       description: |
         <div class="bkly-ref-description">
-          <p>Consulte o saldo disponível, bloqueado, em processamento e o total de uma conta pocket.</p> 
-          <span class="bkly-ref-small-stable-tag">beta</span> 
-          <span class="bkly-ref-scope-tag">pocket.read</span>
+          <p>[Beta] Consulte o saldo disponível, bloqueado, em processamento e o total de uma conta pocket.</p> 
+          <b>Scope: pocket.read</b>
         </div>
       operationId: GetPocketBalanceAsync
       parameters:
@@ -560,9 +602,8 @@ paths:
       summary: Alteração do usuário
       description: |
         <div class="bkly-ref-description">
-          <p>Realize a alteração do usuário de uma conta pocket.</p> 
-          <span class="bkly-ref-small-stable-tag">beta</span> 
-          <span class="bkly-ref-scope-tag">pocket.update</span>
+          <p>[Beta] Realize a alteração do usuário de uma conta pocket.</p>
+          <b>Scope: pocket.update</b>
         </div>
       parameters:
         - $ref: "#/components/parameters/PocketNumber"
@@ -607,9 +648,8 @@ paths:
       summary: Depósito em uma conta pocket
       description: |
         <div class="bkly-ref-description">
-          <p>Deposite um valor da conta de pagamento para a conta pocket atrelada a ela.</p> 
-          <span class="bkly-ref-small-stable-tag">beta</span> 
-          <span class="bkly-ref-scope-tag">pocket.transaction.create</span>
+          <p>[Beta] Deposite um valor da conta de pagamento para a conta pocket atrelada a ela.</p>  
+          <b>Scope: pocket.transaction.create</b>
         </div>
         [block:callout]
         {
@@ -671,9 +711,8 @@ paths:
       summary: Resgate de um valor da conta pocket
       description: |
         <div class="bkly-ref-description">
-          <p>Transfira um valor da conta pocket para a conta de pagamento ao qual ela está associada.</p> 
-          <span class="bkly-ref-small-stable-tag">beta</span> 
-          <span class="bkly-ref-scope-tag">pocket.transaction.create</span>
+          <p>[Beta] Transfira um valor da conta pocket para a conta de pagamento ao qual ela está associada.</p>  
+          <b>Scope: pocket.transaction.create</b>
         </div>
         [block:callout]
         {
@@ -736,9 +775,8 @@ paths:
       summary: Consulta de uma transação
       description: |
         <div class="bkly-ref-description">
-          <p>Realize consulta de uma transação específica, de depósito ou resgate, ocorrida entre a conta de pagamento e a pocket.</p> 
-          <span class="bkly-ref-small-stable-tag">beta</span> 
-          <span class="bkly-ref-scope-tag">pocket.transaction.read</span>
+          <p>[Beta] Realize consulta de uma transação específica, de depósito ou resgate, ocorrida entre a conta de pagamento e a pocket.</p> 
+          <b>Scope: pocket.transaction.read</b>
         </div>
       parameters:
         - $ref: "#/components/parameters/PocketNumber"
@@ -783,9 +821,8 @@ paths:
       summary: Encerramento de uma conta pocket
       description: |
         <div class="bkly-ref-description">
-          <p>Encerre uma conta pocket.</p> 
-          <span class="bkly-ref-small-stable-tag">beta</span> 
-          <span class="bkly-ref-scope-tag">pocket.close</span>
+          <p>[Beta] Encerre uma conta pocket.</p>
+          <b>Scope: pocket.close</b>
         </div>
       operationId: ClosePocketAccountAsync
       parameters:
@@ -889,6 +926,89 @@ components:
       schema:
         type: string
         nullable: true
+
+    BalanceType:
+      name: type
+      in: query
+      description: Tipo do saldo que será retornado.
+      required: false
+      schema:
+        type: string
+        enum:
+          - RESIDUAL
+          - BLOCKED
+          - DEFAULT
+        nullable: true
+
+    BalanceCurrency:
+      name: currency
+      in: query
+      description: Código da moeda que deverá ser consultada.
+      required: false
+      schema:
+        type: string
+
+    Page:
+      name: page
+      in: query
+      description: Número da página.
+      required: false
+      schema:
+        type: string
+
+    Size:
+      name: size
+      in: query
+      description: Quantidade de registros que serão retornados.
+      required: false
+      schema:
+        type: string
+
+    Code:
+      name: code
+      in: query
+      description: Código do banco.
+      required: false
+      schema:
+        type: string
+
+    Ispb:
+      name: ispb
+      in: query
+      description: ISPB do banco.
+      required: false
+      schema:
+        type: string
+
+    Branch:
+      name: branch
+      in: query
+      description: Número da agência bancária.
+      required: false
+      schema:
+        type: string
+
+    AccountType:
+      name: type
+      in: query
+      description: Tipo da conta.
+      required: false
+      schema:
+        enum:
+        - Payment
+        - Checking
+        type: string
+
+    Status:
+      name: status
+      in: query
+      description: Situação da conta.
+      required: false
+      schema:
+        enum:
+        - Active
+        - Closed
+        type: string
 
   schemas:
     PaymentAccountHolder:
@@ -2066,6 +2186,50 @@ components:
           $ref: "#/components/schemas/ReasonType"
       additionalProperties: false
 
+    BalanceResponse:
+      type: object
+      properties:
+        available:
+          type: object
+          description: "Objeto que contém informações sobre o saldo disponível na conta. <b>Somente</b> será retornado na consulta padrão de saldo (Type: <code>default</code>)."
+          properties:
+            value:
+              type: number
+              description: Valor do saldo disponível.
+            currency:
+              type: string
+              description: Código da moeda com base na ISO 4217.
+        hold:
+          type: object
+          description: "Objeto que contém informações sobre o saldo em processamento. <b>Somente</b> será retornado na consulta padrão de saldo (Type: <code>default</code>)."
+          properties:
+            value:
+              type: number
+              description: Valor do saldo em processamento.
+            currency:
+              type: string
+              description: Código da moeda com base na ISO 4217.
+        blocked:
+          type: object
+          description: "Objeto que contém informações sobre o saldo bloqueado na conta. <b>Somente</b> será retornado na consulta de saldo bloqueado (Type: <code>blocked</code>)."
+          properties:
+            value:
+              type: number
+              description: Valor do saldo bloqueado.
+            currency:
+              type: string
+              description: Código da moeda com base na ISO 4217.
+        residual:
+          type: object
+          description: "Objeto que contém informações sobre o saldo remanescente. <b>Somente</b> será retornado na consulta de saldo remanescente (Type: <code>residual</code>)."
+          properties:
+            value:
+              type: number
+              description: Valor do saldo remanescente.
+            currency:
+              type: string
+              description: Código da moeda com base na ISO 4217.
+
   examples:
     
     accountDetailedExample:
@@ -2090,6 +2254,30 @@ components:
           name: "Acesso Soluções De Pagamento SA - Instituição de Pagamento"
         programId: "d83c37b2-fb71-477c-b689-8ec95ab810c8"
       summary: Conta de pagamento com saldo
+
+    balanceDefaultResponse:
+      value:
+        available:
+          value: 100.00
+          currency: "BRL"
+        hold:
+          value: 90.00
+          currency: "BRL"
+      summary: Consulta de saldo disponível e em processamento
+
+    balanceBlockedResponse:
+      value:
+        blocked:
+          value: 100.00
+          currency: "BRL"
+      summary: Consulta de saldo bloqueado
+
+    balanceResidualResponse:
+      value:
+        residual:
+          value: 100.00
+          currency: "BRL"
+      summary: Consulta de saldo remanescente
 
     accountDetailedExamplePost:
       value:
