@@ -618,7 +618,7 @@ components:
           type: array
           items:
             type: string
-          description: Lista que contém os motivos de reprovação do registro.
+          description: Lista contendo os motivos de reprovação do registro.
         document:
           type: object
           description: Objeto que contém informações sobre o documento do cliente.
