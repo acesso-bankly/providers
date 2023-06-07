@@ -599,9 +599,6 @@ components:
               - SELF
               - RELATED
               description: Nível de exposição política do cliente.
-            verified:
-              type: boolean
-              description: Indica se a situação de vínculo com pessoa politicamente exposta foi verificada na análise de KYC. O valor default desse campo é <code>false</code>.
         documentation:
           $ref: "#/components/schemas/SendedDocumentationResponse"
         birthDate:
