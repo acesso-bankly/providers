@@ -17,9 +17,8 @@ paths:
       summary: Registro de pessoa física
       description: |
         <div class="bkly-ref-description">
-          <p>Registre um cliente pessoa física. Se os dados informados já existirem, eles serão sobrepostos. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getcustomerregistration">Consulta do registro do cliente</a>.</p>
-          Endpoint <b>stable</b> 
-          <b>scope: customer.write</b>
+          <p>[Stable] Registre um cliente pessoa física. Se os dados informados já existirem, eles serão sobrepostos. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getcustomerregistration">Consulta do registro do cliente</a>.</p>
+          <b>Scope: customer.write</b>
         </div>      
         [block:callout]
         {
@@ -59,9 +58,8 @@ paths:
         Consulta do registro do cliente
       description: |
         <div class="bkly-ref-description">
-          <p>Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de um cliente.</p> 
-          <b>stable</b> 
-          <b>scope: customer.read</b>
+          <p>[Stable] Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de um cliente.</p>  
+          <b>Scope: customer.read</b>
         </div>
       operationId: GetCustomerRegistration
       parameters:
@@ -94,9 +92,8 @@ paths:
       summary: Atualização cadastral
       description: |
         <div class="bkly-ref-description">
-            <p>Realize a atualização de determinados dados cadastrais de clientes do tipo pessoa física.</p>
-            <b>stable</b> 
-            <b>scope: customer.update</b>
+            <p>[Stable] Realize a atualização de determinados dados cadastrais de clientes do tipo pessoa física.</p> 
+            <b>Scope: customer.update</b>
           </div>   
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
@@ -133,9 +130,8 @@ paths:
         Offboarding de pessoa física
       description: |
         <div class="bkly-ref-description">
-          <p>Solicite o o cancelamento de relacionamento do cliente pessoa física.</p> 
-          <b>stable</b> 
-          <b>scope: customer.cancel</b>
+          <p>[Stable] Solicite o o cancelamento de relacionamento do cliente pessoa física.</p> 
+          <b>Scope: customer.cancel</b>
         </div>
       operationId: CancelCustomerRegistration
       parameters:
@@ -168,9 +164,8 @@ paths:
       summary: Registro de pessoa jurídica (MEI, EI, EIRELI ou SLU)
       description: |
         <div class="bkly-ref-description">
-          <p>Registre um cliente pessoa jurídica. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>.</p> 
-          <b>stable</b> 
-          <b>scope: business.write</b>
+          <p>[Stable] Registre um cliente pessoa jurídica. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>.</p>  
+          <b>Scope: business.write</b>
         </div>        
         [block:callout]
         {
@@ -210,9 +205,8 @@ paths:
         Consulta do registro da empresa
       description: |
         <div class="bkly-ref-description">
-          <p>Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de uma empresa.</p> 
-          <b>stable</b> 
-          <b>scope: business.read</b>
+          <p>[Stable] Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de uma empresa.</p>  
+          <b>Scope: business.read</b>
         </div>
       operationId: GetBusinessRegistration
       parameters:
@@ -246,9 +240,8 @@ paths:
       summary: Registro de pessoa jurídica (LTDA, S.A. ou TS)
       description: |
         <div class="bkly-ref-description">
-          <p>Registre (ou substitua) uma nova empresa (LTDA, S.A. ou TS). O pedido de registro será analisado e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>. Caso o cadastro não exista, ele será criado. Se já existir, os dados serão sobrepostos.</p>
-          <b>stable</b> 
-          <b>scope: business.corporation.write</b>
+          <p>[Stable] Registre (ou substitua) uma nova empresa (LTDA, S.A. ou TS). O pedido de registro será analisado e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>. Caso o cadastro não exista, ele será criado. Se já existir, os dados serão sobrepostos.</p> 
+          <b>Scope: business.corporation.write</b>
         </div>
       operationId: RegisterCorporationBusinessAsync
       parameters:
@@ -289,9 +282,8 @@ paths:
         Offboarding de pessoa jurídica
       description: |
         <div class="bkly-ref-description">
-          <p>Solicite o o cancelamento de relacionamento do cliente pessoa jurídica.</p> 
-          <b>stable</b> 
-          <b>scope: business.cancel</b>
+          <p>[Stable] Solicite o o cancelamento de relacionamento do cliente pessoa jurídica.</p> 
+          <b>Scope: business.cancel</b>
         </div>
       operationId: CancelBusinessRegistration
       parameters:
@@ -598,6 +590,7 @@ components:
           $ref: "#/components/schemas/OccupationResponse"
         pep:
           type: object
+          description: Objeto onde deve ser informado o nível de exposição política do cliente, atendendo à Circular nº 3.978.
           properties:
             level:
               type: string
