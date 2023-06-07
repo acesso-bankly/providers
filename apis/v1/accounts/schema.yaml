@@ -196,7 +196,7 @@ paths:
           Canal <b>stable</b> 
           <b>Scope: account.read</b>
         </div>
-      operationId: GetAccount
+      operationId: GetAccountBalance
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/AccountNumber"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
