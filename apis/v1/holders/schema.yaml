@@ -58,13 +58,12 @@ paths:
         Consulta do registro do cliente
       description: |
         <div class="bkly-ref-description">
-          <p>[Stable] Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de um cliente.</p>  
+          <p>[Stable] Obtenha o resultado detalhado dos dados de registro de um cliente.</p>  
           <b>Scope: customer.read</b>
         </div>
       operationId: GetCustomerRegistration
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
-        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/ResultLevel"
       responses:

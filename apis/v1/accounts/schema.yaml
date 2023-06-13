@@ -93,7 +93,6 @@ paths:
       operationId: GetPersonalAccounts
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
-        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Page"
         - $ref: "#/components/parameters/Size"
@@ -121,10 +120,8 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/400"
         "403":
           $ref: "http://localhost:3320/commons/components#/components/responses/403"
-        "409":
-          $ref: "http://localhost:3320/commons/components#/components/responses/409"
-        "422":
-          $ref: "http://localhost:3320/commons/components#/components/responses/422"
+        "404":
+          $ref: "http://localhost:3320/commons/components#/components/responses/404"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
     post:
@@ -194,7 +191,6 @@ paths:
       operationId: GetAccountBalance
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/AccountNumber"
-        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/X-Correlation-Id"
         - $ref: "#/components/parameters/BalanceType"
@@ -216,14 +212,10 @@ paths:
                   $ref: "#/components/examples/balanceBlockedResponse"
                 BalanceResidualResponse:
                   $ref: "#/components/examples/balanceResidualResponse"
-        "400":
-          $ref: "http://localhost:3320/commons/components#/components/responses/400"
         "403":
           $ref: "http://localhost:3320/commons/components#/components/responses/403"
-        "409":
-          $ref: "http://localhost:3320/commons/components#/components/responses/409"
-        "422":
-          $ref: "http://localhost:3320/commons/components#/components/responses/422"
+        "404":
+          $ref: "http://localhost:3320/commons/components#/components/responses/404"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
 
