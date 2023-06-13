@@ -572,7 +572,7 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
           examples:
             accountDetailedExample:
-              $ref: '#/components/examples/errorResponse'
+              $ref: '#/components/examples/serverErrorResponse'
 
     '503':
       description: |
@@ -606,6 +606,16 @@ components:
         reference: "link"
       summary: Parametro inválido
   
+    serverErrorResponse:
+      value:
+        errors:
+          - code: SOME_ERROR_CODE
+            messages:
+              - '{{Some error message}}'
+        reference: "link"
+
+      summary: Erro no servidor
+
     errorResponse:
       value:
         errors:
