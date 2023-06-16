@@ -624,4 +624,4 @@ components:
               - '{{Some error message}}'
         reference: "link"
 
-      summary: Erro de negócio
+      summary: Erro comum/específico
