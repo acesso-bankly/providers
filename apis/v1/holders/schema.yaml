@@ -7,7 +7,7 @@ info:
     pagamento e cartões de crédito (pré-pago).
   version: "1.0"
 servers:
-  - url: "https://api-mtls.sandbox.bankly.com.br"
+  - url: "https://bsp.sandbox.bankly.com.br"
 
 paths:
   /customers/{documentNumber}:
