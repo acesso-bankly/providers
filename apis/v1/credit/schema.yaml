@@ -6,7 +6,7 @@ info:
     A análise de crédito do Bankly opera por meio da gestão de contratos. Essa gestão é responsável por analisar a elegibilidade de clientes para conceder crédito, originar contratos de crédito, gerir os contratos concedidos, cancelar contratos quando solicitado pelo parceiro, revisar os limites dos contratos. Consulte também nossa
     [documentação](https://bankly.readme.io/v1.0/docs/) para mais detalhes sobre os fluxos de negócio.
 servers:
-  - url: 'https://api-mtls.sandbox.bankly.com.br'
+  - url: 'https://bsp.sandbox.bankly.com.br'
 paths:
   /cards/credits/customers:
     post:

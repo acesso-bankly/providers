@@ -4,7 +4,7 @@ info:
   description: API para autenticação de transações bandeiradas através do protocolo Flow3DS
   version: '1.0'
 servers:
-  - url: https://api.sandbox.bankly.com.br
+  - url: https://bsp.sandbox.bankly.com.br
 paths:
   /card-network-transactions/simulator/challenge:
     post:
