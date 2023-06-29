@@ -72,7 +72,6 @@ paths:
           required: true
           schema:
             type: string
-            nullable: true
       requestBody:
         content:
           application/json:
