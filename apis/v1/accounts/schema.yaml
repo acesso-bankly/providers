@@ -49,8 +49,8 @@ paths:
   /accounts/{accountNumber}/balance-blocks:
     post:
       tags:
-        - Criação de bloqueio de saldo
-      summary: Bloqueio de saldo
+        - Bloqueio de saldo
+      summary: Criação de bloqueio de saldo
       description: |
         <div class="bkly-ref-description">
           <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários bloqueie o saldo de uma determinada conta aberta com ele.</p>
@@ -90,8 +90,8 @@ paths:
   /accounts/{accountNumber}/balance-blocks/{authenticationCode}:
     get:
       tags:
-        - Consulta de bloqueio de saldo
-      summary: Bloqueio de saldo
+        - Bloqueio de saldo
+      summary: Consulta de bloqueio de saldo
       description: |
         <div class="bkly-ref-description">
           <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários consulte o bloqueio de saldo.</p>
