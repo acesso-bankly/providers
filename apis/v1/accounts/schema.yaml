@@ -66,7 +66,13 @@ paths:
       parameters:
         - $ref: "#/components/parameters/AccountNumber"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
-        - $ref: "http://localhost:3320/commons/components#/components/parameters/IdempotencyKey"
+        - name: Idempotency-Key
+          in: header
+          description: Chave de idempotêcia para a requisição (UUID v4).
+          required: true
+          schema:
+            type: string
+            nullable: true
       requestBody:
         content:
           application/json:
@@ -975,7 +981,6 @@ components:
       required: true
       schema:
         type: string
-        nullable: true
 
     IncludeBalance:
       name: includeBalance
@@ -995,7 +1000,6 @@ components:
       required: true
       schema:
         type: string
-        nullable: true
 
     PocketNumber:
       name: pocketNumber
