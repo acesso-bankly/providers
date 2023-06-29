@@ -977,7 +977,6 @@ components:
         type: string
         nullable: true
 
-
     IncludeBalance:
       name: includeBalance
       in: query
@@ -2312,10 +2311,16 @@ components:
 
     CreateBalanceBlockRequest:
       type: object
+      required:
+        - amount
+        - channel
       properties:
         amount:
           type: object
           description: Objeto contendo os dados relativos ao valor de bloqueio.
+          required:
+            - value
+            - currency
           properties:
             value:
               type: number
@@ -2326,6 +2331,9 @@ components:
         channel:
           type: object
           description: Objeto contendo os dados relativos ao bloqueio.
+          required:
+            - name
+            - order
           properties:
             name:
               type: string
@@ -2333,6 +2341,11 @@ components:
             order:
               type: object
               description: Obrigatório se o channel.name informado for JUDICIAL_BLOCK. Objeto contendo os dados relativos da ordem de bloqueio judicial.
+              required:
+                - issuer
+                - number
+                - protocol
+                - lawsuit
               properties:
                 issuer:
                   type: string
@@ -2351,6 +2364,9 @@ components:
                 lawsuit:
                   type: object
                   description: Objeto contendo os dados do processo judicial.
+                  required:
+                    - number
+                    - type
                   properties:
                     number:
                       type: string
@@ -2358,11 +2374,6 @@ components:
                     type:
                       type: string
                       description: Tipo do processo judicial.
-      required: 
-        - amount
-        - channel
-        - order
-        - lawsuit
 
     CreateBalanceBlockResponse:
       type: object
