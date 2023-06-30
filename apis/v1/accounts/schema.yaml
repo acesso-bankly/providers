@@ -89,8 +89,16 @@ paths:
                   $ref: "#/components/examples/CreateBalanceJudicialBlockExample"
         "400":
           $ref: "http://localhost:3320/commons/components#/components/responses/400"
+        "401":
+          $ref: "http://localhost:3320/commons/components#/components/responses/401"
+        "403":
+          $ref: "http://localhost:3320/commons/components#/components/responses/403"
+        "404":
+          $ref: "http://localhost:3320/commons/components#/components/responses/404"
         "422":
           $ref: "http://localhost:3320/commons/components#/components/responses/422"
+        "500":
+          $ref: "http://localhost:3320/commons/components#/components/responses/500"
 
   /accounts/{accountNumber}/balance-blocks/{authenticationCode}:
     get:
@@ -107,7 +115,7 @@ paths:
         - $ref: "#/components/parameters/AuthenticationCode"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       responses:
-        "202":
+        "200":
           description: Recurso encontrado.
           content:
             application/json:
@@ -116,8 +124,15 @@ paths:
               examples:
                 BalanceJudicialBlockExample:
                   $ref: "#/components/examples/QueryBalanceJudicialBlockExample"
+        "401":
+          $ref: "http://localhost:3320/commons/components#/components/responses/401"
+        "403":
+          $ref: "http://localhost:3320/commons/components#/components/responses/403"
         "404":
-          $ref: "http://localhost:3320/commons/components#/components/responses/404"      
+          $ref: "http://localhost:3320/commons/components#/components/responses/404"
+        "500":
+          $ref: "http://localhost:3320/commons/components#/components/responses/500"
+ 
 
   /accounts/{accountNumber}/closure:
     patch:
