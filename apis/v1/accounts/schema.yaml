@@ -2468,7 +2468,8 @@ components:
                       description: Tipo do processo judicial.
         createdAt:
           type: string
-          description: Data de criação do bloqueio de saldo, no formato YYYY-MM-DDTHH:mm:SS.
+          format: date-time
+          description: Data de criação do bloqueio de saldo.
 
     QueryBalanceBlockResponse:
       type: object
@@ -2545,10 +2546,12 @@ components:
                       description: Tipo do processo judicial.
         createdAt:
           type: string
-          description: Data de criação do bloqueio de saldo, no formato YYYY-MM-DDTHH:mm:SS.
+          format: date-time
+          description: Data de criação do bloqueio de saldo.
         updatedAt:
           type: string
-          description: Data de atualização do bloqueio de saldo, no formato YYYY-MM-DDTHH:mm:SS. 
+          format: date-time
+          description: Data de atualização do bloqueio de saldo. 
 
   examples:
     
