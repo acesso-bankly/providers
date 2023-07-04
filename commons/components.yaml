@@ -434,7 +434,14 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
           examples:
             accountDetailedExample:
-              $ref: '#/components/examples/errorResponse'
+              value:
+                errors:
+                  - code: SOME_ERROR_CODE
+                    messages:
+                      - '{{Some error message}}'
+                reference: "link"
+
+              summary: Acesso não autorizado
 
     '403':
       description: |
