@@ -95,6 +95,8 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/403"
         "404":
           $ref: "http://localhost:3320/commons/components#/components/responses/404"
+        "409":
+          $ref: "http://localhost:3320/commons/components#/components/responses/409"
         "422":
           $ref: "http://localhost:3320/commons/components#/components/responses/422"
         "500":
@@ -2355,10 +2357,12 @@ components:
           properties:
             name:
               type: string
-              description: Nome do canal de bloqueio. Atualmente, só é possível informar JUDICIAL_BLOCK.
+              enum:
+                - JUDICIAL_BLOCK
+              description: Nome do canal de bloqueio.
             order:
               type: object
-              description: Obrigatório se o channel.name informado for JUDICIAL_BLOCK. Objeto contendo os dados relativos da ordem de bloqueio judicial.
+              description: Objeto contendo os dados relativos da ordem de <b>bloqueio judicial</b>. 
               required:
                 - issuer
                 - number
