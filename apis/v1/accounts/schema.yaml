@@ -2362,7 +2362,7 @@ components:
               description: Nome do canal de bloqueio.
             order:
               type: object
-              description: Objeto contendo os dados relativos da ordem de <b>bloqueio judicial</b>. 
+              description: Objeto contendo informações relativas à ordem de <b>bloqueio judicial</b>. 
               required:
                 - issuer
                 - number
