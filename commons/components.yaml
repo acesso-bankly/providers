@@ -462,7 +462,7 @@ components:
                       - '{{Some error message}}'
                 reference: "link"
 
-              summary: Acesso negado
+              summary: Acesso negado pelo servidor
     
     '404':
       description: |
