@@ -2475,7 +2475,7 @@ components:
           description: Situação do bloqueio.
           enum:
           - ACTIVE
-          - CANCELELD
+          - CANCELED
         createdAt:
           type: string
           format: date-time
@@ -2559,7 +2559,7 @@ components:
           description: Situação do bloqueio.
           enum:
           - ACTIVE
-          - CANCELELD
+          - CANCELED
         createdAt:
           type: string
           format: date-time
