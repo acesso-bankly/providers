@@ -2683,7 +2683,7 @@ components:
               number: "0001103-32.2023.6.2.1625"
               type: "Execução Fiscal"
         createdAt: "2023-06-20T15:49:46.5899092Z"
-      summary: Criação de bloqueio judicial de saldo
+      summary: Criação de bloqueio de saldo
 
     QueryBalanceJudicialBlockExample:
       value:
