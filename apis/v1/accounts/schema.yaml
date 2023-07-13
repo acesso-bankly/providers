@@ -2622,6 +2622,7 @@ components:
           properties:
             value:
               type: number
+              minimum: 1
               description: Valor a ser adicionado.
             currency:
               type: string
