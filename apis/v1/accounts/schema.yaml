@@ -142,7 +142,7 @@ paths:
       summary: Cancelamento de bloqueio de saldo
       description: |
         <div class="bkly-ref-description">
-          <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários cancele o bloqueio realizado.</p>
+          <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários cancele o bloqueio de saldo realizado.</p>
           <b>Scope: account.balance-block.delete</b>
         </div>
       parameters:
@@ -172,9 +172,16 @@ paths:
       summary: Adição de valor ao bloqueio de saldo
       description: |
         <div class="bkly-ref-description">
-          <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários adicione valor ao bloqueio de saldo.</p>
+          <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários atualize o bloqueio de saldo ao adicionar um novo valor a ele.</p>
           <b>Scope: account.balance-block.update</b>
         </div>
+        [block:callout]
+        {
+          "type": "warn",
+          "title": "Importante",
+          "body": "O valor a ser adicionado ao bloqueio deverá ser menor ou igual ao disponível na conta bancária do cliente."
+        }
+        [/block]
       parameters:
         - $ref: "#/components/parameters/AccountNumber"
         - $ref: "#/components/parameters/AuthenticationCode"
@@ -192,7 +199,7 @@ paths:
               $ref: "#/components/schemas/AddBalanceBlockRequest"
       responses:
         "202":
-          description: A solicitação foi aceita e o bloqueio de saldo está sendo processado.
+          description: A solicitação foi aceita e a atualização do bloqueio de saldo está sendo processada.
           content:
             application/json:
               schema:
@@ -214,9 +221,16 @@ paths:
       summary: Remoção de valor do bloqueio de saldo
       description: |
         <div class="bkly-ref-description">
-          <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários remova um valor do bloqueio de saldo.</p>
+          <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários atualize o bloqueio de saldo ao remover parcial ou integralmente o valor bloqueado.</p>
           <b>Scope: account.balance-block.update</b>
         </div>
+        [block:callout]
+        {
+          "type": "warn",
+          "title": "Importante",
+          "body": "O valor a ser removido do bloqueio deverá ser menor ou igual ao valor já bloqueado."
+        }
+        [/block]
       parameters:
         - $ref: "#/components/parameters/AccountNumber"
         - $ref: "#/components/parameters/AuthenticationCode"
@@ -234,7 +248,7 @@ paths:
               $ref: "#/components/schemas/DeductBalanceBlockRequest"
       responses:
         "202":
-          description: A solicitação foi aceita e o bloqueio de saldo está sendo processado.
+          description: A solicitação foi aceita e a atualização do bloqueio de saldo está sendo processada.
           content:
             application/json:
               schema:
@@ -2673,7 +2687,7 @@ components:
             value:
               type: number
               minimum: 1
-              description: Valor a ser removido do bloqueio. É possível remover o valor <b>integral</b> já bloqueado.
+              description: Valor a ser removido do bloqueio. É possível remover <b>integralmente</b> o valor já bloqueado.
             currency:
               type: string
               default: BRL
