@@ -2444,7 +2444,7 @@ components:
 
     BalanceBlockAccount:
       type: object
-      description: Objeto contendo os dados relativos a conta na qual ocorreu o bloqueio de saldo.
+      description: Objeto contendo os dados relativos à conta na qual ocorreu o bloqueio de saldo.
       properties:
         branch:
           type: string
@@ -2485,22 +2485,22 @@ components:
           description: Nome do canal de bloqueio.
         order:
           type: object
-          description: Objeto contendo os dados relativos da ordem de bloqueio judicial.
+          description: Objeto contendo os dados relativos à ordem de bloqueio judicial.
           properties:
             issuer:
               type: string
               enum:
-                - OFP (Ofício em papel)
-                - BCC (Ofício BC Correio)
+                - OFP
+                - BCC
                 - CVM 
-                - BJ2 (Bacen Jud 2)
+                - BJ2
               description: Órgão emissor da ordem judicial, o qual pode ser OFP (Ofício em papel), BCC (Ofício BC Correio), CVM, BJ2 (Bacen Jud 2).
             number:
               type: string
-              description: Número do oficio.
+              description: Número do ofício.
             protocol:
               type: string
-              description: Número do protocolo do oficio.
+              description: Número do protocolo do ofício.
             lawsuit:
               type: object
               description: Objeto contendo os dados do processo judicial.
@@ -2540,7 +2540,7 @@ components:
               description: Sigla da moeda utilizada, de acordo com a ISO 4217. Atualmente, só é possível informar BRL.
         channel:
           type: object
-          description: Objeto contendo os dados relativos ao bloqueio.
+          description: Objeto que deverá conter os dados relativos ao bloqueio.
           required:
             - name
             - order
@@ -2552,7 +2552,7 @@ components:
               description: Nome do canal de bloqueio.
             order:
               type: object
-              description: Objeto contendo informações referentes à ordem de <b>bloqueio judicial</b>. 
+              description: Objeto que deverá conter informações referentes à ordem de <b>bloqueio judicial</b>. 
               required:
                 - issuer
                 - number
@@ -2562,20 +2562,20 @@ components:
                 issuer:
                   type: string
                   enum:
-                    - OFP (Ofício em papel)
-                    - BCC (Ofício BC Correio)
+                    - OFP
+                    - BCC
                     - CVM 
-                    - BJ2 (Bacen Jud 2)
+                    - BJ2
                   description: Órgão emissor da ordem judicial, o qual pode ser OFP (Ofício em papel), BCC (Ofício BC Correio), CVM, BJ2 (Bacen Jud 2).
                 number:
                   type: string
-                  description: Número do oficio.
+                  description: Número do ofício.
                 protocol:
                   type: string
-                  description: Número do protocolo do oficio.
+                  description: Número do protocolo do ofício.
                 lawsuit:
                   type: object
-                  description: Objeto contendo os dados do processo judicial.
+                  description: Objeto que deverá conter os dados do processo judicial.
                   required:
                     - number
                     - type
@@ -2585,6 +2585,8 @@ components:
                       description: Número do processo judicial.
                     type:
                       type: string
+                      enum:
+                      - JUDICIAL_BLOCK
                       description: Tipo do processo judicial.
 
     CreateBalanceBlockResponse:
