@@ -126,6 +126,8 @@ paths:
               examples:
                 BalanceJudicialBlockExample:
                   $ref: "#/components/examples/QueryBalanceJudicialBlockExample"
+        "400":
+          $ref: "http://localhost:3320/commons/components#/components/responses/400"
         "401":
           $ref: "http://localhost:3320/commons/components#/components/responses/401"
         "403":
@@ -134,7 +136,132 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/404"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
- 
+    delete:
+      tags:
+        - Bloqueio de saldo
+      summary: Cancelamento de bloqueio de saldo
+      description: |
+        <div class="bkly-ref-description">
+          <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários cancele o bloqueio de saldo realizado.</p>
+          <b>Scope: account.balance-block.delete</b>
+        </div>
+      parameters:
+        - $ref: "#/components/parameters/AccountNumber"
+        - $ref: "#/components/parameters/AuthenticationCode"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+      responses:
+        "204":
+          description: Cancelamento de bloqueio realizado.
+        "400":
+          $ref: "http://localhost:3320/commons/components#/components/responses/400"
+        "401":
+          $ref: "http://localhost:3320/commons/components#/components/responses/401"
+        "403":
+          $ref: "http://localhost:3320/commons/components#/components/responses/403"
+        "404":
+          $ref: "http://localhost:3320/commons/components#/components/responses/404"
+        "422":
+          $ref: "http://localhost:3320/commons/components#/components/responses/422"
+        "500":
+          $ref: "http://localhost:3320/commons/components#/components/responses/500"
+
+  /accounts/{accountNumber}/balance-blocks/{authenticationCode}/add:
+    patch:
+      tags:
+        - Bloqueio de saldo
+      summary: Adição de valor ao bloqueio de saldo
+      description: |
+        <div class="bkly-ref-description">
+          <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários atualize o bloqueio de saldo ao adicionar um novo valor a ele.</p>
+          <b>Scope: account.balance-block.update</b>
+        </div>
+        [block:callout]
+        {
+          "type": "warn",
+          "title": "Importante",
+          "body": "O valor a ser adicionado ao bloqueio deverá ser menor ou igual ao disponível na conta bancária do cliente."
+        }
+        [/block]
+      parameters:
+        - $ref: "#/components/parameters/AccountNumber"
+        - $ref: "#/components/parameters/AuthenticationCode"
+        - name: Idempotency-Key
+          in: header
+          description: Chave de idempotêcia para a requisição (UUID v4).
+          required: true
+          schema:
+            type: string
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddBalanceBlockRequest"
+      responses:
+        "202":
+          description: A solicitação foi aceita e a atualização do bloqueio de saldo está sendo processada.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddBalanceBlockResponse"
+              examples:
+                BalanceJudicialBlockExample:
+                  $ref: "#/components/examples/AddBalanceBlockResponseExample"
+        "400":
+          $ref: "http://localhost:3320/commons/components#/components/responses/400"
+        "404":
+          $ref: "http://localhost:3320/commons/components#/components/responses/404"
+        "422":
+          $ref: "http://localhost:3320/commons/components#/components/responses/422"
+
+  /accounts/{accountNumber}/balance-blocks/{authenticationCode}/deduct:
+    patch:
+      tags:
+        - Bloqueio de saldo
+      summary: Remoção de valor do bloqueio de saldo
+      description: |
+        <div class="bkly-ref-description">
+          <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários atualize o bloqueio de saldo ao remover parcial ou integralmente o valor bloqueado.</p>
+          <b>Scope: account.balance-block.update</b>
+        </div>
+        [block:callout]
+        {
+          "type": "warn",
+          "title": "Importante",
+          "body": "O valor a ser removido do bloqueio deverá ser menor ou igual ao valor já bloqueado."
+        }
+        [/block]
+      parameters:
+        - $ref: "#/components/parameters/AccountNumber"
+        - $ref: "#/components/parameters/AuthenticationCode"
+        - name: Idempotency-Key
+          in: header
+          description: Chave de idempotêcia para a requisição (UUID v4).
+          required: true
+          schema:
+            type: string
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeductBalanceBlockRequest"
+      responses:
+        "202":
+          description: A solicitação foi aceita e a atualização do bloqueio de saldo está sendo processada.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeductBalanceBlockResponse"
+              examples:
+                BalanceJudicialBlockExample:
+                  $ref: "#/components/examples/DeductBalanceBlockResponseExample"
+        "400":
+          $ref: "http://localhost:3320/commons/components#/components/responses/400"
+        "404":
+          $ref: "http://localhost:3320/commons/components#/components/responses/404"
+        "422":
+          $ref: "http://localhost:3320/commons/components#/components/responses/422"
 
   /accounts/{accountNumber}/closure:
     patch:
@@ -2329,6 +2456,83 @@ components:
               type: string
               description: Código da moeda com base na ISO 4217.
 
+    BalanceBlockAccount:
+      type: object
+      description: Objeto contendo os dados relativos à conta na qual ocorreu o bloqueio de saldo.
+      properties:
+        branch:
+          type: string
+          description: Número da agência bancária.
+        number:
+          type: string
+          description: Número da conta.
+        bank:
+          $ref: "#/components/schemas/Bank"
+
+    BalanceBlockedAmount:
+      type: object
+      properties:
+        value:
+          type: number
+          description: Valor bloqueado.
+        currency:
+          type: string
+          description: Sigla da moeda utilizada, de acordo com a ISO 4217.
+    
+    BalanceBlockAmount:
+      type: object
+      description: Objeto contendo os dados relativos ao valor a ser bloqueado.
+      properties:
+        value:
+          type: number
+          description: Valor a ser bloqueado.
+        currency:
+          type: string
+          description: Sigla da moeda utilizada, de acordo com a ISO 4217.
+    
+    BalanceBlockChannel:
+      type: object
+      description: Objeto contendo os dados relativos ao bloqueio.
+      properties:
+        name:
+          type: string
+          description: Nome do canal de bloqueio.
+        order:
+          type: object
+          description: Objeto contendo os dados relativos à ordem de bloqueio judicial.
+          properties:
+            issuer:
+              type: string
+              enum:
+                - OFP
+                - BCC
+                - CVM 
+                - BJ2
+              description: Órgão emissor da ordem judicial, o qual pode ser OFP (Ofício em papel), BCC (Ofício BC Correio), CVM, BJ2 (Bacen Jud 2).
+            number:
+              type: string
+              description: Número do ofício.
+            protocol:
+              type: string
+              description: Número do protocolo do ofício.
+            lawsuit:
+              type: object
+              description: Objeto contendo os dados do processo judicial.
+              properties:
+                number:
+                  type: string
+                  description: Número do processo judicial.
+                type:
+                  type: string
+                  description: Tipo do processo judicial.
+    
+    BalanceBlockStatus:
+      type: string
+      description: Situação do bloqueio.
+      enum:
+      - ACTIVE
+      - CANCELED
+    
     CreateBalanceBlockRequest:
       type: object
       required:
@@ -2350,7 +2554,7 @@ components:
               description: Sigla da moeda utilizada, de acordo com a ISO 4217. Atualmente, só é possível informar BRL.
         channel:
           type: object
-          description: Objeto contendo os dados relativos ao bloqueio.
+          description: Objeto que deverá conter os dados relativos ao bloqueio.
           required:
             - name
             - order
@@ -2362,7 +2566,7 @@ components:
               description: Nome do canal de bloqueio.
             order:
               type: object
-              description: Objeto contendo informações referentes à ordem de <b>bloqueio judicial</b>. 
+              description: Objeto que deverá conter informações referentes à ordem de <b>bloqueio judicial</b>. 
               required:
                 - issuer
                 - number
@@ -2372,20 +2576,20 @@ components:
                 issuer:
                   type: string
                   enum:
-                    - OFP (Ofício em papel)
-                    - BCC (Ofício BC Correio)
+                    - OFP
+                    - BCC
                     - CVM 
-                    - BJ2 (Bacen Jud 2)
+                    - BJ2
                   description: Órgão emissor da ordem judicial, o qual pode ser OFP (Ofício em papel), BCC (Ofício BC Correio), CVM, BJ2 (Bacen Jud 2).
                 number:
                   type: string
-                  description: Número do oficio.
+                  description: Número do ofício.
                 protocol:
                   type: string
-                  description: Número do protocolo do oficio.
+                  description: Número do protocolo do ofício.
                 lawsuit:
                   type: object
-                  description: Objeto contendo os dados do processo judicial.
+                  description: Objeto que deverá conter os dados do processo judicial.
                   required:
                     - number
                     - type
@@ -2395,6 +2599,8 @@ components:
                       description: Número do processo judicial.
                     type:
                       type: string
+                      enum:
+                      - JUDICIAL_BLOCK
                       description: Tipo do processo judicial.
 
     CreateBalanceBlockResponse:
@@ -2404,78 +2610,16 @@ components:
           type: string
           description: Código de autenticação da operação de bloqueio.
         amount:
-          type: object
-          description: Objeto contendo os dados relativos ao valor a ser bloqueado.
-          properties:
-            value:
-              type: number
-              description: Valor a ser bloqueado.
-            currency:
-              type: string
-              description: Sigla da moeda utilizada, de acordo com a ISO 4217. 
+          $ref: "#/components/schemas/BalanceBlockAmount" 
         blockedAmount:
-          type: object
           description: Objeto contendo os dados relativos ao valor que foi efetivamente bloqueado.
-          properties:
-            value:
-              type: number
-              description: Valor bloqueado.
-            currency:
-              type: string
-              description: Sigla da moeda utilizada, de acordo com a ISO 4217.
+          $ref: "#/components/schemas/BalanceBlockedAmount"
         account: 
-          type: object
-          description: Objeto contendo os dados relativos a conta na qual ocorreu o bloqueio de saldo.
-          properties:
-            branch:
-              type: string
-              description: Número da agência bancária.
-            number:
-              type: string
-              description: Número da conta.
-            bank:
-              $ref: "#/components/schemas/Bank"
+          $ref: "#/components/schemas/BalanceBlockAccount"
         channel:
-          type: object
-          description: Objeto contendo os dados relativos ao bloqueio.
-          properties:
-            name:
-              type: string
-              description: Nome do canal de bloqueio.
-            order:
-              type: object
-              description: Objeto contendo os dados relativos da ordem de bloqueio judicial.
-              properties:
-                issuer:
-                  type: string
-                  enum:
-                    - OFP (Ofício em papel)
-                    - BCC (Ofício BC Correio)
-                    - CVM 
-                    - BJ2 (Bacen Jud 2)
-                  description: Órgão emissor da ordem judicial, o qual pode ser OFP (Ofício em papel), BCC (Ofício BC Correio), CVM, BJ2 (Bacen Jud 2).
-                number:
-                  type: string
-                  description: Número do oficio.
-                protocol:
-                  type: string
-                  description: Número do protocolo do oficio.
-                lawsuit:
-                  type: object
-                  description: Objeto contendo os dados do processo judicial.
-                  properties:
-                    number:
-                      type: string
-                      description: Número do processo judicial.
-                    type:
-                      type: string
-                      description: Tipo do processo judicial.
+          $ref: "#/components/schemas/BalanceBlockChannel"
         status:
-          type: string
-          description: Situação do bloqueio.
-          enum:
-          - ACTIVE
-          - CANCELED
+          $ref: "#/components/schemas/BalanceBlockStatus"
         createdAt:
           type: string
           format: date-time
@@ -2488,78 +2632,16 @@ components:
           type: string
           description: Código de autenticação da operação de bloqueio.
         amount:
-          type: object
-          description: Objeto contendo os dados relativos ao valor a ser bloqueado.
-          properties:
-            value:
-              type: number
-              description: Valor a ser bloqueado.
-            currency:
-              type: string
-              description: Sigla da moeda utilizada, de acordo com a ISO 4217. 
+          $ref: "#/components/schemas/BalanceBlockAmount"
         blockedAmount:
-          type: object
           description: Objeto contendo os dados relativos ao valor que foi efetivamente bloqueado.
-          properties:
-            value:
-              type: number
-              description: Valor bloqueado.
-            currency:
-              type: string
-              description: Sigla da moeda utilizada, de acordo com a ISO 4217.
+          $ref: "#/components/schemas/BalanceBlockedAmount"
         account: 
-          type: object
-          description: Objeto contendo os dados relativos a conta na qual ocorreu o bloqueio de saldo.
-          properties:
-            branch:
-              type: string
-              description: Número da agência bancária.
-            number:
-              type: string
-              description: Número da conta.
-            bank:
-              $ref: "#/components/schemas/Bank"
+          $ref: "#/components/schemas/BalanceBlockAccount"
         channel:
-          type: object
-          description: Objeto contendo os dados relativos ao bloqueio.
-          properties:
-            name:
-              type: string
-              description: Nome do canal de bloqueio.
-            order:
-              type: object
-              description: Objeto contendo os dados relativos da ordem de bloqueio judicial.
-              properties:
-                issuer:
-                  type: string
-                  enum:
-                    - OFP (Ofício em papel)
-                    - BCC (Ofício BC Correio)
-                    - CVM 
-                    - BJ2 (Bacen Jud 2)
-                  description: Órgão emissor da ordem judicial, o qual pode ser OFP (Ofício em papel), BCC (Ofício BC Correio), CVM, BJ2 (Bacen Jud 2).
-                number:
-                  type: string
-                  description: Número do oficio.
-                protocol:
-                  type: string
-                  description: Número do protocolo do oficio.
-                lawsuit:
-                  type: object
-                  description: Objeto contendo os dados do processo judicial.
-                  properties:
-                    number:
-                      type: string
-                      description: Número do processo judicial.
-                    type:
-                      type: string
-                      description: Tipo do processo judicial.
+          $ref: "#/components/schemas/BalanceBlockChannel"
         status:
-          type: string
-          description: Situação do bloqueio.
-          enum:
-          - ACTIVE
-          - CANCELED
+          $ref: "#/components/schemas/BalanceBlockStatus"
         createdAt:
           type: string
           format: date-time
@@ -2568,6 +2650,116 @@ components:
           type: string
           format: date-time
           description: Data de atualização do bloqueio de saldo. 
+
+    AddBalanceBlockRequest:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: object
+          description: Objeto que deverá conter informações sobre o valor a ser adicionado ao bloqueio.
+          required:
+            - value
+            - currency
+          properties:
+            value:
+              type: number
+              minimum: 1
+              description: Valor a ser adicionado.
+            currency:
+              type: string
+              default: BRL
+              description: Sigla da moeda utilizada, de acordo com a ISO 4217.
+
+    DeductBalanceBlockRequest:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: object
+          description: Objeto que deverá conter informações sobre o valor a ser removido do bloqueio.
+          required:
+            - value
+            - currency
+          properties:
+            value:
+              type: number
+              minimum: 1
+              description: Valor a ser removido do bloqueio. É possível remover <b>integralmente</b> o valor já bloqueado.
+            currency:
+              type: string
+              default: BRL
+              description: Sigla da moeda utilizada, de acordo com a ISO 4217.
+
+    AddBalanceBlockResponse:
+      type: object
+      properties:
+        authenticationCode:
+          type: string
+          description: Código de autenticação da operação de bloqueio.
+        amount:
+          type: object
+          description: Objeto contendo os dados relativos ao valor a ser adicionado ao bloqueio.
+          properties:
+            value:
+              type: number
+              description: Valor a ser adicionado.
+            currency:
+              type: string
+              description: Sigla da moeda utilizada, de acordo com a ISO 4217.
+        blockedAmount:
+          description: Objeto contendo os dados relativos ao valor bloqueado, após a <b>atualização</b>.
+          $ref: "#/components/schemas/BalanceBlockedAmount"
+        account: 
+          $ref: "#/components/schemas/BalanceBlockAccount"
+        channel:
+          $ref: "#/components/schemas/BalanceBlockChannel"
+        status:
+          $ref: "#/components/schemas/BalanceBlockStatus"
+        createdAt:
+          type: string
+          format: date-time
+          description: Data de criação do bloqueio de saldo.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Data de atualização do bloqueio de saldo. 
+
+    DeductBalanceBlockResponse:
+      type: object
+      properties:
+        authenticationCode:
+          type: string
+          description: Código de autenticação da operação de bloqueio.
+        amount:
+          type: object
+          description: Objeto contendo os dados relativos ao valor a ser removido do bloqueio. 
+          properties:
+            value:
+              type: number
+              description: Valor a ser removido.
+            currency:
+              type: string
+              description: Sigla da moeda utilizada, de acordo com a ISO 4217.
+        blockedAmount:
+          description: Objeto contendo os dados relativos ao valor bloqueado, após a <b>atualização</b>.
+          $ref: "#/components/schemas/BalanceBlockedAmount"
+        account: 
+          $ref: "#/components/schemas/BalanceBlockAccount"
+        channel:
+          $ref: "#/components/schemas/BalanceBlockChannel"
+        status:
+          $ref: "#/components/schemas/BalanceBlockStatus"
+        createdAt:
+          type: string
+          format: date-time
+          description: Data de criação do bloqueio de saldo.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Data de atualização do bloqueio de saldo.
 
   examples:
     
@@ -2689,7 +2881,7 @@ components:
       value:
         authenticationCode: "ce8c0fe2-320c-4433-9c13-139d91627f6c"
         amount:
-          value: 20.0
+          value: 10.0
           currency: "BRL" 
         blockedAmount:
           value: 20.0
@@ -2710,10 +2902,71 @@ components:
             lawsuit:
               number: "0001103-32.2023.6.2.1625"
               type: "Execução Fiscal"
+        value: "ACTIVE"
         createdAt: "2023-05-20T15:49:46.5899092Z"
         updatedAt: "2023-06-20T15:49:46.5899092Z"
       summary: Consulta de bloqueio judicial de saldo
+
+    AddBalanceBlockResponseExample:
+      value:
+        authenticationCode: "ce8c0fe2-320c-4433-9c13-139d91627f6c"
+        amount:
+          value: 10.0
+          currency: "BRL" 
+        blockedAmount:
+          value: 20.0
+          currency: "BRL"
+        account: 
+          branch: "2020"
+          number: "502000636779"
+          bank:
+            ispb: "01858774"
+            code: "413"
+            name: "BCO BV S.A."
+        channel:
+          name: "JUDICIAL_BLOCK"
+          order:
+            issuer: "BJ2"
+            number: "0001103-32.2023.6.2.1625"
+            protocol: "202306021628"
+            lawsuit:
+              number: "0001103-32.2023.6.2.1625"
+              type: "Execução Fiscal"
+        value: "ACTIVE"
+        createdAt: "2023-05-20T15:49:46.5899092Z"
+        updatedAt: "2023-06-20T15:49:46.5899092Z"
+      summary: Adição de valor ao bloqueio judicial de saldo
   
+    DeductBalanceBlockResponseExample:
+      value:
+        authenticationCode: "ce8c0fe2-320c-4433-9c13-139d91627f6c"
+        amount:
+          value: -10.0
+          currency: "BRL" 
+        blockedAmount:
+          value: 10.0
+          currency: "BRL"
+        account: 
+          branch: "2020"
+          number: "502000636779"
+          bank:
+            ispb: "01858774"
+            code: "413"
+            name: "BCO BV S.A."
+        channel:
+          name: "JUDICIAL_BLOCK"
+          order:
+            issuer: "BJ2"
+            number: "0001103-32.2023.6.2.1625"
+            protocol: "202306021628"
+            lawsuit:
+              number: "0001103-32.2023.6.2.1625"
+              type: "Execução Fiscal"
+        value: "ACTIVE"
+        createdAt: "2023-05-20T15:49:46.5899092Z"
+        updatedAt: "2023-06-20T15:49:46.5899092Z"
+      summary: Remoção de valor do bloqueio judicial de saldo
+
   securitySchemes:
     Bearer:
       type: http
