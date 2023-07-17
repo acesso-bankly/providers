@@ -115,7 +115,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/AccountNumber"
         - $ref: "#/components/parameters/AuthenticationCode"
-        - $ref: "http://localhost:3320/commons/components#/components/parameters/IdempotencyKey"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       responses:
         "200":
@@ -137,7 +136,35 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/404"
         "500":
           $ref: "http://localhost:3320/commons/components#/components/responses/500"
- 
+    delete:
+      tags:
+        - Bloqueio de saldo
+      summary: Cancelamento de bloqueio de saldo
+      description: |
+        <div class="bkly-ref-description">
+          <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários cancele o bloqueio realizado.</p>
+          <b>Scope: account.balance-block.delete</b>
+        </div>
+      parameters:
+        - $ref: "#/components/parameters/AccountNumber"
+        - $ref: "#/components/parameters/AuthenticationCode"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+      responses:
+        "204":
+          description: Cancelamento de bloqueio realizado.
+        "400":
+          $ref: "http://localhost:3320/commons/components#/components/responses/400"
+        "401":
+          $ref: "http://localhost:3320/commons/components#/components/responses/401"
+        "403":
+          $ref: "http://localhost:3320/commons/components#/components/responses/403"
+        "404":
+          $ref: "http://localhost:3320/commons/components#/components/responses/404"
+        "422":
+          $ref: "http://localhost:3320/commons/components#/components/responses/422"
+        "500":
+          $ref: "http://localhost:3320/commons/components#/components/responses/500"
+
   /accounts/{accountNumber}/balance-blocks/{authenticationCode}/add:
     patch:
       tags:
@@ -221,8 +248,6 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/404"
         "422":
           $ref: "http://localhost:3320/commons/components#/components/responses/422"
-
-
 
   /accounts/{accountNumber}/closure:
     patch:
@@ -2646,7 +2671,7 @@ components:
             value:
               type: number
               minimum: 1
-              description: Valor a ser removido do bloqueio. Preencha este campo com um valor menor ou igual ao valor total já bloqueado.
+              description: Valor a ser removido do bloqueio. É possível remover o valor <b>integral</b> já bloqueado.
             currency:
               type: string
               default: BRL
