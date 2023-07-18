@@ -175,13 +175,6 @@ paths:
           <p>[Stable] Este <i>endpoint</i> permite que o provedor de serviços bancários atualize o bloqueio de saldo ao adicionar um novo valor a ele.</p>
           <b>Scope: account.balance-block.update</b>
         </div>
-        [block:callout]
-        {
-          "type": "warn",
-          "title": "Importante",
-          "body": "O valor a ser adicionado ao bloqueio deverá ser menor ou igual ao disponível na conta bancária do cliente."
-        }
-        [/block]
       parameters:
         - $ref: "#/components/parameters/AccountNumber"
         - $ref: "#/components/parameters/AuthenticationCode"
