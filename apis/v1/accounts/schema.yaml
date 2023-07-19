@@ -219,7 +219,7 @@ paths:
         </div>
         [block:callout]
         {
-          "type": "warn",
+          "type": "warning",
           "title": "Importante",
           "body": "O valor a ser removido do bloqueio deverá ser menor ou igual ao valor já bloqueado."
         }
