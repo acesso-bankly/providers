@@ -2489,6 +2489,8 @@ components:
       properties:
         name:
           type: string
+          enum:
+          - JUDICIAL_BLOCK
           description: Nome do canal de bloqueio.
         order:
           type: object
@@ -2517,7 +2519,7 @@ components:
                   description: Número do processo judicial.
                 type:
                   type: string
-                  description: Tipo do processo judicial.
+                  description: Natureza do processo judicial.
     
     BalanceBlockStatus:
       type: string
@@ -2592,9 +2594,7 @@ components:
                       description: Número do processo judicial.
                     type:
                       type: string
-                      enum:
-                      - JUDICIAL_BLOCK
-                      description: Tipo do processo judicial.
+                      description: Natureza do processo judicial.
 
     CreateBalanceBlockResponse:
       type: object
