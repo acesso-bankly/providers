@@ -17,14 +17,14 @@ paths:
       summary: Registro de pessoa física
       description: |
         <div class="bkly-ref-description">
-          <p>[Stable] Registre um cliente pessoa física. Se os dados informados já existirem, eles serão sobrepostos. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getcustomerregistration">Consulta do registro do cliente</a>.</p>
+          <p>[Stable] Registre um cliente pessoa física. Se os dados informados já existirem, eles serão sobrepostos. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/consulta-registro-do-cliente">Consulta do registro do cliente</a>.</p>
           <b>Scope: customer.write</b>
         </div>      
         [block:callout]
         {
           "type": "warning",
           "title": "Importante",
-          "body": "Os possíveis status do cliente após essa análise são: PENDING_APPROVAL, APPROVED, REPROVED e BLOCKLISTED. Para mais informações, consulte a documentação [Onboarding de pessoa física](https://docs.bankly.com.br/docs/onboarding-completo)."
+          "body": "Os possíveis status do cliente após essa análise são: PENDING_APPROVAL, APPROVED, REPROVED e BLOCKLISTED."
         }
         [/block]
       operationId: PutCustomerRegistration
@@ -44,8 +44,6 @@ paths:
           $ref: "http://localhost:3320/commons/components#/components/responses/400"
         "403":
           $ref: "http://localhost:3320/commons/components#/components/responses/403"
-        "409":
-          $ref: "http://localhost:3320/commons/components#/components/responses/409"
         "422":
           $ref: "http://localhost:3320/commons/components#/components/responses/422"
         "500":
@@ -326,7 +324,7 @@ components:
         zipCode:
           minLength: 1
           type: string
-          description: O CEP correspondente ao endereço.
+          description: Código postal do endereço.
         addressLine:
           maxLength: 256
           minLength: 1
@@ -355,11 +353,11 @@ components:
         state:
           minLength: 1
           type: string
-          description: Sigla do estado brasileiro conforme a ISO 3166-2:BR.
+          description: "Sigla do estado brasileiro, conforme a ISO 3166-2:BR. Exemplo: PA."
         country:
           minLength: 1
           type: string
-          description: "Sigla do país (Brasil) conforme a ISO 3166-2. Exemplo: BR."
+          description: "Sigla do país (Brasil), conforme a ISO 3166-2. Exemplo: BR."
       additionalProperties: false
 
     AddressResponse:
@@ -403,7 +401,31 @@ components:
           type: string
           description: "Sigla do país (Brasil) conforme a ISO 3166-2. Exemplo: BR."
       additionalProperties: false
-    
+
+    Agreements:
+      type: object
+      description: Lista de objetos que descreve os produtos contratados.
+      properties: 
+        agreedAt:
+          type: string
+          format: date-time
+          description: Data e hora de contratação do produto.
+        productId:
+          type: string
+          format: uuid
+          description: Identificador do produto contratado.
+        version:
+          type: string
+          description: Versão do termo de adesão.
+
+    AssertedIncome:
+      type: object
+      properties: 
+        value: 
+          type: number
+          format: double
+          description: Faixa de renda declarada pelo cliente.
+
     BusinessResponse:
       type: object
       properties:
@@ -702,7 +724,6 @@ components:
           $ref: "#/components/schemas/SendedDocumentationResponse"
       additionalProperties: false
     
-
     DataUpdateCustomerRequest:
       type: object
       properties:
@@ -1570,7 +1591,7 @@ components:
         countryCode:
           minLength: 1
           type: string
-          description: Código DDI do país. Esteja atento à lista de países bloqueados para o Onboarding presente na página <a href="https://docs.bankly.com.br/docs/registro-pessoa-fisica">Registro de pessoa física</a>.
+          description: Código DDI do país.
         number:
           minLength: 1
           type: string
@@ -1627,12 +1648,12 @@ components:
         - birthDate
         - phone
         - address
-        - pep
-        - email
-        - motherName
-        - declaredIncome
+        - assertedIncome
         - occupation
-        - documentation
+        - pep
+        - motherName
+        - email
+        - agreements
       type: object
       properties:
         registerName:
@@ -1658,8 +1679,8 @@ components:
         address:
           description: Objeto onde devem ser informados os dados do endereço do cliente.
           $ref: "#/components/schemas/Address"
-        declaredIncome:
-          $ref: "#/components/schemas/DeclaredIncome"
+        assertedIncome:
+          $ref: "#/components/schemas/AssertedIncome"
         occupation:
           $ref: "#/components/schemas/Occupation"
         pep:
@@ -1675,8 +1696,8 @@ components:
           type: string
           description: Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado por dois clientes.
           format: email
-        documentation:
-          $ref: "#/components/schemas/SendedDocumentationRequest"
+        agreements:
+          $ref: "#/components/schemas/Agreements"
       additionalProperties: false
     
     RegisterBusinessRequest:
