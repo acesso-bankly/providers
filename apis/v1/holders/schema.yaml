@@ -398,6 +398,10 @@ components:
     Agreements:
       type: object
       description: Lista de objetos que descreve os produtos contratados.
+      required: 
+      - agreedAt
+      - productId
+      - version
       properties: 
         agreedAt:
           type: string
@@ -413,11 +417,13 @@ components:
 
     AssertedIncome:
       type: object
+      required: 
+      - value
       properties: 
         value: 
           type: number
           format: double
-          description: Faixa de renda declarada pelo cliente.
+          description: Valor em Reais da renda declarada pelo cliente.
 
     BusinessResponse:
       type: object
@@ -1228,7 +1234,7 @@ components:
 
     Occupation:
       type: string
-      description: Código de ocupação do cliente. Para conhecer a descrição dos códigos das ocupações, consulte a documentação [Código de ocupação do cliente](https://docs.bankly.com.br/docs/codigo-de-ocupacao-cliente). <br/><b>Importante:</b> deve-se enviar somente o código. Caso o cliente possua mais de uma ocupação, esse campo deve ser preenchido com a sua principal fonte de renda.
+      description: Código de ocupação do cliente. <br/><b>Importante:</b> deve-se enviar somente o código. Caso o cliente possua mais de uma ocupação, esse campo deve ser preenchido com a sua principal fonte de renda.
       enum:
         - OCP0001 
         - OCP0002	
@@ -1338,7 +1344,7 @@ components:
 
     OccupationResponse:
       type: string
-      description: Código de ocupação do cliente. Para conhecer a descrição dos códigos das ocupações, consulte a documentação [Código de ocupação do cliente](https://docs.bankly.com.br/docs/codigo-de-ocupacao-cliente). 
+      description: Código de ocupação do cliente. 
       enum:
         - OCP0001 
         - OCP0002	
