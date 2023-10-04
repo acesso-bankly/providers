@@ -20,13 +20,6 @@ paths:
           <p>[Stable] Registre um cliente pessoa física. Se os dados informados já existirem, eles serão sobrepostos. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/consulta-registro-do-cliente">Consulta do registro do cliente</a>.</p>
           <b>Scope: customer.write</b>
         </div>      
-        [block:callout]
-        {
-          "type": "warning",
-          "title": "Importante",
-          "body": "Os possíveis status do cliente após essa análise são: PENDING_APPROVAL, APPROVED, REPROVED e BLOCKLISTED."
-        }
-        [/block]
       operationId: PutCustomerRegistration
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
