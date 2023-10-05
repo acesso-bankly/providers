@@ -423,8 +423,8 @@ components:
           description: Valor em Reais da renda declarada pelo cliente. 
       currency:
         type: string
-        description: Moeda da renda declarada. Atualmente só é permitido BRL.
-
+        default: BRL
+        description: Moeda da renda declarada.
     BusinessResponse:
       type: object
       properties:
