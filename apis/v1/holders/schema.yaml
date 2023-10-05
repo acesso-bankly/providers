@@ -401,7 +401,6 @@ components:
       required: 
       - agreedAt
       - productId
-      - version
       properties: 
         agreedAt:
           type: string
@@ -411,18 +410,20 @@ components:
           type: string
           format: uuid
           description: Identificador do produto contratado.
-        version:
-          type: string
-          description: Versão vigente do termo de adesão do produto.
+
     AssertedIncome:
       type: object
       required: 
       - value
+      - currency
       properties: 
         value: 
           type: number
           format: double
           description: Valor em Reais da renda declarada pelo cliente. 
+      currency:
+        type: string
+        description: Moeda da renda declarada. Atualmente só é permitido BRL.
 
     BusinessResponse:
       type: object
@@ -1233,7 +1234,7 @@ components:
 
     Occupation:
       type: string
-      description: Código de ocupação do cliente. <br/><b>Importante:</b> deve-se enviar somente o código. Caso o cliente possua mais de uma ocupação, esse campo deve ser preenchido com a sua principal fonte de renda.
+      description: Código de ocupação do cliente. Para conhecer a descrição dos códigos das ocupações, consulte a documentação <a href="/reference/codigo-ocupacao-cliente">Código de ocupação do cliente</a>. <br/><b>Importante:</b> deve-se enviar somente o código. Caso o cliente possua mais de uma ocupação, esse campo deve ser preenchido com a sua principal fonte de renda.
       
       enum:
         - OCP0001 
@@ -1344,7 +1345,7 @@ components:
 
     OccupationResponse:
       type: string
-      description: Código de ocupação do cliente. 
+      description: Código de ocupação do cliente. Para conhecer a descrição dos códigos das ocupações, consulte a documentação <a href="/reference/codigo-ocupacao-cliente">Código de ocupação do cliente</a>
       enum:
         - OCP0001 
         - OCP0002	
