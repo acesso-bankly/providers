@@ -59,7 +59,7 @@ components:
     CustomerDocument:
       name: documentNumber
       in: path
-      description: Número do documento CPF do cliente pessoa física ou representante legal da empresa. Informe somente os números.
+      description: Número do documento CPF do cliente pessoa física. Informe somente números.
       required: true
       style: simple
       explode: false
@@ -221,7 +221,7 @@ components:
       additionalProperties: false
 
     CustomerDocument:
-      description: Número do documento CPF do cliente do cliente pessoal ou representante legal.
+      description: Número do documento CPF do cliente do cliente pessoa física.
       type: string
       maxLength: 11
       minLength: 11
