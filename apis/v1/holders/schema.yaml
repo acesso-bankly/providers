@@ -1235,7 +1235,7 @@ components:
 
     Occupation:
       type: string
-      description: Código de ocupação do cliente. Para conhecer a descrição dos códigos das ocupações, consulte a documentação <a href="/reference/codigo-ocupacao-cliente">Código de ocupação do cliente</a>. <br/><b>Importante:</b> deve-se enviar somente o código. Caso o cliente possua mais de uma ocupação, esse campo deve ser preenchido com a sua principal fonte de renda.
+      description: Código de ocupação do cliente. Para conhecer a descrição dos códigos das ocupações, consulte a documentação <a href="https://bankly-bsp.readme.io/docs/codigo-de-ocupacao-do-cliente">Código de ocupação do cliente</a>. <br/><b>Importante:</b> deve-se enviar somente o código. Caso o cliente possua mais de uma ocupação, esse campo deve ser preenchido com a sua principal fonte de renda.
       
       enum:
         - OCP0001 
@@ -1346,7 +1346,7 @@ components:
 
     OccupationResponse:
       type: string
-      description: Código de ocupação do cliente. Para conhecer a descrição dos códigos das ocupações, consulte a documentação <a href="/reference/codigo-ocupacao-cliente">Código de ocupação do cliente</a>
+      description: Código de ocupação do cliente. Para conhecer a descrição dos códigos das ocupações, consulte a documentação <a href="https://bankly-bsp.readme.io/docs/codigo-de-ocupacao-do-cliente">Código de ocupação do cliente</a>
       enum:
         - OCP0001 
         - OCP0002	
