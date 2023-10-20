@@ -5,6 +5,7 @@ info:
   version: "1.0"
 servers:
   - url: https://bsp.sandbox.bankly.com.br
+  - url: https://login.sandbox.bankly.com.br
 paths:
   /accounts/{accountNumber}:
     get:
