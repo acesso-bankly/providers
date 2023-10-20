@@ -44,7 +44,6 @@ jobs:
           files: |
             ./apis/v1/holders/schema.yaml
             ./apis/v1/accounts/schema.yaml
-            ./apis/v1/authentication/schema.yaml
     
   deployDev:
     name: "Deploy / Dev"
@@ -89,10 +88,6 @@ jobs:
         with:
           rdme: openapi './apis/v1/accounts/schema.yaml' --id=${{ secrets.ACCOUNTS_API_README_ID_KEY_DEV }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
  
-      - uses: readmeio/rdme@v8
-        name: Publish Accounts API Reference to readme.io
-        with:
-          rdme: openapi './apis/v1/authentication/schema.yaml' --id=${{ secrets.AUTHENTICATION_API_README_ID_KEY_DEV }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
 
   deployProd:
     name: "Deploy / Prod"
@@ -124,7 +119,4 @@ jobs:
         with:
           rdme: openapi './apis/v1/accounts/schema.yaml' --id=${{ secrets.ACCOUNTS_API_README_ID_KEY }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
 
-      - uses: readmeio/rdme@v8
-        name: Publish Authentication API Reference to readme.io
-        with:
-          rdme: openapi './apis/v1/authentication/schema.yaml' --id=${{ secrets.AUTHENTICATION_API_README_ID_KEY }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
+      
