@@ -359,7 +359,7 @@ components:
         zipCode:
           minLength: 1
           type: string
-          description: O CEP correspondente ao endereço.
+          description: Código postal correspondente ao endereço.
         addressLine:
           maxLength: 256
           minLength: 1
@@ -605,7 +605,7 @@ components:
           description: Objeto que contém informações sobre o endereço informado no registro do cliente.
           $ref: "#/components/schemas/AddressResponse"
         motherName:
-          description: Nome da mãe informado no registro do cliente.
+          description: Nome da mãe ou filiação informada no registro do cliente.
           type: string
           nullable: true
         birthDate:
@@ -673,7 +673,7 @@ components:
           type: string
           nullable: true
         motherName:
-          description: Nome da mãe informado no registro do cliente.
+          description: Nome da mãe ou filiação informada no registro do cliente.
           type: string
           nullable: true
         birthDate:
@@ -1472,7 +1472,7 @@ components:
           format: date-time
         motherName:
           type: string
-          description: Nome da mãe do cliente conforme consta no documento de identificação. <b>Obrigatório</b> apenas para sócio <b>pessoa física</b>.
+          description: Nome da mãe ou filiação do cliente conforme consta no documento de identificação. <b>Obrigatório</b> apenas para sócio <b>pessoa física</b>.
           nullable: true
         email:
           type: string
