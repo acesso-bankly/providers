@@ -409,7 +409,7 @@ components:
         productId:
           type: string
           format: uuid
-          description: Identificador do produto contratado.
+          description: Identificador do produto contratado. O valor possível para este campo é “CREDIT_CARD_CUSTOMER_BCO_BV”.
 
     AssertedIncome:
       type: object
@@ -574,18 +574,30 @@ components:
         status:
           type: string
           enum:
-          - PENDING_APPROVAL
           - APPROVED
-          - IN_ANALYSIS
-          - REPROVED
+          - CANCELED
           - BLOCKLISTED
-          description: Situação da análise KYC realizada no registro do cliente.
+          description: Situação do registro do cliente.
         registerName:
           type: string
-          description: Nome conforme consta no documento de identificação (RG, CNH, RNE, DNI ou CRNM) do cliente.
+          description: Nome conforme consta no documento de identificação do cliente (RG, CNH, RNE, DNI ou CRNM).
         socialName:
           type: string
           description: Nome pelo qual a pessoa gostaria de ser chamada. Saiba mais na documentação <a href="https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Folders/cartilha_nome_social.pdf">Cartilha do nome social</a>.
+        document:
+          type: object
+          description: Objeto que contém informações sobre o documento do cliente.
+          properties:
+            value:
+              type: string
+              description: Número do documento.
+            type:
+              type: string
+              description: Tipo do documento, o qual pode ser "CPF" ou "CNPJ".
+        email:
+          description: E-mail de contato do cliente.
+          type: string
+          nullable: true
         phone:
           description: Objeto que contém informações sobre o telefone do cliente.
           $ref: "#/components/schemas/PhoneResponse"
@@ -596,6 +608,10 @@ components:
           description: Nome da mãe informado no registro do cliente.
           type: string
           nullable: true
+        birthDate:
+          description: Data de nascimento do cliente.
+          type: string
+          format: date-time
         assertedIncome:
           type: object
           properties:
@@ -619,12 +635,6 @@ components:
               - SELF
               - RELATED
               description: Nível de exposição política do cliente.
-        documentation:
-          $ref: "#/components/schemas/SendedDocumentationResponse"
-        birthDate:
-          description: Data de nascimento do cliente.
-          type: string
-          format: date-time
         createdAt:
           description: Data do primeiro registro do cliente.
           type: string
@@ -633,26 +643,7 @@ components:
           description: Data da atualização do registro do cliente.
           type: string
           format: date-time
-          nullable: true
-        reasons:
-          type: array
-          items:
-            type: string
-          description: Lista contendo os motivos de reprovação do registro.
-        document:
-          type: object
-          description: Objeto que contém informações sobre o documento do cliente.
-          properties:
-            value:
-              type: string
-              description: Número do documento.
-            type:
-              type: string
-              description: Tipo do documento, o qual pode ser "CPF" ou "CNPJ".
-        email:
-          description: E-mail de contato do cliente.
-          type: string
-          nullable: true
+          nullable: true     
       additionalProperties: false
 
     CustomerResponseDeprecated:
