@@ -203,7 +203,7 @@ paths:
       summary: Criação de contrato de crédito
       description: |
         <div class="bkly-ref-description">
-          <p>[BETA] Este endpoint permite que o parceiro inicie o processo de criação de contrato de crédito de seu cliente sem a necessidade de passar pelo motor de decisão do Bankly.</p> 
+          <p>[BETA] Inicie o processo de criação de contrato de crédito de seu cliente sem a necessidade de passar pelo motor de decisão do Bankly.</p> 
           <b>Scope: credit.provider.write</b>
         </div>
       parameters:
