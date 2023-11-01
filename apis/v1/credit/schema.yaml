@@ -210,7 +210,7 @@ paths:
         {
           "type": "info",
           "title": "Nota",
-          "body": "Para mais informações, confira a documentação [Criação de contrato de crédito](/docs/criacao-de-contrato-de-credito)."
+          "body": "Para mais informações, confira a documentação [Criação de contrato de crédito](https://bankly-bsp.readme.io/docs/criacao-de-contrato-de-credito)."
         }
         [/block]
       parameters:
