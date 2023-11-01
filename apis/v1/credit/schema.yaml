@@ -199,28 +199,14 @@ paths:
   /api/v1/CreditContract/create:
     post:
       tags:
-        - Análise de crédito 
+        - Contrato de crédito 
       summary: Criação de contrato de crédito
       description: |
         <div class="bkly-ref-description">
-          <p>Após o pedido de reanálise ser aprovado, o cliente do parceiro deverá aceitar a nova proposta de limite de contrato de crédito.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: credit.write</span>
+          <p>[BETA] Este endpoint permite que o parceiro inicie o processo de criação de contrato de crédito de seu cliente sem a necessidade de passar pelo motor de decisão do Bankly.</p> 
+          <b>Scope: credit.provider.write</b>
         </div>
       parameters:
-        - name: x-company-key
-          required: true
-          in: header
-          schema:
-            type: string
-            description: ddd
-            example: ACESSO
-        - name: x-bkly-license
-          required: true
-          in: header
-          description: Id da licença bancária vinculada ao produto.
-          schema:
-            type: string
-            example: 9a69f655-a1cb-48f5-8233-5e568744a59b
         - $ref: "#/components/parameters/apiVersion"
         - $ref: "#/components/parameters/authorization"
       requestBody:
@@ -232,6 +218,10 @@ paths:
       responses:
         '202':
           description: "A solicitação foi aceita e o processo de criação de contrato de crédito foi iniciado."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateContractResponse"
         '404':
           $ref: 'http://localhost:3320/commons/components#/components/responses/404'
         '409':
@@ -523,6 +513,22 @@ components:
         - documentNumber
         - limitApproved
         - accept
+
+    CreateContractResponse:
+      type: object
+      properties:
+        document:
+          type: string
+          description: Número de documento de CPF ou CNPJ.
+          example: "47742663023"
+        contract:
+          type: string
+          description: Número do contrato de crédito criado.
+          example: "000010"
+        companyKey:
+          type: string
+          description: Chave que identifica o parceiro dentro do Bankly.
+          example: "FLORESTA_ED"
 
     createCardsInLotRequest:
       type: object
