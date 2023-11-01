@@ -196,7 +196,7 @@ paths:
         '404':
           $ref: 'http://localhost:3320/commons/components#/components/responses/404'
 
-  /api/v1/CreditContract/create:
+  /credits/customer:
     post:
       tags:
         - Contrato de crédito 
