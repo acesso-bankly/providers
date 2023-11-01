@@ -206,6 +206,13 @@ paths:
           <p>[BETA] Inicie o processo de criação de contrato de crédito de seu cliente sem a necessidade de passar pelo motor de decisão do Bankly.</p> 
           <b>Scope: credit.provider.write</b>
         </div>
+        [block:callout]
+        {
+          "type": "info",
+          "title": "Nota",
+          "body": "Para mais informações, confira a documentação [Criação de contrato de crédito](/docs/criacao-de-contrato-de-credito)."
+        }
+        [/block]
       parameters:
         - $ref: "#/components/parameters/apiVersion"
         - $ref: "#/components/parameters/authorization"
