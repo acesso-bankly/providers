@@ -392,15 +392,15 @@ components:
         name:
           type: string
           description: Nome do cliente.
-          example: John Doe
+          example: Nísia Floresta
         socialName:
           type: string
           description: Nome pelo qual a pessoa gostaria de ser chamada.
-          example: Jon Arbuckle
+          example: Nísia Floresta
         motherName:
           type: string
           description: Nome da mãe do cliente como consta no documento de identidade. Também é possível incluir o nome que consta no campo "Filiação" dos documentos de identificação.
-          example: Jane Doe
+          example: Dionísia Gonçalves Pinto
         profession:
           type: string
           description: Profissão do cliente.
@@ -409,11 +409,11 @@ components:
           type: string
           format: date-time
           description: Data de nascimento do cliente.
-          example: 2023-09-27T03:00:00.000Z
+          example: 1810-12-10T15:21:47.549Z
         email:
           type: string
           description:  Endereço de e-mail do cliente.
-          example: johndoe@example.com
+          example: nisia.floresta@bankly.com.br
         programId:
           type: number
           description: Identificador do programa.
@@ -421,21 +421,21 @@ components:
         address:
           description: Objeto que deverá conter os dados do endereço do cliente.
           example:
-            zipCode: "13843456"
-            addressLine: Rua dos Exemplos, 123
-            buildingNumber: "123"
-            complement: Next to ht bakery
+            zipCode: "68060100"
+            addressLine: "Rua 6 de Março, 2500"
+            buildingNumber: "2500"
+            complement: "Next to the bakery"
             neighborhood: "Alter do Chão"
-            city: São Paulo
-            state: SP
-            country: BR
+            city: "Santarém"
+            state: "PA"
+            country: "BR"
           allOf:
             - $ref: "#/components/schemas/CreateContractAddress"
         phone:
           description: Objeto que deverá conter os dados do telefone do cliente.
           example:
             phoneType: Mobile
-            value: "11911111111"
+            value: "23415162342"
             countryCode: "55"
           allOf:
             - $ref: "#/components/schemas/CreateContractPhone"
@@ -478,11 +478,11 @@ components:
             - Male
             - Female
             - Other
-          example: Male
+          example: Female
         documentNumber:
           type: string
           description: Número do documento (CPF ou CNPJ).
-          example: "01234567891"
+          example: "48151623"
         limitApproved:
           description: Objeto que deverá conter informações do limite sugerido.
           example:
