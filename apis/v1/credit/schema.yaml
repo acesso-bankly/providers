@@ -232,9 +232,9 @@ paths:
         '404':
           $ref: 'http://localhost:3320/commons/components#/components/responses/404'
         '409':
-          $ref: 'http://localhost:3320/commons/components#/components/responses/404'
+          $ref: 'http://localhost:3320/commons/components#/components/responses/409'
         '422':
-          $ref: 'http://localhost:3320/commons/components#/components/responses/404'
+          $ref: 'http://localhost:3320/commons/components#/components/responses/422'
           
 security:
   - bearerAuth: []
