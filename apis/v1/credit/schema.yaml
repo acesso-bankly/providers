@@ -235,7 +235,51 @@ paths:
           $ref: 'http://localhost:3320/commons/components#/components/responses/409'
         '422':
           $ref: 'http://localhost:3320/commons/components#/components/responses/422'
-          
+
+  /credits/customer/document/{documentNumber}/contract/{contractId}:
+    patch:
+      tags:
+        - Contrato de crédito 
+      summary: Alteração de limite de contrato de crédito
+      description: |
+        <div class="bkly-ref-description">
+          <p>[BETA] Realize a alteração (aumento ou diminuição) do limite de um contrato de crédito existente.</p> 
+          <b>Scope: credit.provider.write</b>
+        </div>
+        [block:callout]
+        {
+          "type": "info",
+          "title": "Nota",
+          "body": "Para mais informações, confira a documentação [Endpoint para alteração de limite](https://bankly-bsp.readme.io/docs/endpoint-alteracao-limite)."
+        }
+        [/block]
+      parameters:
+        - $ref: "#/components/parameters/apiVersion"
+        - $ref: "#/components/parameters/authorization"
+        - name: documentNumber
+          required: true
+          in: path
+          description: Número de documento do cliente. Insira somente números, sem caracteres especiais.
+          schema:
+            type: string
+        - name: contractId
+          required: true
+          in: path
+          description: Número de contrato do cliente. Insira somente números, sem caracteres especiais.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCreditLimitDto"
+      responses:
+        '202':
+          description:  A solicitação foi aceita e o limite foi alterado ou foi agendada a sua alteração.
+        '404':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/404'
+
 security:
   - bearerAuth: []
 
@@ -685,8 +729,7 @@ components:
         - password
         - bankAccount
         - bankAgency
-    
-    
+      
     academicDegree:
       type: string
       description: Grau de instrução do cliente.
@@ -696,7 +739,20 @@ components:
         - PostGraduate
         - Masters
         - Doctorate
-   
+
+    Accept:
+      type: object
+      required:
+       - dataHash
+       - acceptedAt
+      properties: 
+        dataHashe:
+          type: string 
+          description: <i>Hash</i> que representa o aceite do cliente.
+        acceptedAt:
+          type: string
+          description: "Data em que o novo limite foi aceito pelo cliente, no formato: YYYY-MM-DDTHH:mm:SS.MMMZ."
+        
     acceptanceContractRequest:
       type: object
       properties:
@@ -1540,7 +1596,24 @@ components:
         - FromFiveThousandToTenThousand
         - FromTenThousandToTwentyThousand
         - OverTwentyThousand
-                    
+
+    LimitApproved:
+      type: object
+      required:
+       - approvedAt
+       - value
+       - currency
+      properties: 
+        approvedAt:
+          type: string
+          description: "Data em que a alteração foi aprovada, no formato: YYYY-MM-DDTHH:mm:SS.MMMZ."
+        value:
+          type: number 
+          description: Valor do limite aprovado.
+        currency:
+          type: string
+          description: "Sigla da moeda do limite aprovado. Exemplo: BRL ."
+        
     maritalStatus:
       type: string
       description: Estado civil do cliente.
@@ -1829,6 +1902,23 @@ components:
             - state
             - country
     
+    UpdateCreditLimitDto:
+      type: object
+      required:
+        - policy
+        - limitApproved
+        - accept
+      properties:
+        policy:
+          description: 'Política de reanálise de crédito. Exemplo: "Aumento" ou "Redução".'
+          type: string
+        limitApproved:
+          description:  Objeto que contém informações sobre a alteração de limite.
+          $ref: "#/components/schemas/LimitApproved"
+        accept:
+          description: Objeto que contém informações sobre o aceite do novo limite aprovado.
+          $ref: "#/components/schemas/Accept"
+      
     walletTypes:
       type: string
       enum:
@@ -1877,13 +1967,12 @@ components:
             type: boolean
             description: Indica a reversibilidade do status, sendo TRUE para reversível e FALSE para irreversível.
 
-
-
     CreditReanalyzeOriginType:
       enum:
       - COMPANY_REQUEST
       - CUSTOMER_REQUEST
       type: string
+    
     ReanalyzeCreditDto:
       type: object
       required:
@@ -1893,6 +1982,7 @@ components:
           description: Solicitante do chamado de reanálise.
           $ref: "#/components/schemas/CreditReanalyzeOriginType"
       additionalProperties: false
+    
     AcceptCreditLimitIncreaseDto:
       type: object
       required:
@@ -1928,6 +2018,7 @@ components:
         userInfo:
           $ref: "#/components/schemas/UserInfoDto"
       additionalProperties: false
+    
     TraceDto:
       type: object
       required:
@@ -1944,6 +2035,7 @@ components:
           description: Data do aceite.
           nullable: true
       additionalProperties: false
+    
     UserInfoDto:
       type: object
       description: Objeto que contém os dados do usuário no momento em que solicitou o crédito.
