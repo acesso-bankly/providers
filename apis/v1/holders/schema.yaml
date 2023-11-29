@@ -718,6 +718,12 @@ components:
     DataUpdateCustomerRequest:
       type: object
       properties:
+        registerName:
+          type: string
+          description: Nome conforme consta no documento de identificação (RG, CNH, RNE, DNI ou CRNM) do cliente.
+        motherName:
+          type: string
+          description: Nome da mãe do cliente.
         email:
           type: string
           description: Novo endereço de e-mail. Recordamos que um mesmo e-mail não poderá ser usado por dois clientes.
@@ -731,8 +737,8 @@ components:
         address:
           description: Objeto onde devem ser informados novos os dados de endereço do cliente. As propriedades desse objeto somente são obrigatórias em caso de alteração de endereço.
           $ref: "#/components/schemas/Address"
-        declaredIncome:
-          $ref: "#/components/schemas/DeclaredIncome"
+        assertedIncome:
+          $ref: "#/components/schemas/AssertedIncome"
         pep:
           description: Objeto onde deve ser informado o nível de exposição política do cliente. A propriedade desse objeto é obrigatória em caso de alteração de nível de exposição política.
           $ref: "#/components/schemas/Pep"
@@ -743,9 +749,6 @@ components:
     DataUpdateCustomerResponse:
       type: object
       properties:
-        documentNumber:
-          description: Número de documento de CPF. (<b>Obsoleto</b>. Considere o campo <code>document.value</code>).
-          type: string
         document:
           type: object
           description: Objeto que contém informações sobre o documento do cliente.
@@ -780,10 +783,17 @@ components:
         motherName:
           type: string
           description: Nome completo da mãe do cliente conforme consta no documento de identificação. <b>Sem abreviações</b>.
-        declaredIncome:
-          type: string
-          description: Faixa de renda declarada pelo cliente, informada em seu registro ou atualizada.
-          $ref: "#/components/schemas/DeclaredIncome"
+        assertedIncome:
+          type: object
+          properties: 
+            value: 
+              type: number
+              format: double
+              description: "Valor em Reais da renda declarada pelo cliente. O valor mínimo para esse campo é de: 0.00, e o valor máximo: 99999999999999.99 (até 14 caracteres antes do ponto e até dois caracteres após o ponto)."  
+            currency:
+              type: string
+              default: BRL
+              description: Moeda da renda declarada.
         confirmedIncome:
           type: string
           description: Indica se o valor informado da renda foi confirmado no Bureau de informação. O valor padrão desse campo é null.
@@ -793,8 +803,6 @@ components:
         pep:
           description: Objeto que contém o nível de exposição política do cliente, informado em seu registro ou atualizado.
           $ref: "#/components/schemas/PepResponse"
-        documentation:
-          $ref: "#/components/schemas/SendedDocumentationResponse"
         birthDate:
           type: string
           description: Data de nascimento do cliente. 
