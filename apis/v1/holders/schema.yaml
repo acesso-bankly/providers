@@ -1583,9 +1583,6 @@ components:
       additionalProperties: false
     
     PhonePf:
-      required:
-        - countryCode
-        - number
       type: object
       properties:
         countryCode:
@@ -1675,6 +1672,9 @@ components:
           format: date-time
         phone:
           description: Objeto onde devem ser informados os dados do telefone do cliente.
+          required:
+            - countryCode
+            - number
           $ref: "#/components/schemas/PhonePf"
         address:
           description: Objeto onde devem ser informados os dados do endereço do cliente.
