@@ -101,7 +101,8 @@ paths:
           in: header 
           description: Informe um GUID v4. A cada requisição, deve-se gerar um novo GUID.
           schema:
-            $ref: '#/components/schemas/X-Correlation-Id'
+            type: string
+            description: Informe um GUID v4. A cada requisição, deve-se gerar um novo GUID.
       requestBody:
         content:
           application/json:
