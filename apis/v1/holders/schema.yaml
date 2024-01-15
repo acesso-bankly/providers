@@ -473,14 +473,9 @@ components:
           description: "Sigla do país (Brasil) conforme a ISO 3166-2. Exemplo: BR."
       additionalProperties: false
 
-    Agreements:
-      type: array 
-      description: Lista de objetos que descreve os produtos contratados.
-      items: 
-        $ref: "#/components/schemas/AgreementsItems"
-
-    AgreementsItems:
+    Agreements: 
       type: object
+      description: Lista de objetos que descreve os produtos contratados.
       required: 
         - agreedAt
         - productId
@@ -1800,7 +1795,9 @@ components:
           description: Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado por dois clientes.
           format: email
         agreements:
-          $ref: "#/components/schemas/Agreements"
+          type: array
+          items: 
+            $ref: "#/components/schemas/Agreements"
       additionalProperties: false
     
     RegisterBusinessRequest:
