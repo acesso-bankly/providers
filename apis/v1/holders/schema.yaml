@@ -60,6 +60,13 @@ paths:
           <p>[Stable] Obtenha os dados de registro de um cliente do tipo pessoa física.</p>  
           <b>Scope: customer.read</b>
         </div>
+        [block:callout]
+        {
+          "type": "info",
+          "title": "Nota",
+          "body": "Para mais informações, consulte a documentação [Consulta do registro do cliente](/docs/consulta-do-registro-do-cliente) "
+        }
+        [/block]   
       operationId: GetCustomerRegistration
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
@@ -91,7 +98,14 @@ paths:
         <div class="bkly-ref-description">
           <p>[Stable] Realize a atualização de determinados dados cadastrais de clientes do tipo pessoa física.</p> 
           <b>Scope: customer.update</b>
-        </div>   
+        </div>
+        [block:callout]
+        {
+          "type": "info",
+          "title": "Nota",
+          "body": "Para mais informações, consulte a documentação [Atualização cadastral](/docs/atualizacao-cadastral) "
+        }
+        [/block]    
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
@@ -462,9 +476,14 @@ components:
     Agreements:
       type: array 
       description: Lista de objetos que descreve os produtos contratados.
+      items: 
+        $ref: "#/components/schemas/AgreementsItems"
+
+    AgreementsItems:
+      type: object
       required: 
-      - agreedAt
-      - productId
+        - agreedAt
+        - productId
       properties: 
         agreedAt:
           type: string
@@ -477,6 +496,7 @@ components:
             - PERSONAL_PAYMENT_ACCOUNT_ACESSO
             - PERSONAL_CHECKING_ACCOUNT_BCO_BV
             - PERSONAL_CREDIT_CARD_BCO_BV
+      additionalProperties: false
 
     AssertedIncome:
       type: object
@@ -1780,7 +1800,6 @@ components:
           description: Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado por dois clientes.
           format: email
         agreements:
-          type: array
           $ref: "#/components/schemas/Agreements"
       additionalProperties: false
     
