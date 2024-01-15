@@ -17,9 +17,17 @@ paths:
       summary: Registro de pessoa física
       description: |
         <div class="bkly-ref-description">
-          <p>[Stable] Registre um cliente pessoa física. Se os dados informados já existirem, eles serão sobrepostos.</p>
+          <p>[Stable] Registre um cliente do tipo pessoa física. Os dados já cadastrados serão sobrepostos.</p>
           <b>Scope: customer.write</b>
-        </div>      
+        </div>  
+        [block:callout]
+        {
+          "type": "info",
+          "title": "Nota",
+          "body": "Para mais informações, consulte a documentação [Registro de pessoa física](/docs/registro-de-pessoa-fisica) "
+        }
+        [/block]      
+            
       operationId: PutCustomerRegistration
       parameters:
         - $ref: "http://localhost:3320/commons/components#/components/parameters/CustomerDocument"
@@ -49,7 +57,7 @@ paths:
         Consulta do registro do cliente
       description: |
         <div class="bkly-ref-description">
-          <p>[Stable] Obtenha os dados de registro de um cliente.</p>  
+          <p>[Stable] Obtenha os dados de registro de um cliente do tipo pessoa física.</p>  
           <b>Scope: customer.read</b>
         </div>
       operationId: GetCustomerRegistration
@@ -452,7 +460,7 @@ components:
       additionalProperties: false
 
     Agreements:
-      type: object
+      type: array 
       description: Lista de objetos que descreve os produtos contratados.
       required: 
       - agreedAt
@@ -464,8 +472,11 @@ components:
           description: Data e hora de contratação do produto.
         productId:
           type: string
-          format: uuid
-          description: Identificador do produto contratado. O valor possível para este campo é “CREDIT_CARD_CUSTOMER_BCO_BV”.
+          description: Identificador do produto contratado. 
+          enum: 
+            - PERSONAL_PAYMENT_ACCOUNT_ACESSO
+            - PERSONAL_CHECKING_ACCOUNT_BCO_BV
+            - PERSONAL_CREDIT_CARD_BCO_BV
 
     AssertedIncome:
       type: object
@@ -1769,6 +1780,7 @@ components:
           description: Endereço de e-mail. Um mesmo endereço de e-mail não poderá ser usado por dois clientes.
           format: email
         agreements:
+          type: array
           $ref: "#/components/schemas/Agreements"
       additionalProperties: false
     
