@@ -1767,7 +1767,7 @@ components:
           minLength: 10
           type: string
           description: Data de nascimento do cliente.
-          format: date-time
+          format: date
         phone:
           description: Objeto onde devem ser informados os dados do telefone do cliente.
           required:
