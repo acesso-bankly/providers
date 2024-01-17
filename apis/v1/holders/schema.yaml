@@ -502,6 +502,7 @@ components:
         value: 
           type: number
           format: double
+          example: 5000.00
           description: "Valor em Reais da renda declarada pelo cliente. O valor mínimo para esse campo é de: 0.00, e o valor máximo: 99999999999999.99 (até 14 caracteres antes do ponto e até dois caracteres após o ponto)."  
         currency:
           type: string
