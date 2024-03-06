@@ -2091,8 +2091,6 @@ components:
 
     UpdateStatusCreditContractDto:
       type: object
-      required:
-        - reason
       properties:
         reason: 
           type: string
@@ -2102,6 +2100,7 @@ components:
             - "LACK_OF_PAYMENT"
             - "PARTNER_REQUEST"
             - "HOLDER_REQUEST"
+            - ""
           description: Motivo da realização da ação de bloqueio, desbloqueio ou de cancelamento (Verifique os motivos possíveis para cada ação no Manual do dev). <b>Importante:</b> Este campo é obrigatório apenas se a ação a ser realizada for de bloqueio ou de cancelamento. 
 
 
