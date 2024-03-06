@@ -280,6 +280,63 @@ paths:
         '404':
           $ref: 'http://localhost:3320/commons/components#/components/responses/404'
 
+  /credits/customer/document/{documentNumber}/contract/{contractId}/{action}:
+    put:
+      tags:
+        - Contrato de crédito 
+      summary: Alteração do status do contrato de crédito
+      description: |
+        <div class="bkly-ref-description">
+          <p>[BETA] Realize a alteração do status do contrato de crédito do seu cliente, a partir de uma ação específica (bloquear, desbloquear ou cancelar um contrato de crédito).</p> 
+          <b>Scope: credit.provider.write</b>
+        </div>
+        [block:callout]
+        {
+          "type": "info",
+          "title": "Nota",
+          "body": "Para mais informações, confira a documentação [Alteração do status do contrato de crédito](https://bankly-bsp.readme.io/docs/alteracao-do-status-do-contrato)."
+        }
+        [/block]  
+      parameters:
+        - $ref: "#/components/parameters/apiVersion"
+        - $ref: "#/components/parameters/authorization"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/X-Company-Key"
+        - name: documentNumber
+          required: true
+          in: path
+          description: Número de documento do cliente. Insira somente números, sem caracteres especiais.
+          schema:
+            type: string
+        - name: contractId
+          required: true
+          in: path
+          description: Número de contrato do cliente. Insira somente números, sem caracteres especiais.
+          schema:
+            type: string
+        - name: action
+          required: true
+          in: path
+          description: A ação que deve ser realizada e que acarretará na mudança do status do contrato de crédito. 
+          schema:
+            type: string
+            enum:
+              - LOCK
+              - UNLOCK
+              - CANCEL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateStatusCreditContractDto"
+      responses:
+        '202':
+          description: A solicitação foi aceita e o status do contrato de crédito foi alterado com sucesso.
+        '404':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/404'
+        '406':
+          $ref: 'http://localhost:3320/commons/components#/components/responses/406'
+
 security:
   - bearerAuth: []
 
@@ -2068,6 +2125,23 @@ components:
           description: Número de telefone do cliente, com DDD.
           nullable: true
       additionalProperties: false
+
+    UpdateStatusCreditContractDto:
+      type: object
+      required:
+        - reason
+      properties:
+        reason: 
+          type: string
+          enum:
+            - "RETENTION"
+            - "INACTIVITY"
+            - "LACK_OF_PAYMENT"
+            - "PARTNER_REQUEST"
+            - "HOLDER_REQUEST"
+          description: Motivo da realização da ação de bloqueio, desbloqueio ou de cancelamento (Verifique os motivos possíveis para cada ação no Manual do dev). <b>Importante:</b> Este campo é obrigatório apenas se a ação a ser realizada for de bloqueio ou de cancelamento. 
+
+
 
 x-readme:
   explorer-enabled: true
