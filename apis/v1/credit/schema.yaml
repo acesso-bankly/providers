@@ -20,8 +20,8 @@ paths:
         </div>
       operationId: creditAnalysisCreate
       parameters:
-        - $ref: "#/components/parameters/apiVersion"
-        - $ref: "#/components/parameters/authorization"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       requestBody:
         required: true
         content:
@@ -61,8 +61,8 @@ paths:
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: credit.write</span>
         </div>
       parameters:
-        - $ref: "#/components/parameters/apiVersion"
-        - $ref: "#/components/parameters/authorization"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       requestBody:
         required: true
         content:
@@ -90,14 +90,9 @@ paths:
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: credit.read</span>
         </div>
       parameters:
-        - $ref: "#/components/parameters/apiVersion"
-        - $ref: "#/components/parameters/authorization"
-        - name: documentNumber
-          in: path
-          required: true
-          description: Número do documento do cliente (CPF ou CNPJ).
-          schema:
-            type: string
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/DocumentNumber"
         - name: contract
           in: path
           description: Número do contrato de crédito do cliente.
@@ -127,14 +122,9 @@ paths:
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: credit.write</span>
         </div>
       parameters:
-        - $ref: "#/components/parameters/apiVersion"
-        - $ref: "#/components/parameters/authorization"
-        - name: documentNumber
-          in: path
-          required: true
-          description: Número do documento do cliente (CPF ou CNPJ).
-          schema:
-            type: string
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/DocumentNumber"
         - name: contract
           in: path
           description: Número do contrato de crédito do cliente.
@@ -168,14 +158,9 @@ paths:
           <span class="bkly-ref-small-stable-tag">stable</span> <span class="bkly-ref-scope-tag">scope: credit.write</span>
         </div>
       parameters:
-        - $ref: "#/components/parameters/apiVersion"
-        - $ref: "#/components/parameters/authorization"
-        - name: documentNumber
-          in: path
-          required: true
-          description: Número do documento do cliente (CPF ou CNPJ).
-          schema:
-            type: string
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/DocumentNumber"
         - name: contract
           in: path
           description: Número do contrato de crédito do cliente.
@@ -214,8 +199,8 @@ paths:
         }
         [/block]
       parameters:
-        - $ref: "#/components/parameters/apiVersion"
-        - $ref: "#/components/parameters/authorization"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
       requestBody:
         required: true
         content:
@@ -254,14 +239,9 @@ paths:
         }
         [/block]
       parameters:
-        - $ref: "#/components/parameters/apiVersion"
-        - $ref: "#/components/parameters/authorization"
-        - name: documentNumber
-          required: true
-          in: path
-          description: Número de documento do cliente. Insira somente números, sem caracteres especiais.
-          schema:
-            type: string
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/DocumentNumber"
         - name: contractId
           required: true
           in: path
@@ -298,15 +278,10 @@ paths:
         }
         [/block]  
       parameters:
-        - $ref: "#/components/parameters/apiVersion"
-        - $ref: "#/components/parameters/authorization"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/ApiVersion"
+        - $ref: "http://localhost:3320/commons/components#/components/parameters/Authorization"
         - $ref: "http://localhost:3320/commons/components#/components/parameters/X-Company-Key"
-        - name: documentNumber
-          required: true
-          in: path
-          description: Número de documento do cliente. Insira somente números, sem caracteres especiais.
-          schema:
-            type: string
+        - $ref: "#/components/parameters/DocumentNumber"
         - name: contractId
           required: true
           in: path
@@ -346,20 +321,7 @@ components:
       type: http
       scheme: bearer
   
-  parameters:
-    apiVersion:
-      name: api-version
-      in: header
-      required: true
-      schema:
-        type: string
-        
-    authorization:
-      name: Authorization
-      in: header
-      required: true
-      schema:
-        type: string 
+  parameters: 
 
     DocumentNumber:
       name: documentNumber
@@ -367,6 +329,7 @@ components:
       required: true
       schema:
         type: string
+        description: Número de documento do cliente (CPF ou CNPJ). Insira somente números, sem caracteres especiais.
         nullable: true
 
     Proxy:
