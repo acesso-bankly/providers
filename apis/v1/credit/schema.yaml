@@ -189,7 +189,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[BETA] Inicie o processo de criação de contrato de crédito de seu cliente sem a necessidade de passar pelo motor de decisão do Bankly.</p> 
-          <b>Scope: credit.provider.write</b>
+          <b>Scope:</b> <code>credit.provider.write</code>
         </div>
         [block:callout]
         {
@@ -229,7 +229,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[BETA] Realize a alteração (aumento ou diminuição) do limite de um contrato de crédito existente.</p> 
-          <b>Scope: credit.provider.write</b>
+          <b>Scope:</b> <code>credit.provider.write</code>
         </div>
         [block:callout]
         {
@@ -268,7 +268,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[BETA] Realize a alteração do status do contrato de crédito do seu cliente, a partir de uma ação específica (bloquear, desbloquear ou cancelar um contrato de crédito).</p> 
-          <b>Scope: credit.provider.write</b>
+          <b>Scope:</b> >code>credit.provider.write</code>
         </div>
         [block:callout]
         {
