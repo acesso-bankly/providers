@@ -2443,15 +2443,14 @@ paths:
       summary: Criação de lote de códigos de rastreio
       description:  |
         <div class="bkly-ref-description">
-          <p>Realize a a gestão personalizada da criação de lotes de códigos de rastreio. </p> 
-          <span class="bkly-ref-small-stable-tag">stable</span>
-          <span class="bkly-ref-scope-tag">scope: card.tracking.batch.provider.write</span>
+          <p>[BETA] Realize a a gestão personalizada da criação de lotes de códigos de rastreio.</p> 
+          <b>Scope:</b> <code>card.tracking.batch.provider.write</code>
         </div>
         [block:callout]
         {
           "type": "info",
           "title": "Importante",
-          "body": "Para mais informações, consulte a documentação [Criação de lote de códigos de rastreio]()."
+          "body": "Para mais informações, consulte a documentação [Criação de lote de códigos de rastreio](https://bankly-bsp.readme.io/docs/criacao-lote-codigos-de-rastreio)."
         }
         [/block]
       parameters:
