@@ -45,6 +45,7 @@ jobs:
             ./apis/v1/holders/schema.yaml
             ./apis/v1/accounts/schema.yaml
             ./apis/v1/credit/schema.yaml
+            ./apis/v1/cards/schema.yaml
     
   deployDev:
     name: "Deploy / Dev"
@@ -94,6 +95,11 @@ jobs:
         with:
           rdme: openapi './apis/v1/credit/schema.yaml' --id=${{ secrets.CREDIT_API_README_ID_KEY_DEV }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
 
+      - uses: readmeio/rdme@v8
+        name: Publish Card API Reference to readme.io
+        with:
+          rdme: openapi './apis/v1/cards/schema.yaml' --id=${{ secrets.CARD_API_README_ID_KEY_DEV }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
+
   deployProd:
     name: "Deploy / Prod"
     environment: production
@@ -128,4 +134,9 @@ jobs:
         name: Publish Credit API Reference to readme.io
         with:
           rdme: openapi './apis/v1/credit/schema.yaml' --id=${{ secrets.CREDIT_API_README_ID_KEY }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
+
+      - uses: readmeio/rdme@v8
+        name: Publish Card API Reference to readme.io
+        with:
+          rdme: openapi './apis/v1/cards/schema.yaml' --id=${{ secrets.CARD_API_README_ID_KEY }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
 
