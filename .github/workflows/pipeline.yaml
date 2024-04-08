@@ -98,7 +98,7 @@ jobs:
       - uses: readmeio/rdme@v8
         name: Publish Card API Reference to readme.io
         with:
-          rdme: openapi './apis/v1/Cards/schema.yaml' --id=${{ secrets.CARD_API_README_ID_KEY_DEV }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
+          rdme: openapi './apis/v1/cards/schema.yaml' --id=${{ secrets.CARD_API_README_ID_KEY_DEV }} --key=${{ secrets.APIS_README_OAS_KEY_DEV }}
 
   deployProd:
     name: "Deploy / Prod"
