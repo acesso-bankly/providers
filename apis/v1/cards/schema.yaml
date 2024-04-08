@@ -2195,7 +2195,7 @@ paths:
   /cards/{proxy}/tracking:
     get:
       tags:
-        - Rastreio de Cartões
+        - Rastreio de cartões
       summary: Por proxy
       description: |
         <div class="bkly-ref-description">
@@ -2277,7 +2277,7 @@ paths:
   /cards/{proxy}/tracking/address:
     post:
       tags:
-        - Rastreio de Cartões
+        - Rastreio de cartões
       summary: Atualização de endereço
       description: |
         <div class="bkly-ref-description">
