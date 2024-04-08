@@ -268,7 +268,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[BETA] Realize a alteração do status do contrato de crédito do seu cliente, a partir de uma ação específica (bloquear, desbloquear ou cancelar um contrato de crédito).</p> 
-          <b>Scope:</b> >code>credit.provider.write</code>
+          <b>Scope:</b> <code>credit.provider.write</code>
         </div>
         [block:callout]
         {
