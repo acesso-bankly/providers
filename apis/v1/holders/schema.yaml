@@ -18,7 +18,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[Stable] Registre um cliente do tipo pessoa física. Os dados já cadastrados serão sobrepostos.</p>
-          <b>Scope: customer.write</b>
+          <b>Scope:</b> <code>customer.write</code>
         </div>  
         [block:callout]
         {
@@ -58,7 +58,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[Stable] Obtenha os dados de registro de um cliente do tipo pessoa física.</p>  
-          <b>Scope: customer.read</b>
+          <b>Scope:</b> <code>customer.read</code>
         </div>
         [block:callout]
         {
@@ -97,7 +97,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[Stable] Realize a atualização de determinados dados cadastrais de clientes do tipo pessoa física.</p> 
-          <b>Scope: customer.update</b>
+          <b>Scope:</b> <code>customer.update</code>
         </div>
         [block:callout]
         {
@@ -156,7 +156,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[Stable] Solicite o o cancelamento de relacionamento do cliente pessoa física.</p> 
-          <b>Scope: customer.cancel</b>
+          <b>Scope:</b> <code>customer.cancel</code>
         </div>
       operationId: CancelCustomerRegistration
       parameters:
@@ -190,7 +190,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[Stable] Registre um cliente pessoa jurídica. <br/>Após o registro, as informações serão analisadas e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>.</p>  
-          <b>Scope: business.write</b>
+          <b>Scope:</b> <code>business.write</code>
         </div>        
         [block:callout]
         {
@@ -231,7 +231,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[Stable] Obtenha um resultado resumido (BASIC) ou detalhado (DETAILED) dos dados de registro de uma empresa.</p>  
-          <b>Scope: business.read</b>
+          <b>Scope:</b> <code>business.read</code>
         </div>
       operationId: GetBusinessRegistration
       parameters:
@@ -266,7 +266,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[Stable] Registre (ou substitua) uma nova empresa (LTDA, S.A. ou TS). O pedido de registro será analisado e você poderá obter o resultado dessa análise por meio do endpoint <a href="/reference/getbusinessregistration">Consulta do registro da empresa</a>. Caso o cadastro não exista, ele será criado. Se já existir, os dados serão sobrepostos.</p> 
-          <b>Scope: business.corporation.write</b>
+          <b>Scope:</b> <code>business.corporation.write</code>
         </div>
       operationId: RegisterCorporationBusinessAsync
       parameters:
@@ -308,7 +308,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[Stable] Solicite o o cancelamento de relacionamento do cliente pessoa jurídica.</p> 
-          <b>Scope: business.cancel</b>
+          <b>Scope:</b> <code>business.cancel</code>
         </div>
       operationId: CancelBusinessRegistration
       parameters:
