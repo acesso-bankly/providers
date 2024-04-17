@@ -2651,9 +2651,13 @@ components:
           description: "Descrição do lote. Exemplo: 'Conjunto de números sequenciais de 1 a 10'."
         prefix:
           type: string
+          minimum: 2
+          maximum: 2
           description: "Duas letras a serem adicionadas no <B>início</B> de todos os códigos de rastreio pertencentes ao lote. Exemplo: 'PI'."
         suffix:
           type: string
+          minimum: 2
+          maximum: 2
           description: "Duas letras a serem adicionadas no <B>final</B> de todos os códigos de rastreio pertencentes ao lote. Exemplo: 'BR'."
         initialTrackingRange:
           type: number
@@ -2667,8 +2671,8 @@ components:
         trackingCodeLength:
           type: number
           format: int
-          maximum: 5
-          description: "Comprimento total do código de rastreamento do lote a ser criado. Exemplo: 10, gerando um código como PI000001BR."
+          minimum: 12
+          description: "Comprimento total do código de rastreamento do lote a ser criado. Exemplo: 12, gerando um código como PI00000001BR."
         provider:
           type: string
           description: Provedor responsável pela entrega.
