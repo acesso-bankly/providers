@@ -1780,9 +1780,8 @@ paths:
       summary: Alteração do status do cartão
       description: |
         <div class="bkly-ref-description">
-          <p>O status do cartão poderá ser alterado para temporário ou definitivo.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: card.update</span>
+          <p>[stable] O status do cartão poderá ser alterado para temporário ou definitivo.</p> 
+          <span class="bkly-ref-scope-tag"><b>Scope</b>: <code>card.update>/code> </span>
         </div>
         [block:callout]
         {
@@ -1972,9 +1971,9 @@ paths:
       summary: Consulta dos próximos status
       description: |
         <div class="bkly-ref-description">
-          <p>Consulte todos os possíveis próximos status válidos para o cartão. Serão consideradas as permissões concedidas para o token informado na requisição.</p> 
+          <p>[stable] Consulte todos os possíveis próximos status válidos para o cartão. Serão consideradas as permissões concedidas para o token informado na requisição.</p> 
           <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag">scope: card.read</span>
+          <span class="bkly-ref-scope-tag"><b>Scope</b>: <code>card.read</code> </span>
         </div>
         [block:callout]
         {
