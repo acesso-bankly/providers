@@ -1788,7 +1788,7 @@ paths:
         {
           "type": "warning",
           "title": "Importante",
-          "body": "É possível cancelar um cartão por meio da alteração do seu status."
+          "body": "É possível cancelar um cartão por meio da alteração do seu status. Para mais informações, confira a documentação [Alteração do status do cartão](https://bankly-bsp.readme.io/docs/alteracao-status-cartao)."
         }
         [/block]
       operationId: cardChangeCardStatus
@@ -1976,6 +1976,13 @@ paths:
           <span class="bkly-ref-small-stable-tag">stable</span> 
           <span class="bkly-ref-scope-tag">scope: card.read</span>
         </div>
+        [block:callout]
+        {
+          "type": "note",
+          "title": "Nota",
+          "body": "Para mais informações, confira a documentação [Consulta dos próximos status](https://bankly-bsp.readme.io/docs/consulta-proximos-status)."
+        }
+        [/block]
       operationId: cardGetLots
       parameters:
         - name: proxy
