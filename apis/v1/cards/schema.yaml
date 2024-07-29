@@ -1781,7 +1781,7 @@ paths:
       description: |
         <div class="bkly-ref-description">
           <p>[stable] O status do cartão poderá ser alterado para temporário ou definitivo.</p> 
-          <span class="bkly-ref-scope-tag"><b>Scope</b>: <code>card.update>/code> </span>
+          <span class="bkly-ref-scope-tag"><b>Scope</b>: <code>card.provider.update>/code> </span>
         </div>
         [block:callout]
         {
@@ -1973,7 +1973,7 @@ paths:
         <div class="bkly-ref-description">
           <p>[stable] Consulte todos os possíveis próximos status válidos para o cartão. Serão consideradas as permissões concedidas para o token informado na requisição.</p> 
           <span class="bkly-ref-small-stable-tag">stable</span> 
-          <span class="bkly-ref-scope-tag"><b>Scope</b>: <code>card.read</code> </span>
+          <span class="bkly-ref-scope-tag"><b>Scope</b>: <code>card.provider.read</code> </span>
         </div>
         [block:callout]
         {
