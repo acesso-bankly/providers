@@ -1780,8 +1780,8 @@ paths:
       summary: Alteração do status do cartão
       description: |
         <div class="bkly-ref-description">
-          <p>[stable] O status do cartão poderá ser alterado para temporário ou definitivo.</p> 
-          <span class="bkly-ref-scope-tag"><b>Scope</b>: <code>card.provider.update>/code> </span>
+          <p>[STABLE] O status do cartão poderá ser alterado para temporário ou definitivo.</p> 
+          <span class="bkly-ref-scope-tag"><b>Scope</b>: <code>card.provider.update</code></span>
         </div>
         [block:callout]
         {
@@ -1971,13 +1971,12 @@ paths:
       summary: Consulta dos próximos status
       description: |
         <div class="bkly-ref-description">
-          <p>[stable] Consulte todos os possíveis próximos status válidos para o cartão. Serão consideradas as permissões concedidas para o token informado na requisição.</p> 
-          <span class="bkly-ref-small-stable-tag">stable</span> 
+          <p>[STABLE] Consulte todos os possíveis próximos status válidos para o cartão. Serão consideradas as permissões concedidas para o token informado na requisição.</p>  
           <span class="bkly-ref-scope-tag"><b>Scope</b>: <code>card.provider.read</code> </span>
         </div>
         [block:callout]
         {
-          "type": "note",
+          "type": "info",
           "title": "Nota",
           "body": "Para mais informações, confira a documentação [Consulta dos próximos status](https://bankly-bsp.readme.io/docs/consulta-proximos-status)."
         }
